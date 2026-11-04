@@ -323,3 +323,4 @@ export const Navbar = ({ onToggleMobile }) => {
     </header>
   );
 };
+

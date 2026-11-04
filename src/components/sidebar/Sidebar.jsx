@@ -71,7 +71,7 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
     { to: '/admin/students', label: 'Student Records', icon: GraduationCap },
     { to: '/admin/faculty', label: 'Faculty Roster', icon: Users },
     { to: '/admin/departments', label: 'Departments & Intake', icon: Building2 },
-    { to: '/admin/fees', label: 'Fee Revenue Tracking', icon: CreditCard },
+    { to: '/admin/fees', label: 'Student Fee Balances', icon: CreditCard },
     { to: '/admin/documents', label: 'Certificate Approvals', icon: FileCheck },
     { to: '/admin/complaints', label: 'Grievance Redressal', icon: AlertTriangle },
     { to: '/admin/notices', label: 'Broadcast Circulars', icon: Bell }

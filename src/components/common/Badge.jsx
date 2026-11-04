@@ -17,3 +17,4 @@ export const Badge = ({ children, variant = 'info', icon: Icon, className = '' }
     </span>
   );
 };
+

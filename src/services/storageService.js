@@ -12,7 +12,13 @@ export const getStoredData = () => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_MOCK_DATA));
       return INITIAL_MOCK_DATA;
     }
-    return JSON.parse(raw);
+    const parsed = JSON.parse(raw);
+    // Ensure studentsRoster has fee attributes
+    if (parsed.studentsRoster && !parsed.studentsRoster[0]?.totalFee) {
+      parsed.studentsRoster = INITIAL_MOCK_DATA.studentsRoster;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+    }
+    return parsed;
   } catch (err) {
     console.error('Failed reading localStorage, re-initializing with mock data', err);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_MOCK_DATA));
@@ -238,12 +244,17 @@ export const storageService = {
     return data.fees;
   },
 
-  payFee: (amount, paymentMode = 'UPI / NetBanking', remarks = 'Online Portal Payment') => {
+  payFee: (amount, paymentMode = 'UPI / NetBanking', remarks = 'Online Portal Payment', usn = '1HK21CS042') => {
     const data = getStoredData();
     const amt = Number(amount);
     if (amt <= 0) throw new Error('Enter valid payment amount.');
-    if (amt > data.fees.outstandingFee) {
-      throw new Error(`Amount exceeds total outstanding balance of ₹ ${data.fees.outstandingFee.toLocaleString('en-IN')}`);
+
+    // Find student in roster if exists
+    const student = data.studentsRoster?.find((s) => s.usn === usn);
+    const maxBalance = student ? student.feeBalance : data.fees.outstandingFee;
+
+    if (amt > maxBalance && maxBalance > 0) {
+      throw new Error(`Amount exceeds total outstanding balance of ₹ ${maxBalance.toLocaleString('en-IN')}`);
     }
 
     const receiptNo = `HKBK/REC/${new Date().getFullYear()}/${Math.floor(10000 + Math.random() * 90000)}`;
@@ -255,15 +266,28 @@ export const storageService = {
       bankReference: `TXN${Date.now().toString().slice(-8)}`,
       category: 'Tuition / College Fee Installment',
       status: 'Success',
-      remarks
+      remarks,
+      studentUsn: usn,
+      studentName: student ? student.name : 'Syed Rayan Ahmed'
     };
 
-    data.fees.paidFee += amt;
-    data.fees.outstandingFee -= amt;
-    if (data.fees.outstandingFee === 0) {
-      data.fees.status = 'Fully Cleared';
+    // Update individual student in roster
+    if (student) {
+      student.paidFee = (student.paidFee || 0) + amt;
+      student.feeBalance = Math.max(0, (student.feeBalance || 0) - amt);
+      student.feeStatus = student.feeBalance === 0 ? 'Cleared' : 'Balance Due';
     }
-    data.fees.transactions.unshift(newTx);
+
+    // If it's the primary demo student Rayan, also update global fee stats
+    if (usn === '1HK21CS042') {
+      data.fees.paidFee += amt;
+      data.fees.outstandingFee = Math.max(0, data.fees.outstandingFee - amt);
+      if (data.fees.outstandingFee === 0) {
+        data.fees.status = 'Fully Cleared';
+      }
+      data.fees.transactions.unshift(newTx);
+    }
+
     saveStoredData(data);
     return newTx;
   },
@@ -503,3 +527,4 @@ export const storageService = {
     return data.collegeInfo;
   }
 };
+

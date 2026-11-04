@@ -200,3 +200,4 @@ export const StudentPlacements = () => {
     </div>
   );
 };
+

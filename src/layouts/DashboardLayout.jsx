@@ -94,3 +94,4 @@ export const DashboardLayout = () => {
     </div>
   );
 };
+

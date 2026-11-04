@@ -348,3 +348,4 @@ export const StudentFees = () => {
     </div>
   );
 };
+

@@ -126,16 +126,16 @@ export const INITIAL_MOCK_DATA = {
 
   // Student Cohort for Class Management & Admin
   studentsRoster: [
-    { usn: "1HK21CS001", name: "Aakash Verma", sem: 6, sec: "A", attendance: 88, cgpa: 8.4, status: "Active" },
-    { usn: "1HK21CS015", name: "Bhoomika N.", sem: 6, sec: "A", attendance: 92, cgpa: 9.1, status: "Active" },
-    { usn: "1HK21CS028", name: "Farhan Khan", sem: 6, sec: "A", attendance: 69, cgpa: 7.2, status: "Attendance Shortage" },
-    { usn: "1HK21CS035", name: "Meghana Rao", sem: 6, sec: "A", attendance: 86, cgpa: 8.6, status: "Active" },
-    { usn: "1HK21CS042", name: "Syed Rayan Ahmed", sem: 6, sec: "A", attendance: 84.6, cgpa: 8.72, status: "Active" },
-    { usn: "1HK21CS054", name: "Sneha Kulkarni", sem: 6, sec: "A", attendance: 94, cgpa: 9.3, status: "Active" },
-    { usn: "1HK21CS060", name: "Zeeshan Ali", sem: 6, sec: "A", attendance: 71, cgpa: 7.5, status: "Attendance Shortage" },
-    { usn: "1HK21CS072", name: "Rohan Christopher", sem: 6, sec: "A", attendance: 81, cgpa: 8.0, status: "Active" },
-    { usn: "1HK21CS085", name: "Divya Bharathi", sem: 6, sec: "A", attendance: 89, cgpa: 8.8, status: "Active" },
-    { usn: "1HK21CS096", name: "Mohammed Danish", sem: 6, sec: "A", attendance: 78, cgpa: 7.9, status: "Active" }
+    { usn: "1HK21CS001", name: "Aakash Verma", sem: 6, sec: "A", attendance: 88, cgpa: 8.4, status: "Active", totalFee: 118500, paidFee: 118500, feeBalance: 0, feeStatus: "Cleared" },
+    { usn: "1HK21CS015", name: "Bhoomika N.", sem: 6, sec: "A", attendance: 92, cgpa: 9.1, status: "Active", totalFee: 118500, paidFee: 118500, feeBalance: 0, feeStatus: "Cleared" },
+    { usn: "1HK21CS028", name: "Farhan Khan", sem: 6, sec: "A", attendance: 69, cgpa: 7.2, status: "Attendance Shortage", totalFee: 118500, paidFee: 78500, feeBalance: 40000, feeStatus: "Balance Due" },
+    { usn: "1HK21CS035", name: "Meghana Rao", sem: 6, sec: "A", attendance: 86, cgpa: 8.6, status: "Active", totalFee: 118500, paidFee: 118500, feeBalance: 0, feeStatus: "Cleared" },
+    { usn: "1HK21CS042", name: "Syed Rayan Ahmed", sem: 6, sec: "A", attendance: 84.6, cgpa: 8.72, status: "Active", totalFee: 118500, paidFee: 95000, feeBalance: 23500, feeStatus: "Balance Due" },
+    { usn: "1HK21CS054", name: "Sneha Kulkarni", sem: 6, sec: "A", attendance: 94, cgpa: 9.3, status: "Active", totalFee: 118500, paidFee: 118500, feeBalance: 0, feeStatus: "Cleared" },
+    { usn: "1HK21CS060", name: "Zeeshan Ali", sem: 6, sec: "A", attendance: 71, cgpa: 7.5, status: "Attendance Shortage", totalFee: 118500, paidFee: 65000, feeBalance: 53500, feeStatus: "Balance Due" },
+    { usn: "1HK21CS072", name: "Rohan Christopher", sem: 6, sec: "A", attendance: 81, cgpa: 8.0, status: "Active", totalFee: 118500, paidFee: 118500, feeBalance: 0, feeStatus: "Cleared" },
+    { usn: "1HK21CS085", name: "Divya Bharathi", sem: 6, sec: "A", attendance: 89, cgpa: 8.8, status: "Active", totalFee: 118500, paidFee: 95000, feeBalance: 23500, feeStatus: "Balance Due" },
+    { usn: "1HK21CS096", name: "Mohammed Danish", sem: 6, sec: "A", attendance: 78, cgpa: 7.9, status: "Active", totalFee: 118500, paidFee: 118500, feeBalance: 0, feeStatus: "Cleared" }
   ],
 
   // Academic Subjects for 6th Sem CSE (VTU 2021 Scheme)
@@ -922,3 +922,4 @@ export const INITIAL_MOCK_DATA = {
     { id: "dept-cv", code: "CIVIL", name: "Civil Engineering", hod: "Dr. B. K. Ramesh", facultyCount: 20, studentCount: 240, intake: 60 }
   ]
 };
+

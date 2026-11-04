@@ -137,12 +137,12 @@ export const AdminDashboard = () => {
           onClick={() => navigate('/admin/faculty')}
         />
         <StatsCard
-          icon={CreditCard}
-          label="Pending Fee Collection"
-          value={`₹ ${(fees.outstandingFee * 42).toLocaleString('en-IN')}`}
-          subvalue="Even Semester Target"
-          color="warning"
-          onClick={() => navigate('/admin/fees')}
+          icon={Building2}
+          label="Academic Departments"
+          value={`${departments.length} Branches`}
+          subvalue="CSE, ISE, ECE, AI&ML, ME, CV"
+          color="gold"
+          onClick={() => navigate('/admin/departments')}
         />
         <StatsCard
           icon={AlertTriangle}
@@ -279,3 +279,4 @@ export const AdminDashboard = () => {
     </div>
   );
 };
+

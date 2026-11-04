@@ -224,3 +224,4 @@ export const StudentComplaints = () => {
     </div>
   );
 };
+

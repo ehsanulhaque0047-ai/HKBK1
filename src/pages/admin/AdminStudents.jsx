@@ -28,6 +28,7 @@ export const AdminStudents = () => {
       s.usn.toLowerCase().includes(search.toLowerCase());
     if (filter === 'Shortage') return matchesSearch && s.attendance < 75;
     if (filter === 'Distinction') return matchesSearch && s.cgpa >= 9.0;
+    if (filter === 'FeeDue') return matchesSearch && (s.feeBalance || 0) > 0;
     return matchesSearch;
   });
 
@@ -51,14 +52,14 @@ export const AdminStudents = () => {
         </div>
 
         <div style={{ display: 'flex', gap: '0.5rem' }}>
-          {['All', 'Shortage', 'Distinction'].map((f) => (
+          {['All', 'FeeDue', 'Shortage', 'Distinction'].map((f) => (
             <Button
               key={f}
               variant={filter === f ? 'primary' : 'outline'}
               size="sm"
               onClick={() => setFilter(f)}
             >
-              {f === 'All' ? 'All Records' : f === 'Shortage' ? 'Attendance Shortage (<75%)' : 'Distinction (≥9.0)'}
+              {f === 'All' ? 'All Records' : f === 'FeeDue' ? 'Fee Balance Due' : f === 'Shortage' ? 'Attendance Shortage (<75%)' : 'Distinction (≥9.0)'}
             </Button>
           ))}
         </div>
@@ -96,6 +97,7 @@ export const AdminStudents = () => {
                 <th>Department & Sem</th>
                 <th>Overall Attendance</th>
                 <th>Cumulative CGPA</th>
+                <th>Fee Balance (₹)</th>
                 <th>Status</th>
                 <th>View Record</th>
               </tr>
@@ -124,6 +126,17 @@ export const AdminStudents = () => {
                   <td>
                     <span className="mono-font" style={{ fontWeight: 800 }}>
                       {std.cgpa}
+                    </span>
+                  </td>
+                  <td>
+                    <span
+                      style={{
+                        fontWeight: 700,
+                        fontFamily: 'var(--font-mono)',
+                        color: (std.feeBalance || 0) > 0 ? 'var(--status-danger)' : 'var(--status-success)'
+                      }}
+                    >
+                      ₹ {(std.feeBalance || 0).toLocaleString('en-IN')}
                     </span>
                   </td>
                   <td>
@@ -188,6 +201,18 @@ export const AdminStudents = () => {
               <div className="simp-label">Cumulative Grade Point (CGPA)</div>
               <div style={{ fontWeight: 700 }}>{selectedStudent.cgpa} / 10.0</div>
             </div>
+            <div>
+              <div className="simp-label">Fee Account Status</div>
+              <div style={{ fontWeight: 700, color: (selectedStudent.feeBalance || 0) > 0 ? 'var(--status-danger)' : 'var(--status-success)' }}>
+                {(selectedStudent.feeBalance || 0) > 0 ? `Balance Due: ₹ ${(selectedStudent.feeBalance || 0).toLocaleString('en-IN')}` : 'Fully Cleared (₹ 0)'}
+              </div>
+            </div>
+            <div>
+              <div className="simp-label">Course Fee Paid</div>
+              <div style={{ fontWeight: 700, color: 'var(--status-success)' }}>
+                ₹ {(selectedStudent.paidFee || 0).toLocaleString('en-IN')} / ₹ {(selectedStudent.totalFee || 118500).toLocaleString('en-IN')}
+              </div>
+            </div>
             <div style={{ gridColumn: 'span 2' }}>
               <div className="simp-label">Campus Transport / Bus Facility</div>
               <div>Registered on Route 14 (HBR Layout - Nagawara Campus)</div>
@@ -198,3 +223,4 @@ export const AdminStudents = () => {
     </div>
   );
 };
+

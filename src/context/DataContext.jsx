@@ -77,11 +77,12 @@ export const DataProvider = ({ children }) => {
     return updated;
   };
 
-  const payFee = (amount, mode, remarks) => {
+  const payFee = (amount, mode, remarks, usn = '1HK21CS042') => {
     try {
-      const tx = storageService.payFee(amount, mode, remarks);
+      const tx = storageService.payFee(amount, mode, remarks, usn);
       setFees({ ...storageService.getFees() });
-      showToast(`Payment of ₹ ${amount.toLocaleString('en-IN')} successful! Receipt #${tx.receiptNo}`);
+      setStudentsRoster([...storageService.getStudentsRoster()]);
+      showToast(`Payment of ₹ ${amount.toLocaleString('en-IN')} recorded! Receipt #${tx.receiptNo}`);
       return tx;
     } catch (err) {
       showToast(err.message, 'danger');
@@ -242,3 +243,4 @@ export const useData = () => {
   }
   return context;
 };
+

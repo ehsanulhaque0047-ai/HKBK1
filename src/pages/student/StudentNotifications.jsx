@@ -118,3 +118,4 @@ export const StudentNotifications = () => {
     </div>
   );
 };
+
