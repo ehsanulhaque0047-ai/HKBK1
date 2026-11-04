@@ -518,3 +518,4 @@ export const PackageComparisonModal = ({ isOpen, onClose }) => {
 };
 
 export default PackageComparisonModal;
+

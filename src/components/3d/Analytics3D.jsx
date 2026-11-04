@@ -3,12 +3,35 @@ import { usePackage } from '../../context/PackageContext';
 import { Award, TrendingUp, Sparkles, BookOpen, Layers } from 'lucide-react';
 import { Badge } from '../common/Badge';
 
-export const Analytics3D = ({ internalMarks = [], semesterHistory = [] }) => {
+export const Analytics3D = ({ internalMarks, subjects = [], semesterHistory = [], onSelectSubject }) => {
   const { packageTier } = usePackage();
   const [selectedSubjectIndex, setSelectedSubjectIndex] = useState(0);
 
   const enable3D = packageTier === 'advanced' || packageTier === 'complete';
-  const selectedCourse = internalMarks[selectedSubjectIndex] || internalMarks[0];
+
+  // Normalize marks list: prefer internalMarks, fallback to subjects
+  const marksList = (internalMarks && internalMarks.length > 0)
+    ? internalMarks
+    : (subjects && subjects.length > 0)
+    ? subjects.map((s) => ({
+        code: s.code,
+        subject: s.name || s.subject,
+        ia1: Math.round((s.percentage || 80) * 0.28),
+        ia2: Math.round((s.percentage || 80) * 0.27),
+        assignment: 19,
+        totalInternal: Math.round(((s.percentage || 80) / 100) * 45) + 3,
+        maxTotal: 50
+      }))
+    : [];
+
+  const selectedCourse = marksList[selectedSubjectIndex] || marksList[0];
+
+  const handleSelectCourse = (idx, course) => {
+    setSelectedSubjectIndex(idx);
+    if (onSelectSubject) {
+      onSelectSubject(course);
+    }
+  };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
@@ -21,14 +44,14 @@ export const Analytics3D = ({ internalMarks = [], semesterHistory = [] }) => {
           perspective: '1000px'
         }}
       >
-        {internalMarks.map((m, idx) => {
+        {marksList.map((m, idx) => {
           const isSelected = selectedSubjectIndex === idx;
           const percentage = (m.totalInternal / m.maxTotal) * 100;
 
           return (
             <div
               key={m.code}
-              onClick={() => setSelectedSubjectIndex(idx)}
+              onClick={() => handleSelectCourse(idx, m)}
               style={{
                 cursor: 'pointer',
                 padding: '1rem 0.85rem',
@@ -216,3 +239,4 @@ export const Analytics3D = ({ internalMarks = [], semesterHistory = [] }) => {
     </div>
   );
 };
+

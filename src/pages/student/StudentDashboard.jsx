@@ -383,8 +383,9 @@ export const StudentDashboard = () => {
 
           {/* 3D CIE Academic Mark Visualizer */}
           <Analytics3D
+            internalMarks={examinations.internalMarks}
             subjects={attendance.subjects}
-            onSelectSubject={(sub) => console.log('Selected:', sub)}
+            onSelectSubject={() => navigate('/student/examination')}
           />
         </div>
       ) : (
