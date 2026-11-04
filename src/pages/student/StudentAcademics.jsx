@@ -13,6 +13,7 @@ import { useData } from '../../context/DataContext';
 import { Card } from '../../components/common/Card';
 import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
+import { EmptyState } from '../../components/common/EmptyState';
 
 export const StudentAcademics = () => {
   const { subjects, studyMaterials } = useData();
@@ -214,9 +215,11 @@ export const StudentAcademics = () => {
               }
             >
               {filteredMaterials.length === 0 ? (
-                <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>
-                  No materials found matching criteria.
-                </div>
+                <EmptyState
+                  icon={FileText}
+                  title="No study materials found"
+                  description="No lecture notes match your search. Try a different keyword or check back later."
+                />
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
                   {filteredMaterials.map((mat) => (
