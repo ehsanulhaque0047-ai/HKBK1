@@ -108,7 +108,7 @@ export const StudentAttendance = () => {
 
       {/* 3. 3D Radial Depth Gauge (Package 2 & Package 3) */}
       {packageTier !== 'package1' && packageTier !== 'basic' && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(320px, 360px) 1fr', gap: '1.5rem', alignItems: 'stretch' }}>
+        <div className="spatial-intelligence-grid">
           <AttendanceRing3D
             percentage={attendance.overallPercentage}
             attended={attendance.totalClassesAttended}

@@ -136,7 +136,7 @@ export const ParentDashboard = () => {
       </div>
 
       {/* 3. Main Dashboard Two-Column Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '1.5rem' }}>
+      <div className="dashboard-split-grid">
         {/* Left Column: Attendance Health & Latest Internal Assessment Marks */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {/* Subject Attendance Health */}

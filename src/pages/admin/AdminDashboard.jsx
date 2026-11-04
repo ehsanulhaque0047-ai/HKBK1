@@ -148,57 +148,97 @@ export const AdminDashboard = () => {
       </div>
 
       {/* 3. Departmental Intake Matrix & Recent Approvals */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '1.5rem' }}>
-        {/* Department Overview */}
-        <Card
-          title="Departmental Enrolment & Sanctioned Intake"
-          subtitle="AICTE approved intake and active student strength"
-          icon={Building2}
-          accent
-          action={
-            <Button
-              variant="outline"
-              size="sm"
-              iconRight={ChevronRight}
-              onClick={() => navigate('/admin/departments')}
-            >
-              All Departments
-            </Button>
-          }
-        >
-          <div className="simp-table-container">
-            <table className="simp-table">
-              <thead>
-                <tr>
-                  <th>Code</th>
-                  <th>Department Name</th>
-                  <th>Head of Dept (HOD)</th>
-                  <th>Faculty</th>
-                  <th>Students</th>
-                  <th>Annual Intake</th>
-                </tr>
-              </thead>
-              <tbody>
-                {departments.map((dept) => (
-                  <tr key={dept.id}>
-                    <td>
-                      <span className="mono-font" style={{ fontWeight: 700, color: 'var(--accent-blue)' }}>
-                        {dept.code}
-                      </span>
-                    </td>
-                    <td style={{ fontWeight: 600 }}>{dept.name}</td>
-                    <td style={{ fontSize: '0.82rem' }}>{dept.hod}</td>
-                    <td style={{ fontWeight: 600 }}>{dept.facultyCount}</td>
-                    <td style={{ fontWeight: 700 }}>{dept.studentCount}</td>
-                    <td>
-                      <Badge variant="gold">{dept.intake} Seats</Badge>
-                    </td>
+      <div className="dashboard-split-grid">
+        {/* Left Column: Department Overview & Fee Balances */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <Card
+            title="Departmental Enrolment & Sanctioned Intake"
+            subtitle="AICTE approved intake and active student strength"
+            icon={Building2}
+            accent
+            action={
+              <Button
+                variant="outline"
+                size="sm"
+                iconRight={ChevronRight}
+                onClick={() => navigate('/admin/departments')}
+              >
+                All Departments
+              </Button>
+            }
+          >
+            <div className="simp-table-container">
+              <table className="simp-table">
+                <thead>
+                  <tr>
+                    <th>Code</th>
+                    <th>Department Name</th>
+                    <th>HOD</th>
+                    <th>Faculty</th>
+                    <th>Students</th>
+                    <th>Intake</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </Card>
+                </thead>
+                <tbody>
+                  {departments.map((dept) => (
+                    <tr key={dept.id}>
+                      <td>
+                        <span className="mono-font" style={{ fontWeight: 700, color: 'var(--accent-blue)' }}>
+                          {dept.code}
+                        </span>
+                      </td>
+                      <td style={{ fontWeight: 600 }}>{dept.name}</td>
+                      <td style={{ fontSize: '0.82rem' }}>{dept.hod}</td>
+                      <td style={{ fontWeight: 600 }}>{dept.facultyCount}</td>
+                      <td style={{ fontWeight: 700 }}>{dept.studentCount}</td>
+                      <td>
+                        <Badge variant="gold">{dept.intake} Seats</Badge>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Card>
+
+          {/* Institutional Fee Collection Overview */}
+          <Card
+            title="Institutional Fee Standing & Balances"
+            subtitle="Semester academic & development fee summary"
+            icon={CreditCard}
+            action={
+              <Button
+                variant="outline"
+                size="sm"
+                iconRight={ChevronRight}
+                onClick={() => navigate('/admin/fees')}
+              >
+                Fee Ledger
+              </Button>
+            }
+          >
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', marginBottom: '1rem' }}>
+              <div style={{ padding: '0.85rem', borderRadius: 'var(--radius-md)', background: 'var(--bg-muted)', border: '1px solid var(--border-light)' }}>
+                <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700 }}>Total Invoiced</div>
+                <div style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-primary)', marginTop: '0.2rem' }}>₹ 2.22 Cr</div>
+                <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>AY 2024–25 Term</div>
+              </div>
+              <div style={{ padding: '0.85rem', borderRadius: 'var(--radius-md)', background: 'var(--status-success-bg)', border: '1px solid var(--status-success-border)' }}>
+                <div style={{ fontSize: '0.72rem', color: 'var(--status-success)', textTransform: 'uppercase', fontWeight: 700 }}>Collected</div>
+                <div style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--status-success)', marginTop: '0.2rem' }}>₹ 1.85 Cr</div>
+                <div style={{ fontSize: '0.7rem', color: 'var(--status-success)' }}>83.3% Realized</div>
+              </div>
+              <div style={{ padding: '0.85rem', borderRadius: 'var(--radius-md)', background: 'var(--status-warning-bg)', border: '1px solid var(--status-warning-border)' }}>
+                <div style={{ fontSize: '0.72rem', color: 'var(--status-warning)', textTransform: 'uppercase', fontWeight: 700 }}>Pending Dues</div>
+                <div style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--status-warning)', marginTop: '0.2rem' }}>₹ 37.0 Lakh</div>
+                <div style={{ fontSize: '0.7rem', color: 'var(--status-warning)' }}>Due: 30-Nov-2024</div>
+              </div>
+            </div>
+            <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+              Fee notifications sent to 142 students with balances over ₹10,000. Examination hall tickets automatically locked for accounts with pending clearance.
+            </div>
+          </Card>
+        </div>
 
         {/* Right Column: Pending Approvals & Actions */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>

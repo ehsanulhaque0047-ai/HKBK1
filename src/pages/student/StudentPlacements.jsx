@@ -130,11 +130,9 @@ export const StudentPlacements = () => {
                   borderRadius: 'var(--radius-md)',
                   backgroundColor: 'var(--bg-muted)',
                   border: '1px solid var(--border-light)',
-                  display: 'grid',
-                  gridTemplateColumns: '2fr 1fr 1fr',
-                  gap: '1rem',
                   fontSize: '0.82rem'
                 }}
+                className="placement-meta-grid"
               >
                 <div>
                   <div style={{ fontWeight: 600, color: 'var(--text-muted)', fontSize: '0.75rem', textTransform: 'uppercase' }}>

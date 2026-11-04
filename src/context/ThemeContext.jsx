@@ -4,7 +4,7 @@ import { storageService } from '../services/storageService';
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setThemeState] = useState(() => storageService.getTheme());
+  const [theme, setThemeState] = useState(() => storageService.getTheme() || 'dark');
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);

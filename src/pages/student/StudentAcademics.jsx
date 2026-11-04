@@ -39,7 +39,7 @@ export const StudentAcademics = () => {
       </div>
 
       {/* Main Two-Column Layout */}
-      <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: '1.5rem' }}>
+      <div className="academics-split-grid">
         {/* Left Column: Course Subjects List */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
           <h3 style={{ fontSize: '0.9rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-secondary)' }}>

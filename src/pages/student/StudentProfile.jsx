@@ -61,103 +61,111 @@ export const StudentProfile = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      {/* Header Profile Card */}
-      <div
-        className="simp-card"
-        style={{
-          padding: '2rem',
-          display: 'grid',
-          gridTemplateColumns: 'auto 1fr auto',
-          alignItems: 'center',
-          gap: '2rem',
-          background: 'var(--bg-surface)'
-        }}
-      >
-        <div style={{ position: 'relative' }}>
-          <img
-            src={studentProfile.avatar}
-            alt={studentProfile.name}
-            style={{
-              width: '110px',
-              height: '110px',
-              borderRadius: 'var(--radius-xl)',
-              objectFit: 'cover',
-              border: '3px solid var(--accent-gold)',
-              boxShadow: 'var(--shadow-md)'
-            }}
-          />
-          <Badge
-            variant="gold"
-            style={{
-              position: 'absolute',
-              bottom: '-8px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              whiteSpace: 'nowrap'
-            }}
-          >
-            6th Sem CSE
-          </Badge>
-        </div>
+      {/* Header Profile Card (Desktop: 2-col, Mobile: Clean vertical stack) */}
+      <div className="student-profile-hero">
+        <img
+          src="/hkbk-crest.svg"
+          alt=""
+          className="student-profile-hero-bg-crest"
+        />
 
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-            <h1 style={{ fontSize: '1.6rem', fontWeight: 800 }}>{studentProfile.name}</h1>
-            <span
-              className="mono-font"
-              style={{
-                fontSize: '0.88rem',
-                fontWeight: 700,
-                color: 'var(--accent-blue)',
-                background: 'var(--accent-blue-subtle)',
-                padding: '0.2rem 0.6rem',
-                borderRadius: 'var(--radius-sm)'
-              }}
-            >
-              USN: {studentProfile.usn}
-            </span>
-          </div>
-          <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
-            {studentProfile.course} in {studentProfile.department}
-          </p>
-          <div
-            style={{
-              display: 'flex',
-              gap: '1.5rem',
-              marginTop: '0.75rem',
-              fontSize: '0.82rem',
-              color: 'var(--text-secondary)',
-              flexWrap: 'wrap'
-            }}
-          >
-            <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-              <Mail size={14} color="var(--accent-gold-dark)" />
-              {studentProfile.email}
-            </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-              <Phone size={14} color="var(--accent-gold-dark)" />
-              {studentProfile.phone}
-            </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-              <MapPin size={14} color="var(--accent-gold-dark)" />
-              Bengaluru, Karnataka
-            </span>
-          </div>
-        </div>
+        <div className="student-profile-desktop-grid">
+          {/* Left Column: Avatar + Identity */}
+          <div className="student-profile-left-col">
+            <div className="student-avatar-container">
+              <img
+                src={studentProfile.avatar}
+                alt={studentProfile.name}
+                className="student-avatar-img"
+              />
+              <span className="student-status-badge">
+                ACTIVE
+              </span>
+            </div>
 
-        <div>
-          <Button
-            variant="gold"
-            icon={Edit3}
-            onClick={() => setIsEditModalOpen(true)}
-          >
-            Edit Contact Details
-          </Button>
+            <div className="student-identity-text">
+              <h1 className="student-name-title">
+                {studentProfile.name}
+              </h1>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                <span className="student-usn-chip">
+                  USN: {studentProfile.usn}
+                </span>
+                <span style={{ fontSize: '0.8rem', color: '#DFBF77', fontWeight: 600 }}>
+                  {studentProfile.course} • Sem {studentProfile.semester}
+                </span>
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '1rem',
+                  marginTop: '0.4rem',
+                  fontSize: '0.78rem',
+                  color: '#CBD5E1',
+                  flexWrap: 'wrap'
+                }}
+              >
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                  <Mail size={13} color="var(--accent-gold)" />
+                  {studentProfile.email}
+                </span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                  <Phone size={13} color="var(--accent-gold)" />
+                  {studentProfile.phone}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Academic Details & Action Buttons */}
+          <div className="student-profile-right-col">
+            <div className="student-academic-meta-grid">
+              <div className="student-meta-item">
+                <GraduationCap size={15} color="var(--accent-gold)" />
+                <span>
+                  <span className="student-meta-label">Department: </span>
+                  <strong>{studentProfile.department}</strong>
+                </span>
+              </div>
+              <div className="student-meta-item">
+                <Calendar size={15} color="var(--accent-gold)" />
+                <span>
+                  <span className="student-meta-label">Academic Term: </span>
+                  <strong>6th Sem (AY 2024–25)</strong>
+                </span>
+              </div>
+              <div className="student-meta-item">
+                <Shield size={15} color="var(--accent-gold)" />
+                <span>
+                  <span className="student-meta-label">Mentor: </span>
+                  <strong>{studentProfile.mentor?.name}</strong>
+                </span>
+              </div>
+              <div className="student-meta-item">
+                <Bus size={15} color="var(--accent-gold)" />
+                <span>
+                  <span className="student-meta-label">Quota / Bus: </span>
+                  <strong>{studentProfile.quota} • Route {studentProfile.transport?.routeNo || '14'}</strong>
+                </span>
+              </div>
+            </div>
+
+            <div className="student-profile-actions">
+              <Button
+                variant="gold"
+                icon={Edit3}
+                size="sm"
+                onClick={() => setIsEditModalOpen(true)}
+              >
+                Edit Contact Details
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Grid of Profile Sections */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+      <div className="grid-cols-2">
         {/* Academic Profile */}
         <Card title="Academic Details & Affiliation" icon={GraduationCap} accent>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>

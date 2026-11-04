@@ -211,10 +211,8 @@ export const StudentTimetable = () => {
                 return (
                   <div
                     key={idx}
+                    className="timetable-period-row"
                     style={{
-                      display: 'grid',
-                      gridTemplateColumns: '160px 1fr auto',
-                      alignItems: 'center',
                       padding: '1rem 1.25rem',
                       borderRadius: 'var(--radius-md)',
                       backgroundColor: 'var(--bg-muted)',

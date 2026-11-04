@@ -55,11 +55,9 @@ export const AdminDepartments = () => {
                   borderRadius: 'var(--radius-md)',
                   backgroundColor: 'var(--bg-muted)',
                   border: '1px solid var(--border-light)',
-                  display: 'grid',
-                  gridTemplateColumns: '1.5fr 1fr 1fr',
-                  gap: '0.75rem',
                   fontSize: '0.82rem'
                 }}
+                className="dept-meta-grid"
               >
                 <div>
                   <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>

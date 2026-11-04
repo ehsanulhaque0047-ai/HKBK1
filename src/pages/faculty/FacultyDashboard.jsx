@@ -133,7 +133,7 @@ export const FacultyDashboard = () => {
       </div>
 
       {/* 3. Main Dashboard Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '1.5rem' }}>
+      <div className="dashboard-split-grid">
         {/* Left Column: Assigned Subjects & Today's Teaching Schedule */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <Card title="Assigned Courses & Curriculum Delivery" icon={BookOpen} accent>

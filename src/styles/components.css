@@ -52,18 +52,18 @@
 
 .simp-card-navy {
   background: linear-gradient(135deg, var(--primary-navy-dark) 0%, var(--primary-navy) 100%);
-  color: #FFFFFF;
-  border: 1px solid rgba(197, 160, 89, 0.35);
+  color: #F4F6FA;
+  border: 1px solid var(--border-accent);
   box-shadow: var(--shadow-md);
 }
 
 .simp-card-navy .simp-card-title,
 .simp-card-navy h1, .simp-card-navy h2, .simp-card-navy h3, .simp-card-navy h4 {
-  color: #FFFFFF;
+  color: #F4F6FA;
 }
 
 .simp-card-navy p, .simp-card-navy span {
-  color: #CBD5E1;
+  color: #B8C4D5;
 }
 
 /* Button System */
@@ -87,25 +87,26 @@
 }
 
 .simp-btn-primary {
-  background: var(--primary-navy);
-  color: #FFFFFF;
-  border: 1px solid var(--primary-navy-light);
+  background: var(--primary-navy-light);
+  color: #F4F6FA;
+  border: 1px solid var(--border-light);
 }
 
 .simp-btn-primary:hover:not(:disabled) {
-  background: var(--primary-navy-light);
+  background: var(--bg-surface-elevated);
+  border-color: var(--accent-gold);
   box-shadow: var(--shadow-sm);
 }
 
 .simp-btn-gold {
-  background: linear-gradient(135deg, #DFBF77 0%, #C5A059 100%);
-  color: #0B1E36;
+  background: linear-gradient(135deg, #E7C78B 0%, #D6AC62 100%);
+  color: #07101D;
   font-weight: 700;
-  border: 1px solid #B89243;
+  border: 1px solid #B58A3E;
 }
 
 .simp-btn-gold:hover:not(:disabled) {
-  background: linear-gradient(135deg, #EAD093 0%, #D4AF37 100%);
+  background: linear-gradient(135deg, #F0D7A6 0%, #DFBF77 100%);
   box-shadow: var(--shadow-accent);
 }
 
@@ -627,11 +628,75 @@
   text-overflow: ellipsis;
 }
 
+/* Center Main Navigation in Header (Desktop) */
+.simp-navbar-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  background: var(--bg-card);
+  padding: 0.25rem 0.35rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.simp-nav-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.simp-nav-pill:hover {
+  color: var(--text-primary);
+  background: var(--bg-surface-elevated);
+}
+
+.simp-nav-pill.active {
+  background: var(--bg-surface-elevated);
+  color: var(--text-primary);
+  border-color: var(--accent-gold);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.simp-nav-pill.active span {
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
 .simp-navbar-right {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 0.65rem;
+  flex: 1;
   flex-shrink: 0;
+}
+
+.navbar-user-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+}
+
+@media (max-width: 900px) {
+  .navbar-user-chip {
+    display: none !important;
+  }
 }
 
 /* Compact Package Selector in Navbar */
@@ -1000,8 +1065,33 @@
   align-items: stretch;
 }
 
+.academics-split-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 1.5rem;
+}
+
+.placement-meta-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.timetable-period-row {
+  display: grid;
+  grid-template-columns: 160px 1fr auto;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dept-meta-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 0.75rem;
+}
+
 /* ========================================================
-   RESPONSIVE MEDIA QUERIES (1024px, 768px, 640px, 430px, 360px)
+   RESPONSIVE MEDIA QUERIES (1024px, 768px, 640px, 480px, 360px)
    ======================================================== */
 @media (max-width: 1024px) {
   .simp-sidebar {
@@ -1027,6 +1117,9 @@
   .spatial-intelligence-grid {
     grid-template-columns: 1fr !important;
   }
+  .academics-split-grid {
+    grid-template-columns: 1fr !important;
+  }
   .student-profile-desktop-grid {
     grid-template-columns: 1fr;
     gap: 1.25rem;
@@ -1038,15 +1131,9 @@
 
 @media (max-width: 768px) {
   .simp-main-content {
-  padding: 1.75rem;
-}
-@media (max-width: 768px) {
-  .simp-main-content {
     padding: 0.85rem !important;
   }
-}
-
-.simp-navbar {
+  .simp-navbar {
     padding: 0 0.85rem;
     height: 60px;
   }
@@ -1062,8 +1149,11 @@
   .simp-navbar-subtitle {
     display: none !important;
   }
+  .login-card-container {
+    grid-template-columns: 1fr !important;
+  }
 
-  /* Student Profile Card Mobile Stack per Requirement 4 */
+  /* Student Profile Card Mobile Stack per Requirement 5 */
   .student-profile-hero {
     padding: 1.25rem;
   }
@@ -1133,17 +1223,21 @@
   }
 }
 
-@media (max-width: 480px) {
-  .simp-main-content {
-  padding: 1.75rem;
-}
-@media (max-width: 768px) {
-  .simp-main-content {
-    padding: 0.85rem !important;
+@media (max-width: 640px) {
+  .placement-meta-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .timetable-period-row {
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem !important;
+  }
+  .dept-meta-grid {
+    grid-template-columns: 1fr !important;
   }
 }
 
-.simp-navbar {
+@media (max-width: 480px) {
+  .simp-navbar {
     padding: 0 0.65rem;
   }
   .simp-navbar-brand-logo {

@@ -63,7 +63,7 @@ export const storageService = {
   },
 
   getTheme: () => {
-    return localStorage.getItem(THEME_KEY) || 'light';
+    return localStorage.getItem(THEME_KEY) || 'dark';
   },
 
   setTheme: (theme) => {

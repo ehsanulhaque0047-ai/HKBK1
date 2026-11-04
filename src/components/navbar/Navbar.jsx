@@ -103,7 +103,26 @@ export const Navbar = ({ onToggleMobile }) => {
         </div>
       </div>
 
-      {/* Right: Package Selector Dropdown + Role Switcher (Desktop) + Theme + Notifications */}
+      {/* Center: Main Navigation (Desktop) */}
+      <nav className="simp-navbar-center" aria-label="Portal Role Navigation">
+        {roleConfigs.map((cfg) => {
+          const Icon = cfg.icon;
+          const isSelected = role === cfg.key;
+          return (
+            <button
+              key={cfg.key}
+              onClick={() => handleRoleChange(cfg.key)}
+              className={`simp-nav-pill ${isSelected ? 'active' : ''}`}
+              title={`Switch to ${cfg.label} Dashboard`}
+            >
+              <Icon size={14} color={isSelected ? 'var(--accent-gold)' : 'var(--text-muted)'} />
+              <span>{cfg.label}</span>
+            </button>
+          );
+        })}
+      </nav>
+
+      {/* Right: Package Selector Dropdown + User Controls (Theme, Notifications, Profile) */}
       <div className="simp-navbar-right">
         {/* Compact Package Selector with Dropdown */}
         <div className="package-selector-wrapper" ref={packageDropdownRef}>
@@ -114,9 +133,9 @@ export const Navbar = ({ onToggleMobile }) => {
             style={{
               background:
                 packageTier === 'package3' || packageTier === 'complete'
-                  ? 'linear-gradient(135deg, rgba(197, 160, 89, 0.2) 0%, rgba(197, 160, 89, 0.05) 100%)'
+                  ? 'linear-gradient(135deg, rgba(214, 172, 98, 0.2) 0%, rgba(20, 36, 58, 0.6) 100%)'
                   : packageTier === 'package2' || packageTier === 'advanced'
-                  ? 'rgba(37, 99, 235, 0.12)'
+                  ? 'rgba(46, 117, 211, 0.16)'
                   : 'var(--bg-subtle)',
               border:
                 packageTier === 'package3' || packageTier === 'complete'
@@ -212,58 +231,21 @@ export const Navbar = ({ onToggleMobile }) => {
           )}
         </div>
 
-        {/* Quick 1-Click Role Switcher (Visible on desktop > 1024px) */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            background: 'var(--bg-subtle)',
-            padding: '0.25rem',
-            borderRadius: 'var(--radius-md)',
-            border: '1px solid var(--border-light)'
-          }}
-          className="role-switcher-container"
-        >
-          <span
-            style={{
-              fontSize: '0.7rem',
-              fontWeight: 700,
-              textTransform: 'uppercase',
-              color: 'var(--text-muted)',
-              padding: '0 0.5rem',
-              letterSpacing: '0.04em'
-            }}
-          >
-            Role:
-          </span>
-          {roleConfigs.map((cfg) => {
-            const Icon = cfg.icon;
-            const isSelected = role === cfg.key;
-            return (
-              <button
-                key={cfg.key}
-                onClick={() => handleRoleChange(cfg.key)}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.35rem',
-                  padding: '0.35rem 0.65rem',
-                  fontSize: '0.75rem',
-                  fontWeight: 600,
-                  borderRadius: 'var(--radius-sm)',
-                  backgroundColor: isSelected ? 'var(--primary-navy)' : 'transparent',
-                  color: isSelected ? '#FFFFFF' : 'var(--text-secondary)',
-                  border: isSelected ? '1px solid var(--accent-gold)' : '1px solid transparent',
-                  boxShadow: isSelected ? 'var(--shadow-xs)' : 'none',
-                  transition: 'all 0.15s ease',
-                  cursor: 'pointer'
-                }}
-              >
-                <Icon size={13} color={isSelected ? 'var(--accent-gold)' : undefined} />
-                <span>{cfg.label}</span>
-              </button>
-            );
-          })}
+        {/* User Mini Profile Chip (Desktop) */}
+        <div className="navbar-user-chip">
+          <img
+            src={currentUser?.avatar || 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100'}
+            alt=""
+            style={{ width: '26px', height: '26px', borderRadius: '50%', objectFit: 'cover', border: '1.5px solid var(--accent-gold)' }}
+          />
+          <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', lineHeight: 1.1 }}>
+            <span style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+              {currentUser?.name?.split(' ')[0] || 'User'}
+            </span>
+            <span style={{ fontSize: '0.62rem', color: 'var(--accent-gold)', textTransform: 'uppercase', fontWeight: 700 }}>
+              {role}
+            </span>
+          </div>
         </div>
 
         {/* Dark / Light Mode Switch */}
@@ -281,7 +263,7 @@ export const Navbar = ({ onToggleMobile }) => {
             cursor: 'pointer'
           }}
         >
-          {isDark ? <Sun size={17} color="#DFBF77" /> : <Moon size={17} color="var(--primary-navy)" />}
+          {isDark ? <Sun size={17} color="#D6AC62" /> : <Moon size={17} color="var(--primary-navy)" />}
         </button>
 
         {/* Notifications Popover Toggle */}

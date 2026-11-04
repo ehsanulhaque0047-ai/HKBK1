@@ -46,7 +46,7 @@ export const ParentTeacherContact = () => {
         </p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '1.5rem' }}>
+      <div className="dashboard-split-grid">
         {/* Left Column: Messages Thread */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           {/* Send New Message Box */}
