@@ -10,14 +10,15 @@ export default defineConfig({
     open: false
   },
   build: {
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 1200,
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
           charts: ['recharts'],
           motion: ['framer-motion'],
-          icons: ['lucide-react']
+          icons: ['lucide-react'],
+          three: ['three']
         }
       }
     }

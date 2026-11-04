@@ -394,3 +394,109 @@
   .grid-cols-4, .grid-cols-3, .grid-cols-2 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
 }
 
+
+
+/* ========================================================
+   3D Spatial Experiences & Package Tier Customizations
+   ======================================================== */
+
+/* Laser Scan Animation for QR Simulator */
+@keyframes scanLaser {
+  0% { top: 5%; opacity: 0.2; }
+  50% { top: 92%; opacity: 1; }
+  100% { top: 5%; opacity: 0.2; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Smartphone 3D chassis perspective adjustments */
+.smartphone-3d-chassis {
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.smartphone-3d-chassis:hover {
+  transform: rotateY(-1deg) rotateX(0deg) translateY(-4px) scale(1.01);
+  box-shadow: 0 32px 64px -16px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(197, 160, 89, 0.35);
+}
+
+/* Tier-specific Card Depth Enhancements */
+[data-package-tier='basic'] .simp-card,
+[data-package-tier='basic'] .simp-stat-card {
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+[data-package-tier='basic'] .simp-card:hover,
+[data-package-tier='basic'] .simp-stat-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: rgba(197, 160, 89, 0.4);
+}
+
+[data-package-tier='advanced'] .simp-card,
+[data-package-tier='advanced'] .simp-stat-card {
+  box-shadow: 0 8px 24px -6px rgba(15, 23, 42, 0.12), 0 2px 6px -1px rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--border-light);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+[data-package-tier='advanced'] .simp-card:hover,
+[data-package-tier='advanced'] .simp-stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.18), 0 4px 12px -2px rgba(197, 160, 89, 0.2);
+  border-color: var(--accent-gold);
+}
+
+[data-package-tier='complete'] .simp-card,
+[data-package-tier='complete'] .simp-stat-card {
+  box-shadow: 0 12px 32px -8px rgba(11, 19, 43, 0.18), 0 0 0 1px rgba(197, 160, 89, 0.15);
+  border: 1px solid var(--border-light);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+[data-package-tier='complete'] .simp-card:hover,
+[data-package-tier='complete'] .simp-stat-card:hover {
+  transform: translateY(-4px) scale(1.005);
+  box-shadow: 0 24px 44px -10px rgba(11, 19, 43, 0.28), 0 0 0 1.5px rgba(197, 160, 89, 0.4);
+}
+
+/* Package Tier Pill in Navbar */
+.package-tier-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(197, 160, 89, 0.2);
+}
+
+@media (max-width: 900px) {
+  .package-tier-pill-name {
+    display: none;
+  }
+  .mobile-showcase-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Accessibility & Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
+  }
+  .smartphone-3d-chassis {
+    transform: none !important;
+  }
+  .card-3d-wrapper {
+    transform: none !important;
+  }
+}

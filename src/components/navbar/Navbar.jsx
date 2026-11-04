@@ -12,16 +12,20 @@ import {
   Shield,
   HeartHandshake,
   ExternalLink,
-  X
+  X,
+  Sparkles,
+  Sliders
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 import { useData } from '../../context/DataContext';
+import { usePackage } from '../../context/PackageContext';
 
 export const Navbar = ({ onToggleMobile }) => {
   const { currentUser, role, switchRole } = useAuth();
   const { theme, toggleTheme, isDark } = useTheme();
   const { announcements, markAnnouncementRead } = useData();
+  const { packageTier, currentPackage, setIsComparisonModalOpen } = usePackage();
   const navigate = useNavigate();
 
   const [showNotifications, setShowNotifications] = useState(false);
@@ -108,6 +112,59 @@ export const Navbar = ({ onToggleMobile }) => {
 
       {/* Center/Right: Role Switcher Demo Pills + Theme + Notifications */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+        {/* Package Tier Trigger Pill */}
+        <button
+          onClick={() => setIsComparisonModalOpen(true)}
+          title="Click to compare 3D packages (₹2,00,000 – ₹4,50,000)"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.45rem',
+            padding: '0.35rem 0.75rem',
+            borderRadius: 'var(--radius-md)',
+            background:
+              packageTier === 'complete'
+                ? 'linear-gradient(135deg, rgba(197, 160, 89, 0.2) 0%, rgba(197, 160, 89, 0.05) 100%)'
+                : packageTier === 'advanced'
+                ? 'rgba(37, 99, 235, 0.12)'
+                : 'var(--bg-subtle)',
+            border:
+              packageTier === 'complete'
+                ? '1px solid var(--accent-gold)'
+                : '1px solid var(--border-light)',
+            color: packageTier === 'complete' ? 'var(--accent-gold)' : 'var(--text-primary)',
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            cursor: 'pointer',
+            transition: 'all 0.15s ease'
+          }}
+          className="package-tier-pill"
+        >
+          <Sparkles size={13} color="var(--accent-gold)" />
+          <span className="package-tier-pill-name">{currentPackage?.name}</span>
+          <span
+            style={{
+              fontSize: '0.68rem',
+              fontWeight: 800,
+              color: packageTier === 'complete' ? 'var(--accent-gold)' : 'var(--text-muted)'
+            }}
+          >
+            {currentPackage?.price}
+          </span>
+          <span
+            style={{
+              fontSize: '0.62rem',
+              color: 'var(--text-muted)',
+              background: 'var(--bg-card)',
+              padding: '0.1rem 0.35rem',
+              borderRadius: '4px',
+              border: '1px solid var(--border-light)'
+            }}
+          >
+            Tiers ▾
+          </span>
+        </button>
+
         {/* Quick 1-Click Role Switcher */}
         <div
           style={{

@@ -26,10 +26,12 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useData } from '../../context/DataContext';
+import { usePackage } from '../../context/PackageContext';
 
 export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
   const { currentUser, role, logout } = useAuth();
   const { resetAllData } = useData();
+  const { packageTier, currentPackage, setIsComparisonModalOpen } = usePackage();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -294,6 +296,48 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
             );
           })}
         </nav>
+
+        {/* 3D Package Tier Switcher Banner */}
+        <div
+          onClick={() => setIsComparisonModalOpen(true)}
+          style={{
+            margin: '0.4rem 0.75rem',
+            padding: '0.65rem 0.85rem',
+            borderRadius: 'var(--radius-md)',
+            background: 'linear-gradient(135deg, rgba(197, 160, 89, 0.18) 0%, rgba(15, 23, 42, 0.6) 100%)',
+            border: '1px solid rgba(197, 160, 89, 0.35)',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            transition: 'all 0.2s ease'
+          }}
+          title="Compare 3D Packages: Basic ₹2L / Advanced ₹3.5L / Complete ₹4.5L"
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', minWidth: 0 }}>
+            <Sparkles size={16} color="var(--accent-gold)" style={{ flexShrink: 0 }} />
+            <div style={{ minWidth: 0 }}>
+              <div
+                style={{
+                  fontSize: '0.74rem',
+                  fontWeight: 800,
+                  color: 'var(--accent-gold)',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}
+              >
+                {currentPackage?.name}
+              </div>
+              <div style={{ fontSize: '0.65rem', color: '#94A3B8' }}>
+                {currentPackage?.price} • 3D Packages
+              </div>
+            </div>
+          </div>
+          <span style={{ fontSize: '0.7rem', color: 'var(--accent-gold)', fontWeight: 800, flexShrink: 0 }}>
+            ➔
+          </span>
+        </div>
 
         {/* User Mini Profile Footer */}
         <div

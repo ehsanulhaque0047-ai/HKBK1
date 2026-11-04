@@ -27,9 +27,13 @@ import { Button } from '../../components/common/Button';
 import { Badge } from '../../components/common/Badge';
 import { StatsCard } from '../../components/common/StatsCard';
 import { Modal } from '../../components/common/Modal';
+import { usePackage } from '../../context/PackageContext';
+import { AttendanceRing3D } from '../../components/3d/AttendanceRing3D';
+import { Card3D } from '../../components/3d/Card3D';
 
 export const StudentAttendance = () => {
   const { attendance } = useData();
+  const { packageTier } = usePackage();
 
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [filterType, setFilterType] = useState('All'); // All, Good, Borderline
@@ -102,8 +106,37 @@ export const StudentAttendance = () => {
         />
       </div>
 
-      {/* 3. Monthly Attendance Trend Chart & Threshold Alert */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gap: '1.5rem' }}>
+      {/* 3. 3D Radial Depth Gauge (Advanced & Complete Packages) */}
+      {packageTier !== 'basic' && (
+        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(320px, 360px) 1fr', gap: '1.5rem', alignItems: 'stretch' }}>
+          <AttendanceRing3D
+            percentage={attendance.overallPercentage}
+            attended={attendance.totalClassesAttended}
+            conducted={attendance.totalClassesConducted}
+          />
+          <Card title="VTU Attendance Regulations & Compliance Status" icon={Info} accent>
+            <div style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+              <div style={{ padding: '0.85rem', background: 'var(--status-warning-bg)', borderRadius: 'var(--radius-md)', border: '1px solid var(--status-warning-border)' }}>
+                <div style={{ fontWeight: 700, color: 'var(--status-warning)' }}>Notice: 75% Mandatory VTU Rule</div>
+                <p style={{ marginTop: '0.25rem', color: 'var(--text-primary)', lineHeight: 1.45 }}>
+                  VTU Academic Regulations Clause 18OB4.1 strictly prohibits students with &lt; 75% aggregate attendance from appearing in Semester End Examinations and issuance of Hall Tickets.
+                </p>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div>
+                  <strong>Medical Condonation:</strong> Max 10% condonation (65% to 75%) permitted on principal-endorsed medical proof.
+                </div>
+                <div>
+                  <strong>Proctorial Support:</strong> Regular monitoring by department mentor Prof. Dr. A. K. Manjunath.
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+      )}
+
+      {/* 4. Monthly Attendance Trend Chart & Threshold Alert */}
+      <div style={{ display: 'grid', gridTemplateColumns: packageTier !== 'basic' ? '1fr' : '1.6fr 1fr', gap: '1.5rem' }}>
         <Card
           title="Monthly Attendance Trend (%)"
           subtitle="Attendance percentage progression across months"
@@ -129,23 +162,21 @@ export const StudentAttendance = () => {
           </div>
         </Card>
 
-        {/* VTU Shortage Guidelines Card */}
-        <Card title="VTU Attendance Regulations" icon={Info} accent>
-          <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-            <div style={{ padding: '0.75rem', background: 'var(--status-warning-bg)', borderRadius: 'var(--radius-md)', border: '1px solid var(--status-warning-border)' }}>
-              <div style={{ fontWeight: 700, color: 'var(--status-warning)' }}>Notice: 75% Mandatory Rule</div>
-              <p style={{ marginTop: '0.25rem', color: 'var(--text-primary)' }}>
-                VTU Academic Regulations Clause 18OB4.1 strictly prohibits students with &lt; 75% attendance from appearing in Semester End Examinations.
-              </p>
+        {packageTier === 'basic' && (
+          <Card title="VTU Attendance Regulations" icon={Info} accent>
+            <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+              <div style={{ padding: '0.75rem', background: 'var(--status-warning-bg)', borderRadius: 'var(--radius-md)', border: '1px solid var(--status-warning-border)' }}>
+                <div style={{ fontWeight: 700, color: 'var(--status-warning)' }}>Notice: 75% Mandatory Rule</div>
+                <p style={{ marginTop: '0.25rem', color: 'var(--text-primary)' }}>
+                  VTU Academic Regulations Clause 18OB4.1 strictly prohibits students with &lt; 75% attendance from appearing in Semester End Examinations.
+                </p>
+              </div>
+              <div>
+                <strong>Medical Condonation:</strong> Maximum 10% condonation (65% to 75%) is permitted only upon submission of verified medical certificates endorsed by Principal within 3 days.
+              </div>
             </div>
-            <div>
-              <strong>Medical Condonation:</strong> Maximum 10% condonation (65% to 75%) is permitted only upon submission of verified medical certificates endorsed by Principal within 3 days.
-            </div>
-            <div>
-              <strong>Proctorial Counseling:</strong> Students approaching 75% are mandated to attend counseling with Dr. A. K. Manjunath (AB-208).
-            </div>
-          </div>
-        </Card>
+          </Card>
+        )}
       </div>
 
       {/* 4. Subject-wise Attendance Table */}
