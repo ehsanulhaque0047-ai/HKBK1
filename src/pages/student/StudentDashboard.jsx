@@ -36,6 +36,7 @@ import { AttendanceRing3D } from '../../components/3d/AttendanceRing3D';
 import { Analytics3D } from '../../components/3d/Analytics3D';
 import { CampusCanvas3D } from '../../components/3d/CampusCanvas3D';
 import { MobileAppShowcase3D } from '../../components/3d/MobileAppShowcase3D';
+import { HeroOrbitalCrystal } from '../../components/3d/HeroOrbitalCrystalLazy';
 
 export const StudentDashboard = () => {
   const {
@@ -51,6 +52,7 @@ export const StudentDashboard = () => {
 
   const { packageTier, setPackageTier, currentPackage, setIsComparisonModalOpen } = usePackage();
   const navigate = useNavigate();
+  const [hero3DMode, setHero3DMode] = useState('crystal'); // 'crystal' | 'campus'
 
   // Pending assignments count
   const pendingAssignments = assignments.filter((a) => a.status === 'Pending');
@@ -303,9 +305,62 @@ export const StudentDashboard = () => {
         </div>
       </Card3D>
 
-      {/* Flagship Feature: Real-time Three.js WebGL Campus Digital Spire (Included in Complete Digital Campus) */}
-      {packageTier === 'complete' && (
-        <CampusCanvas3D onNavigateModule={(route) => navigate(route)} />
+      {/* Flagship Feature: Real-time 3D Orbital Crystal Sculpture (Reference Design: Glossy Black Crystal, Gold Cage, Intersecting Rings & 3 Gemstones) */}
+      {packageTier !== 'basic' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+          {packageTier === 'complete' && (
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+                gap: '0.4rem'
+              }}
+            >
+              <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                3D Experience:
+              </span>
+              <button
+                onClick={() => setHero3DMode('crystal')}
+                style={{
+                  padding: '0.25rem 0.65rem',
+                  fontSize: '0.72rem',
+                  fontWeight: 700,
+                  borderRadius: 'var(--radius-sm)',
+                  backgroundColor: hero3DMode === 'crystal' ? 'var(--primary-navy)' : 'var(--bg-subtle)',
+                  color: hero3DMode === 'crystal' ? 'var(--accent-gold)' : 'var(--text-secondary)',
+                  border: hero3DMode === 'crystal' ? '1px solid var(--accent-gold)' : '1px solid var(--border-light)',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                💎 3D Orbital Crystal
+              </button>
+              <button
+                onClick={() => setHero3DMode('campus')}
+                style={{
+                  padding: '0.25rem 0.65rem',
+                  fontSize: '0.72rem',
+                  fontWeight: 700,
+                  borderRadius: 'var(--radius-sm)',
+                  backgroundColor: hero3DMode === 'campus' ? 'var(--primary-navy)' : 'var(--bg-subtle)',
+                  color: hero3DMode === 'campus' ? 'var(--accent-gold)' : 'var(--text-secondary)',
+                  border: hero3DMode === 'campus' ? '1px solid var(--accent-gold)' : '1px solid var(--border-light)',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                🏛️ Campus Spire & Map
+              </button>
+            </div>
+          )}
+
+          {hero3DMode === 'crystal' ? (
+            <HeroOrbitalCrystal height={390} />
+          ) : (
+            <CampusCanvas3D onNavigateModule={(route) => navigate(route)} />
+          )}
+        </div>
       )}
 
       {/* 2. Key Academic Metric Cards (Wrapped in 3D Parallax Tilt) */}

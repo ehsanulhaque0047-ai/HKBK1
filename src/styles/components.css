@@ -500,3 +500,20 @@
     transform: none !important;
   }
 }
+
+
+/* 3D Hero Orbital Crystal Styling */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin-icon {
+  animation: spinSlow 6s linear infinite;
+}
+
+@media (max-width: 768px) {
+  .hero-orbital-crystal-container {
+    height: 320px !important;
+  }
+}
