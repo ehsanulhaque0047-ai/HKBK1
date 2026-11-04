@@ -5,7 +5,7 @@ import { PackageProvider, usePackage } from './context/PackageContext';
 import { AuthProvider } from './context/AuthContext';
 import { DataProvider } from './context/DataContext';
 import { AppRoutes } from './routes/AppRoutes';
-import { PackageComparisonModal } from './components/3d/PackageComparisonModal';
+import { PackageComparisonModal } from './components/packages/PackageComparisonModal';
 import './styles/index.css';
 import './styles/components.css';
 
