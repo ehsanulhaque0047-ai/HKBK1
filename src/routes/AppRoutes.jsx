@@ -48,6 +48,9 @@ import { ParentResults } from '../pages/parent/ParentResults';
 import { ParentFees } from '../pages/parent/ParentFees';
 import { ParentTeacherContact } from '../pages/parent/ParentTeacherContact';
 
+// Packages Page
+import { PackagesPage } from '../pages/packages/PackagesPage';
+
 export const AppRoutes = () => {
   const { role, isAuthenticated } = useAuth();
 
@@ -91,6 +94,7 @@ export const AppRoutes = () => {
         <Route path="complaints" element={<StudentComplaints />} />
         <Route path="placements" element={<StudentPlacements />} />
         <Route path="notifications" element={<StudentNotifications />} />
+        <Route path="packages" element={<PackagesPage />} />
       </Route>
 
       {/* FACULTY PORTAL ROUTES */}
@@ -111,6 +115,7 @@ export const AppRoutes = () => {
         <Route path="students" element={<FacultyStudents />} />
         <Route path="leaves" element={<FacultyLeave />} />
         <Route path="notifications" element={<StudentNotifications />} />
+        <Route path="packages" element={<PackagesPage />} />
       </Route>
 
       {/* ADMIN PORTAL ROUTES */}
@@ -131,6 +136,19 @@ export const AppRoutes = () => {
         <Route path="documents" element={<AdminDocuments />} />
         <Route path="complaints" element={<AdminComplaints />} />
         <Route path="notices" element={<AdminNotices />} />
+        <Route path="packages" element={<PackagesPage />} />
+      </Route>
+
+      {/* DEDICATED COMMERCIAL PACKAGES ROUTE */}
+      <Route
+        path="/packages"
+        element={
+          <ProtectedRoute allowedRoles={['student', 'faculty', 'admin', 'parent']}>
+            <DashboardLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<PackagesPage />} />
       </Route>
 
       {/* PARENT PORTAL ROUTES */}
@@ -149,6 +167,7 @@ export const AppRoutes = () => {
         <Route path="fees" element={<ParentFees />} />
         <Route path="communication" element={<ParentTeacherContact />} />
         <Route path="notifications" element={<StudentNotifications />} />
+        <Route path="packages" element={<PackagesPage />} />
       </Route>
 
       {/* Fallback for unknown routes */}

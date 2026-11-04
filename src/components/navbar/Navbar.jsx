@@ -201,7 +201,32 @@ export const Navbar = ({ onToggleMobile }) => {
                 );
               })}
 
-              <div style={{ borderTop: '1px solid var(--border-light)', paddingTop: '0.35rem', marginTop: '0.2rem' }}>
+              <div style={{ borderTop: '1px solid var(--border-light)', paddingTop: '0.35rem', marginTop: '0.2rem', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                <button
+                  onClick={() => {
+                    setShowPackageDropdown(false);
+                    navigate('/packages');
+                  }}
+                  style={{
+                    width: '100%',
+                    padding: '0.4rem 0.6rem',
+                    fontSize: '0.72rem',
+                    fontWeight: 700,
+                    color: 'var(--accent-gold)',
+                    background: 'rgba(197, 160, 89, 0.1)',
+                    border: '1px solid rgba(197, 160, 89, 0.25)',
+                    borderRadius: 'var(--radius-sm)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.35rem'
+                  }}
+                >
+                  <Sparkles size={13} color="var(--accent-gold)" />
+                  <span>Dedicated Packages Page ➔</span>
+                </button>
+
                 <button
                   onClick={() => {
                     setShowPackageDropdown(false);
@@ -209,9 +234,9 @@ export const Navbar = ({ onToggleMobile }) => {
                   }}
                   style={{
                     width: '100%',
-                    padding: '0.4rem 0.6rem',
+                    padding: '0.35rem 0.6rem',
                     fontSize: '0.72rem',
-                    fontWeight: 700,
+                    fontWeight: 600,
                     color: 'var(--accent-blue)',
                     background: 'transparent',
                     border: 'none',
@@ -224,7 +249,7 @@ export const Navbar = ({ onToggleMobile }) => {
                   }}
                 >
                   <Layers size={13} />
-                  <span>Compare All 3 Packages ↗</span>
+                  <span>Compare Feature Matrix ↗</span>
                 </button>
               </div>
             </div>

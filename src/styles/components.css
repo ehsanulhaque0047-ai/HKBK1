@@ -757,125 +757,6 @@
 }
 
 /* ========================================================
-   Clean Demo Package Summary Card (Section 0)
-   ======================================================== */
-.demo-package-summary-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-light);
-  border-top: 3.5px solid var(--accent-gold);
-  border-radius: var(--radius-xl);
-  padding: 1.25rem 1.4rem;
-  box-shadow: var(--shadow-sm);
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-}
-
-.demo-package-header-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.demo-package-active-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  min-width: 0;
-}
-
-.demo-package-badge-row {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.demo-package-pricing-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  padding: 0.4rem 0.75rem;
-  flex-wrap: wrap;
-}
-
-.demo-package-features-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.25rem;
-}
-
-.demo-package-feature-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.25rem 0.6rem;
-  border-radius: var(--radius-full);
-  background: var(--bg-muted);
-  border: 1px solid var(--border-light);
-  font-size: 0.72rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-
-.demo-package-buttons-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr) auto;
-  gap: 0.5rem;
-  width: 100%;
-}
-
-.demo-pkg-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0.55rem 0.75rem;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  transition: all 0.15s ease;
-  border: 1px solid var(--border-light);
-  background: var(--bg-subtle);
-  color: var(--text-secondary);
-  text-align: center;
-  gap: 0.15rem;
-}
-
-.demo-pkg-btn:hover {
-  border-color: var(--accent-gold);
-  background: var(--bg-card);
-}
-
-.demo-pkg-btn.active {
-  background: var(--primary-navy);
-  color: #FFFFFF;
-  border-color: var(--accent-gold);
-  box-shadow: var(--shadow-xs);
-}
-
-.demo-pkg-btn.active .demo-pkg-price {
-  color: var(--accent-gold-light);
-}
-
-.demo-pkg-title {
-  font-size: 0.78rem;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-.demo-pkg-price {
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--text-muted);
-}
-
-/* ========================================================
    Student Profile Hero Card (Section 1)
    Desktop: 2-column layout (Left: photo + identity; Right: academic info + action buttons)
    Mobile: Clean vertical layout (Photo, Name, USN, Dept/Sem, Academic info, Buttons stacked)
@@ -1124,9 +1005,6 @@
     grid-template-columns: 1fr;
     gap: 1.25rem;
   }
-  .demo-package-buttons-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 768px) {
@@ -1217,11 +1095,6 @@
     justify-content: center !important;
   }
 
-  /* Demo package buttons on mobile */
-  .demo-package-buttons-grid {
-    grid-template-columns: 1fr;
-  }
-
   /* Pricing disclosure callout single column on mobile */
   .pricing-disclosure-callout {
     grid-template-columns: 1fr !important;
@@ -1251,9 +1124,6 @@
   }
   .simp-navbar-college-name-mobile {
     font-size: 0.85rem;
-  }
-  .demo-package-summary-card {
-    padding: 1rem;
   }
 }
 

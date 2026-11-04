@@ -53,7 +53,8 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
     { to: '/student/documents', label: 'Document Requests', icon: FileCheck },
     { to: '/student/complaints', label: 'Grievance / Complaints', icon: AlertTriangle },
     { to: '/student/placements', label: 'Placements & Internships', icon: Briefcase },
-    { to: '/student/notifications', label: 'Notices & Circulars', icon: Bell }
+    { to: '/student/notifications', label: 'Notices & Circulars', icon: Bell },
+    { to: '/packages', label: 'Commercial Packages', icon: Sparkles }
   ];
 
   // Faculty Navigation Links
@@ -64,7 +65,8 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
     { to: '/faculty/internal-marks', label: 'Internal Assessment Marks', icon: Award },
     { to: '/faculty/materials', label: 'Upload Study Notes', icon: FolderUp },
     { to: '/faculty/students', label: 'Student Cohort (6th CSE)', icon: Users },
-    { to: '/faculty/leaves', label: 'Faculty Leave Request', icon: FileClock }
+    { to: '/faculty/leaves', label: 'Faculty Leave Request', icon: FileClock },
+    { to: '/packages', label: 'Commercial Packages', icon: Sparkles }
   ];
 
   // Administrator Navigation Links
@@ -76,7 +78,8 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
     { to: '/admin/fees', label: 'Student Fee Balances', icon: CreditCard },
     { to: '/admin/documents', label: 'Certificate Approvals', icon: FileCheck },
     { to: '/admin/complaints', label: 'Grievance Redressal', icon: AlertTriangle },
-    { to: '/admin/notices', label: 'Broadcast Circulars', icon: Bell }
+    { to: '/admin/notices', label: 'Broadcast Circulars', icon: Bell },
+    { to: '/packages', label: 'Commercial Packages', icon: Sparkles }
   ];
 
   // Parent Navigation Links
@@ -85,7 +88,8 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
     { to: '/parent/attendance', label: 'Subject Attendance', icon: UserCheck },
     { to: '/parent/results', label: 'Academic Performance', icon: Award },
     { to: '/parent/fees', label: 'Fee Dues & Receipts', icon: CreditCard },
-    { to: '/parent/communication', label: 'Proctor Communication', icon: MessageSquare }
+    { to: '/parent/communication', label: 'Proctor Communication', icon: MessageSquare },
+    { to: '/packages', label: 'Commercial Packages', icon: Sparkles }
   ];
 
   const roleLinks = {
@@ -340,7 +344,10 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
 
         {/* 3D Package Tier Switcher Banner */}
         <div
-          onClick={() => setIsComparisonModalOpen(true)}
+          onClick={() => {
+            navigate('/packages');
+            if (onCloseMobile) onCloseMobile();
+          }}
           style={{
             margin: '0.4rem 0.75rem',
             padding: '0.65rem 0.85rem',
@@ -353,7 +360,7 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
             justifyContent: 'space-between',
             transition: 'all 0.2s ease'
           }}
-          title="Compare Packages: P1 Website (₹1.20L) / P2 +Android (₹1.68L) / P3 +Android+iOS (₹2.16L)"
+          title="View Packages: P1 Website (₹1.20L) / P2 +Android (₹1.68L) / P3 +Android+iOS (₹2.16L)"
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', minWidth: 0 }}>
             <Sparkles size={16} color="var(--accent-gold)" style={{ flexShrink: 0 }} />
