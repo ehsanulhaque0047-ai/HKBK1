@@ -17,8 +17,8 @@ export const Card3D = ({
   const [tilt, setTilt] = useState({ x: 0, y: 0, glareX: 50, glareY: 50, opacity: 0 });
   const [isHovered, setIsHovered] = useState(false);
 
-  // If in 'basic' tier or reduced motion preferred, we don't apply 3D gyro tilt
-  const enable3DPhysics = packageTier === 'advanced' || packageTier === 'complete';
+  // If in 'package1' / 'basic' tier or reduced motion preferred, we don't apply 3D gyro tilt
+  const enable3DPhysics = packageTier !== 'package1' && packageTier !== 'basic';
 
   const handleMouseMove = (e) => {
     if (!enable3DPhysics || !cardRef.current) return;

@@ -16,7 +16,7 @@ export const AttendanceRing3D = ({
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   const isSafe = percentage >= threshold;
-  const enableAdvanced3D = packageTier === 'advanced' || packageTier === 'complete';
+  const enableAdvanced3D = packageTier !== 'package1' && packageTier !== 'basic';
 
   return (
     <div

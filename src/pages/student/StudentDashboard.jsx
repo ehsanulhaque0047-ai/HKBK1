@@ -37,6 +37,7 @@ import { Analytics3D } from '../../components/3d/Analytics3D';
 import { CampusCanvas3D } from '../../components/3d/CampusCanvas3D';
 import { MobileAppShowcase3D } from '../../components/3d/MobileAppShowcase3D';
 import { HeroOrbitalCrystal } from '../../components/3d/HeroOrbitalCrystalLazy';
+import { PackagePricingSection } from '../../components/packages/PackagePricingSection';
 
 export const StudentDashboard = () => {
   const {
@@ -100,7 +101,7 @@ export const StudentDashboard = () => {
                 color: 'var(--accent-gold)'
               }}
             >
-              {currentPackage.name} ({currentPackage.price})
+              {currentPackage.name} (Dev: {currentPackage.devPrice} | Hosting: {currentPackage.hostingPrice})
             </span>
             <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)', marginLeft: '0.5rem' }}>
               • {currentPackage.tagline}
@@ -125,7 +126,7 @@ export const StudentDashboard = () => {
                 transition: 'all 0.15s ease'
               }}
             >
-              {pkg.id === 'basic' ? 'Basic (₹2L)' : pkg.id === 'advanced' ? 'Advanced (₹3.5L)' : 'Complete (₹4.5L)'}
+              {pkg.number === 1 ? 'P1: Website (₹1.20L)' : pkg.number === 2 ? 'P2: +Android (₹1.68L)' : 'P3: +Android+iOS (₹2.16L)'}
             </button>
           ))}
           <button
@@ -145,7 +146,7 @@ export const StudentDashboard = () => {
             }}
           >
             <Sliders size={12} />
-            <span>Compare Matrix ▾</span>
+            <span>Packages & Estimates ▾</span>
           </button>
         </div>
       </div>
@@ -306,9 +307,9 @@ export const StudentDashboard = () => {
       </Card3D>
 
       {/* Flagship Feature: Real-time 3D Orbital Crystal Sculpture (Reference Design: Glossy Black Crystal, Gold Cage, Intersecting Rings & 3 Gemstones) */}
-      {packageTier !== 'basic' && (
+      {packageTier !== 'package1' && packageTier !== 'basic' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-          {packageTier === 'complete' && (
+          {(packageTier === 'package3' || packageTier === 'complete') && (
             <div
               style={{
                 display: 'flex',
@@ -419,7 +420,7 @@ export const StudentDashboard = () => {
       </div>
 
       {/* 3. 3D Spatial Intelligence Section: Dynamic 3D Attendance Ring + Continuous CIE Analytics Engine */}
-      {packageTier !== 'basic' ? (
+      {packageTier !== 'package1' && packageTier !== 'basic' ? (
         <div
           style={{
             display: 'grid',
@@ -444,7 +445,7 @@ export const StudentDashboard = () => {
           />
         </div>
       ) : (
-        /* Subtle upgrade indicator when on Basic tier */
+        /* Package 1 notice */
         <div
           style={{
             background: 'var(--bg-card)',
@@ -461,26 +462,26 @@ export const StudentDashboard = () => {
             <Sparkles size={18} color="var(--accent-gold)" />
             <div>
               <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-                Basic Campus Portal (₹2,00,000) Active
+                Package 1 – Website Only (₹1,20,000 Dev + ₹60,000/yr Hosting Estimate) Active
               </div>
               <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                3D Interactive Attendance Depth Gauge and Continuous CIE Analytics are enabled in Advanced (₹3.5L) & Complete (₹4.5L) tiers.
+                3D Interactive Attendance Depth Gauge and Continuous CIE Analytics are enabled in Package 2 (₹1.68L) & Package 3 (₹2.16L).
               </div>
             </div>
           </div>
           <Button
             variant="outline"
             size="sm"
-            onClick={() => setPackageTier('advanced')}
+            onClick={() => setPackageTier('package2')}
             style={{ fontSize: '0.75rem', whiteSpace: 'nowrap' }}
           >
-            Preview 3D Analytics (Advanced)
+            Preview Package 2 (+Android)
           </Button>
         </div>
       )}
 
       {/* 4. Complete Digital Campus Flagship: Native Android & iOS Applications 3D Showcase */}
-      {packageTier === 'complete' ? (
+      {packageTier === 'package3' || packageTier === 'complete' ? (
         <MobileAppShowcase3D studentData={studentProfile} />
       ) : (
         /* Package comparison teaser for mobile apps */
@@ -515,10 +516,10 @@ export const StudentDashboard = () => {
             </div>
             <div>
               <div style={{ fontSize: '0.88rem', fontWeight: 800, color: 'var(--text-primary)' }}>
-                Turnkey Native Android & iOS Mobile Applications Included in Complete Digital Campus (₹4,50,000)
+                Native Android & iOS Mobile Applications Included in Package 3 (₹2,16,000 Dev + ₹1,08,000/yr Hosting)
               </div>
               <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-                Includes React Native codebase, Google Play Store / Apple App Store submission, Digital RFID Student ID & Geofenced QR attendance scanner.
+                Turnkey React Native / Flutter apps, push notification architecture, and shared Spring Boot + PostgreSQL backend. Package 2 includes Android (₹1,68,000); Package 3 includes Android + iOS (₹2,16,000).
               </div>
             </div>
           </div>
@@ -527,10 +528,10 @@ export const StudentDashboard = () => {
             variant="gold"
             size="sm"
             icon={Eye}
-            onClick={() => setPackageTier('complete')}
+            onClick={() => setPackageTier('package3')}
             style={{ fontSize: '0.78rem', whiteSpace: 'nowrap' }}
           >
-            Preview Complete Package (₹4.5L)
+            Preview Package 3 (₹2.16L)
           </Button>
         </div>
       )}
@@ -828,6 +829,9 @@ export const StudentDashboard = () => {
           </Card3D>
         </div>
       </div>
+
+      {/* 6. Commercial Packages & Implementation Pricing Section */}
+      <PackagePricingSection id="packages-comparison" />
     </div>
   );
 };

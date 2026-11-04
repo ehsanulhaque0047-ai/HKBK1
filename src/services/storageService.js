@@ -39,8 +39,9 @@ export const resetStoredData = () => {
   return INITIAL_MOCK_DATA;
 };
 
-// --- SIMULATED SPRING BOOT REST SERVICE LAYER ---
-// Prepared for future axios / fetch API migration
+// --- SPRING BOOT REST SERVICE CONFIGURATION ---
+// Configurable backend API URL through Vite environment variables
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api/v1';
 
 export const storageService = {
   // Current logged in user session

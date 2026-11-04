@@ -11,7 +11,9 @@ import {
   Zap,
   Globe,
   Sliders,
-  Award
+  Award,
+  AlertCircle,
+  Info
 } from 'lucide-react';
 import { usePackage, PACKAGES } from '../../context/PackageContext';
 
@@ -33,77 +35,77 @@ export const PackageComparisonModal = ({ isOpen, onClose }) => {
 
   const comparisonFeatures = [
     {
-      category: 'UI & 3D Spatial Experience',
+      category: 'Platforms & Applications Included',
       items: [
         {
-          name: 'Dashboard Cards Styling',
-          basic: 'Layered 3D Shadows & Glassmorphism',
-          advanced: 'Interactive Mouse Parallax Gyro Tilt (±12°)',
-          complete: 'Full Physics Parallax + Dynamic Glare Mesh'
+          name: 'React Web Portal (4 Dashboards)',
+          p1: 'Included (Student, Faculty, Admin, Parent)',
+          p2: 'Included (Student, Faculty, Admin, Parent)',
+          p3: 'Included (Student, Faculty, Admin, Parent)'
         },
         {
-          name: 'Attendance Visualization',
-          basic: 'Flat SVG Progress Bars',
-          advanced: '3D Depth Radial Ring Gauge with Thresholds',
-          complete: 'Multi-layer 3D Radial Gauge + VTU Seal'
+          name: 'Android Native Mobile App',
+          p1: '— (Not Included)',
+          p2: 'Included in Scope (Roadmap Delivery)',
+          p3: 'Included in Scope (Roadmap Delivery)'
         },
         {
-          name: 'Academic Analytics Engine',
-          basic: 'Standard 2D Charts',
-          advanced: 'Interactive 3D Dimensional CIE Mark Cylinders',
-          complete: 'Multi-axis 3D Dynamic Continuous Analytics'
+          name: 'Apple iOS Native Mobile App',
+          p1: '— (Not Included)',
+          p2: '— (Not Included)',
+          p3: 'Included in Scope (Roadmap Delivery)'
         },
         {
-          name: 'Three.js WebGL Campus Experience',
-          basic: '— (Standard CSS)',
-          advanced: '— (Standard CSS)',
-          complete: 'Interactive 3D WebGL Spire & Orbital Satellites'
+          name: 'Mobile Push Notifications',
+          p1: 'In-app Web Notifications',
+          p2: 'Native Android Push Service',
+          p3: 'Multi-platform APNs & FCM Push'
         }
       ]
     },
     {
-      category: 'Mobile & Platform Delivery Proposal',
+      category: 'Backend & Database Architecture',
       items: [
         {
-          name: 'Responsive Web Portal',
-          basic: 'Full Mobile Responsive',
-          advanced: 'PWA Web-App Ready',
-          complete: 'Native Responsive + PWA'
+          name: 'Java Spring Boot REST Services',
+          p1: 'Included (Enterprise Architecture)',
+          p2: 'Included (Shared Web & Mobile)',
+          p3: 'Included (Shared High-Concurrence)'
         },
         {
-          name: 'Android & iOS Native Apps',
-          basic: 'Not Included in Proposal',
-          advanced: 'Not Included in Proposal',
-          complete: 'Included in Turnkey Proposal (.apk & .ipa)'
+          name: 'PostgreSQL Relational Database',
+          p1: 'Included (ACID Compliant)',
+          p2: 'Included (Unified Schema)',
+          p3: 'Included (Optimized Indexes)'
         },
         {
-          name: 'Offline Smart ID & Bus Pass',
-          basic: 'Web Verification Only',
-          advanced: 'Cached Digital ID',
-          complete: 'Biometric Offline Token + QR Pass'
+          name: 'First-Year Cloud Hosting Estimate',
+          p1: '₹60,000 / year (Estimate)',
+          p2: '₹84,000 / year (Estimate)',
+          p3: '₹1,08,000 / year (Estimate)'
         }
       ]
     },
     {
-      category: 'Core Portal Modules & Roles',
+      category: 'Academic Modules & 3D Visual Experience',
       items: [
         {
-          name: 'Supported User Roles',
-          basic: 'Student, Faculty, Admin, Parent',
-          advanced: 'Student, Faculty, Admin, Parent',
-          complete: 'Student, Faculty, Admin, Parent + Dean View'
+          name: 'Academic Modules (Attendance, Timetable, CIE)',
+          p1: 'Full Access (All Roles)',
+          p2: 'Full Access (Web + Mobile)',
+          p3: 'Full Access (Web + Mobile + iOS)'
         },
         {
-          name: 'VTU / AICTE Compliance',
-          basic: 'Attendance 75% Alerts',
-          advanced: 'CIE & SEE Auto-Calculation Matrix',
-          complete: 'Full VTU Compliance & Hall Ticket Generation'
+          name: '3D Spatial Visuals & Micro-Interactions',
+          p1: 'Layered 3D Depth & Shadows',
+          p2: '3D Parallax Tilt + CIE Visualizer',
+          p3: 'Full 3D WebGL Crystal Sculpture'
         },
         {
-          name: 'Demonstration Persistence',
-          basic: 'LocalStorage State',
-          advanced: 'LocalStorage State',
-          complete: 'LocalStorage + Simulated Backend Export'
+          name: 'Separate Maintenance Fee',
+          p1: '₹0 (No Separate Maintenance)',
+          p2: '₹0 (No Separate Maintenance)',
+          p3: '₹0 (No Separate Maintenance)'
         }
       ]
     }
@@ -130,8 +132,8 @@ export const PackageComparisonModal = ({ isOpen, onClose }) => {
       <div
         style={{
           width: '100%',
-          maxWidth: '1100px',
-          maxHeight: '90vh',
+          maxWidth: '1140px',
+          maxHeight: '92vh',
           backgroundColor: 'var(--bg-card)',
           borderRadius: 'var(--radius-xl)',
           border: '1px solid var(--border-light)',
@@ -179,7 +181,7 @@ export const PackageComparisonModal = ({ isOpen, onClose }) => {
                     color: 'var(--text-primary)'
                   }}
                 >
-                  HKBK SIMP – Implementation Packages Comparison
+                  HKBK SIMP – Implementation Packages & Pricing
                 </h2>
                 <span
                   style={{
@@ -192,11 +194,11 @@ export const PackageComparisonModal = ({ isOpen, onClose }) => {
                     border: '1px solid rgba(197, 160, 89, 0.25)'
                   }}
                 >
-                  Live Visual Switcher
+                  Live Architecture Switcher
                 </span>
               </div>
               <p style={{ margin: '0.15rem 0 0 0', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                Select any package below to instantly preview the visual depth and interaction differences across all dashboards.
+                One-time development fees and recurring annual hosting estimates are strictly separated with zero hidden maintenance charges.
               </p>
             </div>
           </div>
@@ -229,8 +231,7 @@ export const PackageComparisonModal = ({ isOpen, onClose }) => {
           >
             {PACKAGES.map((pkg) => {
               const isActive = packageTier === pkg.id;
-              const isFlagship = pkg.id === 'complete';
-              const isPopular = pkg.id === 'advanced';
+              const isFullSuite = pkg.id === 'package3';
 
               return (
                 <div
@@ -239,8 +240,8 @@ export const PackageComparisonModal = ({ isOpen, onClose }) => {
                     borderRadius: 'var(--radius-lg)',
                     border: isActive
                       ? '2px solid var(--accent-gold)'
-                      : isFlagship
-                      ? '1px solid rgba(197, 160, 89, 0.4)'
+                      : isFullSuite
+                      ? '1px solid rgba(197, 160, 89, 0.45)'
                       : '1px solid var(--border-light)',
                     background: isActive
                       ? 'linear-gradient(180deg, var(--accent-gold-subtle) 0%, var(--bg-card) 45%)'
@@ -264,17 +265,17 @@ export const PackageComparisonModal = ({ isOpen, onClose }) => {
                         letterSpacing: '0.04em',
                         padding: '0.2rem 0.55rem',
                         borderRadius: 'var(--radius-sm)',
-                        backgroundColor: isFlagship
+                        backgroundColor: isFullSuite
                           ? 'rgba(197, 160, 89, 0.2)'
-                          : isPopular
+                          : pkg.id === 'package2'
                           ? 'rgba(37, 99, 235, 0.15)'
                           : 'var(--bg-subtle)',
-                        color: isFlagship
+                        color: isFullSuite
                           ? 'var(--accent-gold)'
-                          : isPopular
+                          : pkg.id === 'package2'
                           ? 'var(--accent-blue)'
                           : 'var(--text-secondary)',
-                        border: isFlagship ? '1px solid var(--accent-gold)' : 'none'
+                        border: isFullSuite ? '1px solid var(--accent-gold)' : 'none'
                       }}
                     >
                       {pkg.badge}
@@ -300,53 +301,82 @@ export const PackageComparisonModal = ({ isOpen, onClose }) => {
                     )}
                   </div>
 
-                  {/* Title & Price */}
+                  {/* Title */}
                   <h3
                     style={{
                       fontFamily: 'var(--font-heading)',
-                      fontSize: '1.15rem',
+                      fontSize: '1.1rem',
                       fontWeight: 800,
-                      margin: '0 0 0.25rem 0',
+                      margin: '0 0 0.65rem 0',
                       color: 'var(--text-primary)'
                     }}
                   >
                     {pkg.name}
                   </h3>
 
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.4rem', margin: '0.4rem 0 0.75rem 0' }}>
-                    <span
-                      style={{
-                        fontFamily: 'var(--font-heading)',
-                        fontSize: '1.65rem',
-                        fontWeight: 900,
-                        color: isFlagship ? 'var(--accent-gold)' : 'var(--text-primary)'
-                      }}
-                    >
-                      {pkg.price}
-                    </span>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{pkg.period}</span>
-                  </div>
-
-                  <p
+                  {/* 1. ONE-TIME DEVELOPMENT PRICE */}
+                  <div
                     style={{
-                      fontSize: '0.8rem',
-                      color: 'var(--text-secondary)',
-                      lineHeight: 1.45,
-                      margin: '0 0 1rem 0',
-                      minHeight: '48px'
+                      padding: '0.75rem 0.85rem',
+                      borderRadius: 'var(--radius-md)',
+                      background: 'var(--bg-muted)',
+                      border: '1px solid var(--border-light)',
+                      marginBottom: '0.65rem'
                     }}
                   >
-                    {pkg.description}
-                  </p>
+                    <div style={{ fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-muted)' }}>
+                      One-Time Development Fee
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.4rem', marginTop: '0.15rem' }}>
+                      <span
+                        style={{
+                          fontFamily: 'var(--font-heading)',
+                          fontSize: '1.65rem',
+                          fontWeight: 900,
+                          color: isFullSuite ? 'var(--accent-gold)' : 'var(--text-primary)'
+                        }}
+                      >
+                        {pkg.devPrice}
+                      </span>
+                    </div>
+                  </div>
 
-                  {/* Key Package Features List */}
-                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.45rem', marginBottom: '1.25rem' }}>
-                    {pkg.highlights.slice(0, 4).map((h, i) => (
-                      <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.45rem', fontSize: '0.78rem' }}>
-                        <Check size={14} color="var(--accent-gold)" style={{ flexShrink: 0, marginTop: '2px' }} />
-                        <span style={{ color: 'var(--text-secondary)' }}>{h}</span>
+                  {/* 2. RECURRING ANNUAL HOSTING ESTIMATE */}
+                  <div
+                    style={{
+                      padding: '0.65rem 0.85rem',
+                      borderRadius: 'var(--radius-md)',
+                      background: 'rgba(37, 99, 235, 0.05)',
+                      border: '1px dashed rgba(37, 99, 235, 0.25)',
+                      marginBottom: '1rem'
+                    }}
+                  >
+                    <div style={{ fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--accent-blue)' }}>
+                      First-Year Hosting Estimate (Recurring)
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.35rem', marginTop: '0.15rem' }}>
+                      <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                        {pkg.hostingPrice}
+                      </span>
+                      <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+                        / year (traffic estimate)
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Includes List */}
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.4rem', marginBottom: '1rem' }}>
+                    {pkg.includes.slice(0, 5).map((item, i) => (
+                      <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.45rem', fontSize: '0.76rem' }}>
+                        <Check size={13} color="var(--accent-gold)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                        <span style={{ color: 'var(--text-secondary)' }}>{item}</span>
                       </div>
                     ))}
+                    {pkg.includes.length > 5 && (
+                      <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginLeft: '1.25rem' }}>
+                        + {pkg.includes.length - 5} additional modules included
+                      </div>
+                    )}
                   </div>
 
                   {/* Switch / Active Button */}
@@ -366,10 +396,10 @@ export const PackageComparisonModal = ({ isOpen, onClose }) => {
                       transition: 'all 0.15s ease',
                       backgroundColor: isActive
                         ? 'var(--primary-navy)'
-                        : isFlagship
+                        : isFullSuite
                         ? 'var(--accent-gold)'
                         : 'var(--bg-subtle)',
-                      color: isActive ? '#FFFFFF' : isFlagship ? '#0B132B' : 'var(--text-primary)',
+                      color: isActive ? '#FFFFFF' : isFullSuite ? '#0B132B' : 'var(--text-primary)',
                       border: isActive
                         ? '1px solid var(--accent-gold)'
                         : '1px solid var(--border-light)'
@@ -383,7 +413,7 @@ export const PackageComparisonModal = ({ isOpen, onClose }) => {
                     ) : (
                       <>
                         <Eye size={15} />
-                        <span>Preview This Package</span>
+                        <span>Preview {pkg.shortName}</span>
                       </>
                     )}
                   </button>
@@ -406,7 +436,7 @@ export const PackageComparisonModal = ({ isOpen, onClose }) => {
             >
               <Award size={18} color="var(--accent-gold)" />
               <h3 style={{ fontSize: '1rem', fontWeight: 800, margin: 0, color: 'var(--text-primary)' }}>
-                Comprehensive Package Capabilities Matrix
+                Detailed Deliverables & Architecture Matrix
               </h3>
             </div>
 
@@ -430,10 +460,10 @@ export const PackageComparisonModal = ({ isOpen, onClose }) => {
                   color: 'var(--text-primary)'
                 }}
               >
-                <div>Platform Feature</div>
-                <div style={{ textAlign: 'center' }}>Basic (₹2.0L)</div>
-                <div style={{ textAlign: 'center' }}>Advanced (₹3.5L)</div>
-                <div style={{ textAlign: 'center', color: 'var(--accent-gold)' }}>Complete (₹4.5L)</div>
+                <div>Deliverable / Feature</div>
+                <div style={{ textAlign: 'center' }}>Package 1 (₹1.20L)</div>
+                <div style={{ textAlign: 'center' }}>Package 2 (₹1.68L)</div>
+                <div style={{ textAlign: 'center', color: 'var(--accent-gold)' }}>Package 3 (₹2.16L)</div>
               </div>
 
               {comparisonFeatures.map((group, gIdx) => (
@@ -467,9 +497,9 @@ export const PackageComparisonModal = ({ isOpen, onClose }) => {
                       }}
                     >
                       <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{row.name}</div>
-                      <div style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>{row.basic}</div>
+                      <div style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>{row.p1}</div>
                       <div style={{ textAlign: 'center', color: 'var(--text-secondary)', fontWeight: 500 }}>
-                        {row.advanced}
+                        {row.p2}
                       </div>
                       <div
                         style={{
@@ -478,12 +508,40 @@ export const PackageComparisonModal = ({ isOpen, onClose }) => {
                           fontWeight: 700
                         }}
                       >
-                        {row.complete}
+                        {row.p3}
                       </div>
                     </div>
                   ))}
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Pricing & Hosting Disclosure Callout */}
+          <div
+            style={{
+              marginTop: '1.5rem',
+              borderRadius: 'var(--radius-lg)',
+              background: 'var(--bg-muted)',
+              border: '1px solid var(--border-light)',
+              padding: '1rem 1.25rem',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.5rem',
+              fontSize: '0.76rem',
+              color: 'var(--text-secondary)',
+              lineHeight: 1.5
+            }}
+          >
+            <div style={{ fontWeight: 800, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+              <AlertCircle size={14} color="var(--accent-gold)" />
+              <span>Hosting Cost & Roadmap Notice</span>
+            </div>
+            <div>
+              • <strong>Recurring Hosting Estimate:</strong> First-year hosting figures (₹60,000, ₹84,000, and ₹1,08,000) are recurring annual infrastructure estimates based on expected concurrent college traffic, database sizing, and file storage. They are direct cloud hosting operational expenses and are strictly separated from one-time development pricing. No separate maintenance fees are charged.
+            </div>
+            <div>
+              • <strong>Application Scope:</strong> The React Web Portal is active and running in this demonstration. Native Android and iOS applications are planned deliverables under Packages 2 & 3 upon institutional commissioning.
             </div>
           </div>
         </div>
@@ -518,4 +576,3 @@ export const PackageComparisonModal = ({ isOpen, onClose }) => {
 };
 
 export default PackageComparisonModal;
-

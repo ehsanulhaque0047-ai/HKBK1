@@ -4,93 +4,124 @@ const PACKAGE_STORAGE_KEY = 'hkbk_package_tier';
 
 export const PACKAGES = [
   {
-    id: 'basic',
-    name: 'Basic Campus Portal',
-    price: '₹2,00,000',
-    priceNumeric: 200000,
-    period: 'One-time Implementation & License',
-    badge: 'Foundation Package',
-    tagline: 'Essential academic and administrative digital operations',
-    description: 'A solid foundation for institutional digitization featuring sleek 3D-styled cards, realistic shadows, and multi-role dashboards.',
-    highlights: [
-      'Premium 3D-styled dashboard cards with layered depth',
-      'Realistic shadows, elevated borders & glassmorphism',
-      'Smooth micro-interactions and route transitions',
-      'Fully responsive Student, Faculty, Admin and Parent portals',
-      'Core academic modules (Attendance, Timetable, Profile, Results)',
-      'Document request tracking & grievance submission',
-      'Role-based security & demo authentication',
-      'Light and Dark academic theme support'
+    id: 'package1',
+    alias: 'basic',
+    number: 1,
+    name: 'PACKAGE 1 – WEBSITE ONLY',
+    shortName: 'Website Only',
+    devPrice: '₹1,20,000',
+    devPriceNumeric: 120000,
+    devPriceLabel: 'One-Time Development Fee',
+    hostingPrice: '₹60,000',
+    hostingPriceNumeric: 60000,
+    hostingPriceLabel: 'First-Year Hosting Estimate',
+    hostingPeriod: 'per year (recurring annual expense)',
+    badge: 'Core Web Platform',
+    tagline: 'Complete institutional digital management portal & database',
+    description: 'Comprehensive React web portal serving all 4 user roles, powered by a Spring Boot backend and PostgreSQL database with responsive 3D-inspired academic UI.',
+    includes: [
+      'React web portal',
+      'Student dashboard',
+      'Faculty dashboard',
+      'Admin dashboard',
+      'Parent dashboard',
+      'Spring Boot backend',
+      'PostgreSQL database',
+      'Attendance',
+      'Timetable',
+      'Assignments',
+      'Results',
+      'Responsive premium 3D-inspired UI'
     ],
+    statusTag: 'Web Portal: Live Demonstration Active',
+    hasAndroid: false,
+    hasIOS: false,
     visualFeatures: {
-      cardDepth: 'Subtle 3D Layered Shadows',
-      interactions: 'Smooth CSS Transitions',
-      analytics: 'Standard 2D Charts (Recharts)',
-      threeJsCanvases: false,
-      mobileAppsProposal: 'Web Portal Only (Mobile Responsive)'
+      cardDepth: '3D Layered Shadows & Glassmorphism',
+      analytics: 'Interactive 2D & 3D Gauges',
+      platforms: 'Web Browser (Desktop, Tablet & Mobile)'
     }
   },
   {
-    id: 'advanced',
-    name: 'Advanced College Management',
-    price: '₹3,50,000',
-    priceNumeric: 350000,
-    period: 'One-time Implementation & License',
-    badge: 'Most Popular Choice',
-    tagline: 'Interactive 3D academic analytics & dynamic visual intelligence',
-    description: 'Elevates institutional intelligence with interactive 3D parallax cards, dynamic attendance rings, and multidimensional performance visualizers.',
-    highlights: [
-      'Everything in Basic Campus Portal included',
-      'Interactive 3D-inspired academic analytics & performance gauges',
-      'Gyroscope & mouse-reactive 3D parallax card tilt physics',
-      'Animated attendance radial rings with depth layers',
-      'Interactive Continuous Evaluation (CIE) 3D bar visualizer',
-      'Dynamic fee receipt inspection with holographic seal preview',
-      'Advanced proctorial student cohort performance matrix',
-      'Performance-tuned for 60 FPS across desktop and mobile browsers'
+    id: 'package2',
+    alias: 'advanced',
+    number: 2,
+    name: 'PACKAGE 2 – WEBSITE + ANDROID',
+    shortName: 'Website + Android',
+    devPrice: '₹1,68,000',
+    devPriceNumeric: 168000,
+    devPriceLabel: 'One-Time Development Fee',
+    hostingPrice: '₹84,000',
+    hostingPriceNumeric: 84000,
+    hostingPriceLabel: 'First-Year Hosting Estimate',
+    hostingPeriod: 'per year (recurring annual expense)',
+    badge: 'Web + Android App',
+    tagline: 'Includes everything in Package 1 plus native Android mobile app',
+    description: 'Expands institutional reach with a dedicated Android application, real-time push alerts, mobile attendance, and a unified shared backend.',
+    includes: [
+      'Everything in Package 1 included',
+      'Android application',
+      'Mobile dashboards',
+      'Push notifications',
+      'Mobile attendance and results',
+      'Shared backend and database'
     ],
+    statusTag: 'Android Application: Architecture Proposed (Roadmap Delivery)',
+    hasAndroid: true,
+    hasIOS: false,
     visualFeatures: {
-      cardDepth: 'Interactive 3D Mouse Parallax Tilt',
-      interactions: 'Layered Spatial Micro-physics',
-      analytics: '3D Depth Rings & Dimensional Charts',
-      threeJsCanvases: 'Subtle Holographic Accents',
-      mobileAppsProposal: 'PWA Web-App Ready'
+      cardDepth: '3D Parallax Tilt Physics',
+      analytics: 'Interactive 3D Continuous Evaluation (CIE)',
+      platforms: 'Web + Android Mobile App'
     }
   },
   {
-    id: 'complete',
-    name: 'Complete Digital Campus',
-    price: '₹4,50,000',
-    priceNumeric: 450000,
-    period: 'Comprehensive Turnkey Solution',
-    badge: 'Enterprise Flagship',
-    tagline: 'Flagship Web Experience + Native Mobile Apps Included in Proposal',
-    description: 'The pinnacle of institutional technology: real-time Three.js 3D WebGL visuals throughout the portal PLUS native Android & iOS mobile applications included in the delivery proposal roadmap.',
-    highlights: [
-      'Everything in Advanced College Management included',
-      'Interactive WebGL 3D Digital Campus orbital sphere with academic satellites',
-      'Interactive 3D Mobile App Device Showcase previewing native Android & iOS interfaces',
-      'Native Android (.apk) & iOS (.ipa) applications included in package roadmap',
-      'Real-time Three.js spatial lighting, specular glares & particle atmospheres',
-      '3D Holographic VTU Academic Seal & Hall Ticket inspector',
-      'Priority VTU / AICTE regulatory compliance integration',
-      'Respects prefers-reduced-motion for universal accessibility'
+    id: 'package3',
+    alias: 'complete',
+    number: 3,
+    name: 'PACKAGE 3 – WEBSITE + ANDROID + IOS',
+    shortName: 'Website + Android + iOS',
+    devPrice: '₹2,16,000',
+    devPriceNumeric: 216000,
+    devPriceLabel: 'One-Time Development Fee',
+    hostingPrice: '₹1,08,000',
+    hostingPriceNumeric: 108000,
+    hostingPriceLabel: 'First-Year Hosting Estimate',
+    hostingPeriod: 'per year (recurring annual expense)',
+    badge: 'Full Turnkey Suite',
+    tagline: 'Complete turnkey ecosystem: Web portal + Android + iOS applications',
+    description: 'The flagship institutional package: React web portal, native Android app, native iOS app, shared high-performance backend, and App Store release preparation.',
+    includes: [
+      'Everything in Package 2 included',
+      'iOS application',
+      'iOS mobile dashboards',
+      'Shared backend and database',
+      'iOS release preparation'
     ],
+    statusTag: 'iOS Application: Architecture Proposed (Roadmap Delivery)',
+    hasAndroid: true,
+    hasIOS: true,
     visualFeatures: {
-      cardDepth: 'Full 3D WebGL & Physics Layering',
-      interactions: 'Real-time Particle Atmospheric Depth',
-      analytics: 'Multi-axis 3D Interactive Analytics Engine',
-      threeJsCanvases: 'Interactive WebGL 3D Campus & Holograms',
-      mobileAppsProposal: 'Dedicated Android & iOS Native Apps Included'
+      cardDepth: 'Full 3D WebGL Crystal Sculpture & Spire',
+      analytics: 'Multi-axis 3D Dynamic Continuous Analytics',
+      platforms: 'Web + Android + Apple iOS Native'
     }
   }
 ];
 
 const PackageContext = createContext();
 
+const normalizeTierId = (tier) => {
+  if (['package1', 'basic', 'website'].includes(tier)) return 'package1';
+  if (['package2', 'advanced', 'android'].includes(tier)) return 'package2';
+  if (['package3', 'complete', 'ios'].includes(tier)) return 'package3';
+  return 'package3';
+};
+
 export const PackageProvider = ({ children }) => {
   const [packageTier, setPackageTierState] = useState(() => {
-    return localStorage.getItem(PACKAGE_STORAGE_KEY) || 'complete';
+    const saved = localStorage.getItem(PACKAGE_STORAGE_KEY);
+    return normalizeTierId(saved || 'package3');
   });
 
   const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);
@@ -101,9 +132,8 @@ export const PackageProvider = ({ children }) => {
   }, [packageTier]);
 
   const setPackageTier = (tier) => {
-    if (['basic', 'advanced', 'complete'].includes(tier)) {
-      setPackageTierState(tier);
-    }
+    const normalized = normalizeTierId(tier);
+    setPackageTierState(normalized);
   };
 
   const currentPackage = PACKAGES.find((p) => p.id === packageTier) || PACKAGES[2];
@@ -116,7 +146,10 @@ export const PackageProvider = ({ children }) => {
         currentPackage,
         packages: PACKAGES,
         isComparisonModalOpen,
-        setIsComparisonModalOpen
+        setIsComparisonModalOpen,
+        isPackage1: packageTier === 'package1',
+        hasAndroid: packageTier === 'package2' || packageTier === 'package3',
+        hasIOS: packageTier === 'package3'
       }}
     >
       {children}
@@ -132,3 +165,4 @@ export const usePackage = () => {
   return context;
 };
 
+export default PackageContext;

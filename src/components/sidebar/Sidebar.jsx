@@ -312,7 +312,7 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
             justifyContent: 'space-between',
             transition: 'all 0.2s ease'
           }}
-          title="Compare 3D Packages: Basic ₹2L / Advanced ₹3.5L / Complete ₹4.5L"
+          title="Compare Packages: P1 Website (₹1.20L) / P2 +Android (₹1.68L) / P3 +Android+iOS (₹2.16L)"
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', minWidth: 0 }}>
             <Sparkles size={16} color="var(--accent-gold)" style={{ flexShrink: 0 }} />
@@ -327,10 +327,10 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
                   textOverflow: 'ellipsis'
                 }}
               >
-                {currentPackage?.name}
+                {currentPackage?.shortName || currentPackage?.name}
               </div>
               <div style={{ fontSize: '0.65rem', color: '#94A3B8' }}>
-                {currentPackage?.price} • 3D Packages
+                {currentPackage?.devPrice} Dev • {currentPackage?.hostingPrice}
               </div>
             </div>
           </div>

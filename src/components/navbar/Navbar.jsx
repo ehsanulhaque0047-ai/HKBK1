@@ -115,7 +115,7 @@ export const Navbar = ({ onToggleMobile }) => {
         {/* Package Tier Trigger Pill */}
         <button
           onClick={() => setIsComparisonModalOpen(true)}
-          title="Click to compare 3D packages (₹2,00,000 – ₹4,50,000)"
+          title="Click to view packages: P1 Website (₹1.20L) / P2 +Android (₹1.68L) / P3 +Android+iOS (₹2.16L)"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -123,16 +123,16 @@ export const Navbar = ({ onToggleMobile }) => {
             padding: '0.35rem 0.75rem',
             borderRadius: 'var(--radius-md)',
             background:
-              packageTier === 'complete'
+              packageTier === 'package3' || packageTier === 'complete'
                 ? 'linear-gradient(135deg, rgba(197, 160, 89, 0.2) 0%, rgba(197, 160, 89, 0.05) 100%)'
-                : packageTier === 'advanced'
+                : packageTier === 'package2' || packageTier === 'advanced'
                 ? 'rgba(37, 99, 235, 0.12)'
                 : 'var(--bg-subtle)',
             border:
-              packageTier === 'complete'
+              packageTier === 'package3' || packageTier === 'complete'
                 ? '1px solid var(--accent-gold)'
                 : '1px solid var(--border-light)',
-            color: packageTier === 'complete' ? 'var(--accent-gold)' : 'var(--text-primary)',
+            color: packageTier === 'package3' || packageTier === 'complete' ? 'var(--accent-gold)' : 'var(--text-primary)',
             fontSize: '0.75rem',
             fontWeight: 700,
             cursor: 'pointer',
@@ -141,15 +141,15 @@ export const Navbar = ({ onToggleMobile }) => {
           className="package-tier-pill"
         >
           <Sparkles size={13} color="var(--accent-gold)" />
-          <span className="package-tier-pill-name">{currentPackage?.name}</span>
+          <span className="package-tier-pill-name">{currentPackage?.shortName || currentPackage?.name}</span>
           <span
             style={{
               fontSize: '0.68rem',
               fontWeight: 800,
-              color: packageTier === 'complete' ? 'var(--accent-gold)' : 'var(--text-muted)'
+              color: packageTier === 'package3' || packageTier === 'complete' ? 'var(--accent-gold)' : 'var(--text-muted)'
             }}
           >
-            {currentPackage?.price}
+            {currentPackage?.devPrice}
           </span>
           <span
             style={{
@@ -161,7 +161,7 @@ export const Navbar = ({ onToggleMobile }) => {
               border: '1px solid var(--border-light)'
             }}
           >
-            Tiers ▾
+            Packages ▾
           </span>
         </button>
 

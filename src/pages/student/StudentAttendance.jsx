@@ -106,8 +106,8 @@ export const StudentAttendance = () => {
         />
       </div>
 
-      {/* 3. 3D Radial Depth Gauge (Advanced & Complete Packages) */}
-      {packageTier !== 'basic' && (
+      {/* 3. 3D Radial Depth Gauge (Package 2 & Package 3) */}
+      {packageTier !== 'package1' && packageTier !== 'basic' && (
         <div style={{ display: 'grid', gridTemplateColumns: 'minmax(320px, 360px) 1fr', gap: '1.5rem', alignItems: 'stretch' }}>
           <AttendanceRing3D
             percentage={attendance.overallPercentage}
@@ -136,7 +136,7 @@ export const StudentAttendance = () => {
       )}
 
       {/* 4. Monthly Attendance Trend Chart & Threshold Alert */}
-      <div style={{ display: 'grid', gridTemplateColumns: packageTier !== 'basic' ? '1fr' : '1.6fr 1fr', gap: '1.5rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: (packageTier !== 'package1' && packageTier !== 'basic') ? '1fr' : '1.6fr 1fr', gap: '1.5rem' }}>
         <Card
           title="Monthly Attendance Trend (%)"
           subtitle="Attendance percentage progression across months"
@@ -162,7 +162,7 @@ export const StudentAttendance = () => {
           </div>
         </Card>
 
-        {packageTier === 'basic' && (
+        {(packageTier === 'package1' || packageTier === 'basic') && (
           <Card title="VTU Attendance Regulations" icon={Info} accent>
             <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               <div style={{ padding: '0.75rem', background: 'var(--status-warning-bg)', borderRadius: 'var(--radius-md)', border: '1px solid var(--status-warning-border)' }}>

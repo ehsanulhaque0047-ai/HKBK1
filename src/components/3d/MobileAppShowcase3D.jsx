@@ -94,7 +94,7 @@ export const MobileAppShowcase3D = ({ studentData }) => {
               }}
             >
               <Sparkles size={12} />
-              Included in Complete Digital Campus (₹4,50,000)
+              Included in Package 3: Web + Android + iOS (₹2,16,000)
             </span>
             <span
               style={{
@@ -327,7 +327,7 @@ export const MobileAppShowcase3D = ({ studentData }) => {
               <ShieldCheck size={14} color="var(--accent-gold)" />
               <span>Turnkey Package Delivery Scope</span>
             </div>
-            Included in the Complete Digital Campus (₹4.5L) contract: Full React Native source code, Google Play Store console deployment, Apple App Store signing, and VTU biometric gateway integration.
+            Included in Package 2 (₹1,68,000) for Android and Package 3 (₹2,16,000) for Android + iOS: Turnkey React Native / Flutter codebase, app store submissions, and shared Spring Boot + PostgreSQL backend integration. First-year hosting is an annual recurring estimate (₹84k/yr for P2, ₹1.08L/yr for P3).
           </div>
         </div>
 

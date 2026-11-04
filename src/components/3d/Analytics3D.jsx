@@ -7,7 +7,7 @@ export const Analytics3D = ({ internalMarks, subjects = [], semesterHistory = []
   const { packageTier } = usePackage();
   const [selectedSubjectIndex, setSelectedSubjectIndex] = useState(0);
 
-  const enable3D = packageTier === 'advanced' || packageTier === 'complete';
+  const enable3D = packageTier !== 'package1' && packageTier !== 'basic';
 
   // Normalize marks list: prefer internalMarks, fallback to subjects
   const marksList = (internalMarks && internalMarks.length > 0)

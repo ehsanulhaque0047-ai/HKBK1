@@ -108,6 +108,23 @@ Future backend endpoints can be integrated without modifying UI components:
 
 ---
 
+## 💼 Commercial Implementation Packages & Estimates
+
+The portal features a transparent package comparison matrix:
+
+| Package | One-Time Development Price | First-Year Hosting Estimate (Recurring) | Scope & Key Inclusions | Status |
+| :--- | :--- | :--- | :--- | :--- |
+| **PACKAGE 1 – WEBSITE ONLY** | **₹1,20,000** | **₹60,000 / year** | • React web portal (Student, Faculty, Admin, Parent)<br>• Spring Boot backend & PostgreSQL database<br>• Attendance, Timetable, Assignments, Results<br>• Responsive premium 3D-inspired UI | **Live Production Demonstration** |
+| **PACKAGE 2 – WEBSITE + ANDROID** | **₹1,68,000** | **₹84,000 / year** | • Everything in Package 1 included<br>• Dedicated native Android application (.apk)<br>• Mobile dashboards & push notifications engine<br>• Mobile attendance and results<br>• Shared backend and database | **Planned Roadmap Delivery** |
+| **PACKAGE 3 – WEBSITE + ANDROID + IOS** | **₹2,16,000** | **₹1,08,000 / year** | • Everything in Package 2 included<br>• Dedicated native Apple iOS application (.ipa)<br>• iOS mobile dashboards & release preparation<br>• Shared backend and database | **Planned Roadmap Delivery** |
+
+> **⚠️ Hosting & Operational Notes:**
+> 1. **Separated Hosting Estimate:** First-year hosting figures are recurring annual cloud infrastructure estimates based on expected student/faculty concurrent traffic and storage volume. Hosting is an ongoing cloud operational cost and is strictly separated from one-time development pricing.
+> 2. **No Maintenance Fees:** No separate maintenance fees are added or bundled into the package quotes.
+> 3. **Application Roadmap Transparency:** The React web portal is fully functional in this demonstration. Native Android and iOS mobile applications are planned turnkey deliverables included in the scope of Packages 2 & 3 upon institutional agreement.
+
+---
+
 ## 🚀 Running the Project Locally
 
 ```bash

@@ -430,41 +430,53 @@
 
 /* Tier-specific Card Depth Enhancements */
 [data-package-tier='basic'] .simp-card,
-[data-package-tier='basic'] .simp-stat-card {
+[data-package-tier='package1'] .simp-card,
+[data-package-tier='basic'] .simp-stat-card,
+[data-package-tier='package1'] .simp-stat-card {
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-light);
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 [data-package-tier='basic'] .simp-card:hover,
-[data-package-tier='basic'] .simp-stat-card:hover {
+[data-package-tier='package1'] .simp-card:hover,
+[data-package-tier='basic'] .simp-stat-card:hover,
+[data-package-tier='package1'] .simp-stat-card:hover {
   box-shadow: var(--shadow-md);
   border-color: rgba(197, 160, 89, 0.4);
 }
 
 [data-package-tier='advanced'] .simp-card,
-[data-package-tier='advanced'] .simp-stat-card {
+[data-package-tier='package2'] .simp-card,
+[data-package-tier='advanced'] .simp-stat-card,
+[data-package-tier='package2'] .simp-stat-card {
   box-shadow: 0 8px 24px -6px rgba(15, 23, 42, 0.12), 0 2px 6px -1px rgba(15, 23, 42, 0.08);
   border: 1px solid var(--border-light);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 [data-package-tier='advanced'] .simp-card:hover,
-[data-package-tier='advanced'] .simp-stat-card:hover {
+[data-package-tier='package2'] .simp-card:hover,
+[data-package-tier='advanced'] .simp-stat-card:hover,
+[data-package-tier='package2'] .simp-stat-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.18), 0 4px 12px -2px rgba(197, 160, 89, 0.2);
   border-color: var(--accent-gold);
 }
 
 [data-package-tier='complete'] .simp-card,
-[data-package-tier='complete'] .simp-stat-card {
+[data-package-tier='package3'] .simp-card,
+[data-package-tier='complete'] .simp-stat-card,
+[data-package-tier='package3'] .simp-stat-card {
   box-shadow: 0 12px 32px -8px rgba(11, 19, 43, 0.18), 0 0 0 1px rgba(197, 160, 89, 0.15);
   border: 1px solid var(--border-light);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
 }
 
 [data-package-tier='complete'] .simp-card:hover,
-[data-package-tier='complete'] .simp-stat-card:hover {
+[data-package-tier='package3'] .simp-card:hover,
+[data-package-tier='complete'] .simp-stat-card:hover,
+[data-package-tier='package3'] .simp-stat-card:hover {
   transform: translateY(-4px) scale(1.005);
   box-shadow: 0 24px 44px -10px rgba(11, 19, 43, 0.28), 0 0 0 1.5px rgba(197, 160, 89, 0.4);
 }
