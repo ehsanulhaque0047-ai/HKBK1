@@ -1,0 +1,395 @@
+/* Components & Layout CSS */
+
+/* Card Styles */
+.simp-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  overflow: hidden;
+}
+
+.simp-card:hover {
+  border-color: var(--border-subtle);
+}
+
+.simp-card-header {
+  padding: 1.15rem 1.4rem;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.simp-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.simp-card-body {
+  padding: 1.4rem;
+}
+
+.simp-card-footer {
+  padding: 0.9rem 1.4rem;
+  border-top: 1px solid var(--border-light);
+  background: var(--bg-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Academic Accent Card */
+.simp-card-accent {
+  border-top: 3.5px solid var(--accent-gold);
+}
+
+.simp-card-navy {
+  background: linear-gradient(135deg, var(--primary-navy-dark) 0%, var(--primary-navy) 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  box-shadow: var(--shadow-md);
+}
+
+.simp-card-navy .simp-card-title,
+.simp-card-navy h1, .simp-card-navy h2, .simp-card-navy h3, .simp-card-navy h4 {
+  color: #FFFFFF;
+}
+
+.simp-card-navy p, .simp-card-navy span {
+  color: #CBD5E1;
+}
+
+/* Button System */
+.simp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--radius-md);
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.simp-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.simp-btn-primary {
+  background: var(--primary-navy);
+  color: #FFFFFF;
+  border: 1px solid var(--primary-navy-light);
+}
+
+.simp-btn-primary:hover:not(:disabled) {
+  background: var(--primary-navy-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.simp-btn-gold {
+  background: linear-gradient(135deg, #DFBF77 0%, #C5A059 100%);
+  color: #0B1E36;
+  font-weight: 700;
+  border: 1px solid #B89243;
+}
+
+.simp-btn-gold:hover:not(:disabled) {
+  background: linear-gradient(135deg, #EAD093 0%, #D4AF37 100%);
+  box-shadow: var(--shadow-accent);
+}
+
+.simp-btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+}
+
+.simp-btn-outline:hover:not(:disabled) {
+  background: var(--bg-subtle);
+  border-color: var(--border-subtle);
+}
+
+.simp-btn-subtle {
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+}
+
+.simp-btn-subtle:hover:not(:disabled) {
+  background: var(--border-light);
+}
+
+.simp-btn-danger {
+  background: var(--status-danger-bg);
+  color: var(--status-danger);
+  border: 1px solid var(--status-danger-border);
+}
+
+.simp-btn-danger:hover:not(:disabled) {
+  background: var(--status-danger);
+  color: #FFFFFF;
+}
+
+.simp-btn-sm {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  border-radius: var(--radius-sm);
+}
+
+.simp-btn-lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+/* Badges and Status Pills */
+.simp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+}
+
+.badge-success {
+  background: var(--status-success-bg);
+  color: var(--status-success);
+  border: 1px solid var(--status-success-border);
+}
+
+.badge-warning {
+  background: var(--status-warning-bg);
+  color: var(--status-warning);
+  border: 1px solid var(--status-warning-border);
+}
+
+.badge-danger {
+  background: var(--status-danger-bg);
+  color: var(--status-danger);
+  border: 1px solid var(--status-danger-border);
+}
+
+.badge-info {
+  background: var(--status-info-bg);
+  color: var(--status-info);
+  border: 1px solid var(--status-info-border);
+}
+
+.badge-gold {
+  background: var(--accent-gold-subtle);
+  color: var(--accent-gold-dark);
+  border: 1px solid var(--border-accent);
+}
+
+.badge-navy {
+  background: var(--primary-navy-light);
+  color: #F8FAFC;
+}
+
+/* Modern Data Table */
+.simp-table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+}
+
+.simp-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.simp-table th {
+  background: var(--bg-muted);
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid var(--border-light);
+  white-space: nowrap;
+}
+
+.simp-table td {
+  padding: 0.95rem 1.1rem;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+.simp-table tr:last-child td {
+  border-bottom: none;
+}
+
+.simp-table tbody tr {
+  transition: background 0.12s ease;
+}
+
+.simp-table tbody tr:hover {
+  background: var(--bg-subtle);
+}
+
+/* Form Controls */
+.simp-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.simp-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.simp-input, .simp-select, .simp-textarea {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.simp-input:focus, .simp-select:focus, .simp-textarea:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(29, 99, 184, 0.12);
+  outline: none;
+}
+
+/* Modals */
+.simp-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 22, 40, 0.65);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.simp-modal-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Tabs */
+.simp-tabs {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border-light);
+  padding: 0 1rem;
+  background: var(--bg-muted);
+  overflow-x: auto;
+}
+
+.simp-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-bottom: 2.5px solid transparent;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.simp-tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.simp-tab-btn.active {
+  color: var(--primary-navy);
+  border-bottom-color: var(--accent-gold);
+  background: var(--bg-card);
+  border-top-left-radius: var(--radius-sm);
+  border-top-right-radius: var(--radius-sm);
+}
+
+[data-theme='dark'] .simp-tab-btn.active {
+  color: #FFFFFF;
+}
+
+/* Metric / Stat Card */
+.simp-stat-card {
+  padding: 1.25rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.simp-stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.simp-stat-value {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.simp-stat-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Responsive Grid helpers */
+.grid-cols-1 { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 1rem; }
+.grid-cols-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.grid-cols-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.grid-cols-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+
+@media (max-width: 1024px) {
+  .grid-cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .grid-cols-4, .grid-cols-3, .grid-cols-2 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+}
