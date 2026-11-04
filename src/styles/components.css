@@ -1221,6 +1221,11 @@
   .demo-package-buttons-grid {
     grid-template-columns: 1fr;
   }
+
+  /* Pricing disclosure callout single column on mobile */
+  .pricing-disclosure-callout {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 @media (max-width: 640px) {

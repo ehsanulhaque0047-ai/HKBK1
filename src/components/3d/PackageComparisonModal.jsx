@@ -99,7 +99,7 @@ export const PackageComparisonModal = ({ isOpen, onClose }) => {
           name: '3D Spatial Visuals & Micro-Interactions',
           p1: 'Layered 3D Depth & Shadows',
           p2: '3D Parallax Tilt + CIE Visualizer',
-          p3: 'Full 3D WebGL Crystal Sculpture'
+          p3: 'Interactive Radial Gauges & Turnkey Ecosystem'
         },
         {
           name: 'Separate Maintenance Fee',

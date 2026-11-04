@@ -102,9 +102,9 @@ export const PACKAGES = [
     hasAndroid: true,
     hasIOS: true,
     visualFeatures: {
-      cardDepth: 'Full 3D WebGL Crystal Sculpture & Spire',
-      analytics: 'Multi-axis 3D Dynamic Continuous Analytics',
-      platforms: 'Web + Android + Apple iOS Native'
+      cardDepth: '3D Layered Depth, Shadow Physics & Glassmorphism',
+      analytics: 'Multi-axis Interactive Continuous Analytics',
+      platforms: 'Web Browser + Android + Apple iOS Native'
     }
   }
 ];
