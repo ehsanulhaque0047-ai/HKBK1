@@ -27,10 +27,10 @@ import { Badge } from '../../components/common/Badge';
 import { StatsCard } from '../../components/common/StatsCard';
 import { Modal } from '../../components/common/Modal';
 
-export const StudentExams = () => {
+export const StudentExams = ({ initialTab = 'internal' }) => {
   const { examinations, studentProfile } = useData();
 
-  const [activeTab, setActiveTab] = useState('internal'); // 'internal', 'timetable', 'results', 'hallticket'
+  const [activeTab, setActiveTab] = useState(initialTab); // 'internal', 'timetable', 'results', 'hallticket'
   const [showHallTicketModal, setShowHallTicketModal] = useState(false);
 
   const sgpaChartData = examinations.semesterHistory.map((s) => ({

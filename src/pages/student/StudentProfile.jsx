@@ -9,12 +9,14 @@ import {
   GraduationCap,
   Calendar,
   Bus,
-  Home,
   Edit3,
   Save,
   CheckCircle2,
   FileCheck,
-  Building
+  Building,
+  Download,
+  Award,
+  FileText
 } from 'lucide-react';
 import { useData } from '../../context/DataContext';
 import { Card } from '../../components/common/Card';
@@ -61,16 +63,10 @@ export const StudentProfile = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      {/* Header Profile Card (Desktop: 2-col, Mobile: Clean vertical stack) */}
+      {/* 1. Profile Hero Card (Desktop: 2-column balanced, Mobile: Clean vertical stack) */}
       <div className="student-profile-hero">
-        <img
-          src="/hkbk-crest.svg"
-          alt=""
-          className="student-profile-hero-bg-crest"
-        />
-
         <div className="student-profile-desktop-grid">
-          {/* Left Column: Avatar + Identity */}
+          {/* Left Column: Avatar + Identity + Contact */}
           <div className="student-profile-left-col">
             <div className="student-avatar-container">
               <img
@@ -91,7 +87,7 @@ export const StudentProfile = () => {
                 <span className="student-usn-chip">
                   USN: {studentProfile.usn}
                 </span>
-                <span style={{ fontSize: '0.8rem', color: '#DFBF77', fontWeight: 600 }}>
+                <span style={{ fontSize: '0.82rem', color: 'var(--accent-teal-light)', fontWeight: 600 }}>
                   {studentProfile.course} • Sem {studentProfile.semester}
                 </span>
               </div>
@@ -101,48 +97,48 @@ export const StudentProfile = () => {
                   gap: '1rem',
                   marginTop: '0.4rem',
                   fontSize: '0.78rem',
-                  color: '#CBD5E1',
+                  color: '#A5B4C7',
                   flexWrap: 'wrap'
                 }}
               >
                 <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                  <Mail size={13} color="var(--accent-gold)" />
+                  <Mail size={13} color="var(--accent-teal)" />
                   {studentProfile.email}
                 </span>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                  <Phone size={13} color="var(--accent-gold)" />
+                  <Phone size={13} color="var(--accent-teal)" />
                   {studentProfile.phone}
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Academic Details & Action Buttons */}
+          {/* Right Column: Academic Metadata + Actions */}
           <div className="student-profile-right-col">
             <div className="student-academic-meta-grid">
               <div className="student-meta-item">
-                <GraduationCap size={15} color="var(--accent-gold)" />
+                <GraduationCap size={15} color="var(--accent-teal)" />
                 <span>
                   <span className="student-meta-label">Department: </span>
                   <strong>{studentProfile.department}</strong>
                 </span>
               </div>
               <div className="student-meta-item">
-                <Calendar size={15} color="var(--accent-gold)" />
+                <Calendar size={15} color="var(--accent-teal)" />
                 <span>
-                  <span className="student-meta-label">Academic Term: </span>
+                  <span className="student-meta-label">Semester: </span>
                   <strong>6th Sem (AY 2024–25)</strong>
                 </span>
               </div>
               <div className="student-meta-item">
-                <Shield size={15} color="var(--accent-gold)" />
+                <Shield size={15} color="var(--accent-teal)" />
                 <span>
                   <span className="student-meta-label">Mentor: </span>
                   <strong>{studentProfile.mentor?.name}</strong>
                 </span>
               </div>
               <div className="student-meta-item">
-                <Bus size={15} color="var(--accent-gold)" />
+                <Bus size={15} color="var(--accent-teal)" />
                 <span>
                   <span className="student-meta-label">Quota / Bus: </span>
                   <strong>{studentProfile.quota} • Route {studentProfile.transport?.routeNo || '14'}</strong>
@@ -152,7 +148,7 @@ export const StudentProfile = () => {
 
             <div className="student-profile-actions">
               <Button
-                variant="gold"
+                variant="teal"
                 icon={Edit3}
                 size="sm"
                 onClick={() => setIsEditModalOpen(true)}
@@ -164,38 +160,98 @@ export const StudentProfile = () => {
         </div>
       </div>
 
-      {/* Grid of Profile Sections */}
+      {/* 2. Profile Completion Status Bar */}
+      <div
+        className="simp-card"
+        style={{
+          padding: '1.1rem 1.4rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '1rem',
+          flexWrap: 'wrap'
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div
+            style={{
+              width: '36px',
+              height: '36px',
+              borderRadius: 'var(--radius-md)',
+              background: 'var(--accent-teal-subtle)',
+              border: '1px solid rgba(54, 198, 176, 0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <CheckCircle2 size={18} color="var(--accent-teal)" />
+          </div>
+          <div>
+            <div style={{ fontWeight: 700, fontSize: '0.88rem', color: '#F1F5F9' }}>
+              Institutional Profile Completion: 95% Verified
+            </div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+              All mandatory VTU student data, biometric record, and proctor verification verified.
+            </div>
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div
+            style={{
+              width: '120px',
+              height: '8px',
+              borderRadius: 'var(--radius-full)',
+              background: 'rgba(255, 255, 255, 0.08)',
+              overflow: 'hidden'
+            }}
+          >
+            <div
+              style={{
+                width: '95%',
+                height: '100%',
+                background: 'var(--accent-teal)',
+                borderRadius: 'var(--radius-full)'
+              }}
+            />
+          </div>
+          <Badge variant="success">95%</Badge>
+        </div>
+      </div>
+
+      {/* 3. Balanced Two-Column Details Grid */}
       <div className="grid-cols-2">
         {/* Academic Profile */}
         <Card title="Academic Details & Affiliation" icon={GraduationCap} accent>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div>
               <div className="simp-label">Institution</div>
-              <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>HKBK College of Engineering</div>
+              <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#F1F5F9' }}>HKBK College of Engineering</div>
             </div>
             <div>
               <div className="simp-label">Affiliated University</div>
-              <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>VTU Belagavi (2021 Scheme)</div>
+              <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#F1F5F9' }}>VTU Belagavi (2021 Scheme)</div>
             </div>
             <div>
               <div className="simp-label">Department</div>
-              <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>{studentProfile.department}</div>
+              <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#F1F5F9' }}>{studentProfile.department}</div>
             </div>
             <div>
               <div className="simp-label">Degree & Semester</div>
-              <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>{studentProfile.course} – Sem {studentProfile.semester}</div>
+              <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#F1F5F9' }}>{studentProfile.course} – Sem {studentProfile.semester}</div>
             </div>
             <div>
               <div className="simp-label">Section & Batch</div>
-              <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>Section {studentProfile.section} (Batch {studentProfile.batch})</div>
+              <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#F1F5F9' }}>Section {studentProfile.section} (Batch {studentProfile.batch})</div>
             </div>
             <div>
               <div className="simp-label">Quota & Admission</div>
-              <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>{studentProfile.quota} ({studentProfile.admissionYear})</div>
+              <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#F1F5F9' }}>{studentProfile.quota} ({studentProfile.admissionYear})</div>
             </div>
             <div style={{ gridColumn: 'span 2' }}>
               <div className="simp-label">Assigned Faculty Mentor / Proctor</div>
-              <div style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--accent-blue)' }}>
+              <div style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--accent-teal)' }}>
                 {studentProfile.mentor?.name} ({studentProfile.mentor?.designation})
               </div>
               <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
@@ -206,15 +262,15 @@ export const StudentProfile = () => {
         </Card>
 
         {/* Personal Details */}
-        <Card title="Personal Information" icon={User} accent>
+        <Card title="Personal Information & Emergency Contact" icon={User} accent>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div>
               <div className="simp-label">Date of Birth</div>
-              <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>{studentProfile.dob} (Age: 21)</div>
+              <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#F1F5F9' }}>{studentProfile.dob} (Age: 21)</div>
             </div>
             <div>
               <div className="simp-label">Gender</div>
-              <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>{studentProfile.gender}</div>
+              <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#F1F5F9' }}>{studentProfile.gender}</div>
             </div>
             <div>
               <div className="simp-label">Blood Group</div>
@@ -224,11 +280,11 @@ export const StudentProfile = () => {
             </div>
             <div>
               <div className="simp-label">Nationality & Domicile</div>
-              <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>Indian (Karnataka State)</div>
+              <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#F1F5F9' }}>Indian (Karnataka State)</div>
             </div>
             <div style={{ gridColumn: 'span 2' }}>
               <div className="simp-label">Permanent Residential Address</div>
-              <div style={{ fontWeight: 500, fontSize: '0.88rem', lineHeight: 1.4 }}>
+              <div style={{ fontWeight: 500, fontSize: '0.88rem', lineHeight: 1.4, color: '#A5B4C7' }}>
                 {studentProfile.address?.street}, {studentProfile.address?.locality},{' '}
                 {studentProfile.address?.city}, {studentProfile.address?.state} - {studentProfile.address?.pincode}
               </div>
@@ -247,69 +303,92 @@ export const StudentProfile = () => {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div>
               <div className="simp-label">Father's Name</div>
-              <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>{studentProfile.parent?.fatherName}</div>
+              <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#F1F5F9' }}>{studentProfile.parent?.fatherName}</div>
             </div>
             <div>
               <div className="simp-label">Mother's Name</div>
-              <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>{studentProfile.parent?.motherName}</div>
+              <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#F1F5F9' }}>{studentProfile.parent?.motherName}</div>
             </div>
             <div>
               <div className="simp-label">Father's Occupation</div>
-              <div style={{ fontWeight: 500, fontSize: '0.88rem' }}>{studentProfile.parent?.occupation}</div>
+              <div style={{ fontWeight: 500, fontSize: '0.88rem', color: '#A5B4C7' }}>{studentProfile.parent?.occupation}</div>
             </div>
             <div>
               <div className="simp-label">Annual Family Income</div>
-              <div style={{ fontWeight: 500, fontSize: '0.88rem' }}>{studentProfile.parent?.annualIncome}</div>
+              <div style={{ fontWeight: 500, fontSize: '0.88rem', color: '#A5B4C7' }}>{studentProfile.parent?.annualIncome}</div>
             </div>
             <div>
               <div className="simp-label">Parent Contact Number</div>
-              <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>{studentProfile.parent?.phone}</div>
+              <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#F1F5F9' }}>{studentProfile.parent?.phone}</div>
             </div>
             <div>
               <div className="simp-label">Parent Email ID</div>
-              <div style={{ fontWeight: 500, fontSize: '0.88rem' }}>{studentProfile.parent?.email}</div>
+              <div style={{ fontWeight: 500, fontSize: '0.88rem', color: '#A5B4C7' }}>{studentProfile.parent?.email}</div>
             </div>
           </div>
         </Card>
 
-        {/* Transport & Campus Accommodation */}
-        <Card title="Campus Transport & Hostels" icon={Bus} accent>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        {/* Document Access & Certificates */}
+        <Card title="Document Access & Institutional Certificates" icon={FileCheck} accent>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <div
               style={{
-                padding: '0.85rem',
+                padding: '0.8rem 1rem',
                 borderRadius: 'var(--radius-md)',
-                backgroundColor: 'var(--bg-muted)',
-                border: '1px solid var(--border-light)'
+                backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                border: '1px solid var(--border-light)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between'
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontWeight: 700, fontSize: '0.9rem' }}>College Bus Facility</span>
-                <Badge variant="success">Active Bus Pass</Badge>
+              <div>
+                <div style={{ fontWeight: 600, fontSize: '0.88rem', color: '#F1F5F9' }}>Bonafide Student Certificate</div>
+                <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Verified by Registrar • Valid for AY 2024–25</div>
               </div>
-              <div style={{ fontSize: '0.82rem', marginTop: '0.4rem', color: 'var(--text-secondary)' }}>
-                Route: <strong>{studentProfile.transport?.routeNo}</strong>
-              </div>
-              <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                Pass Number: {studentProfile.transport?.busPassNo}
-              </div>
+              <Button variant="outline" size="sm" icon={Download}>
+                Download PDF
+              </Button>
             </div>
 
             <div
               style={{
-                padding: '0.85rem',
+                padding: '0.8rem 1rem',
                 borderRadius: 'var(--radius-md)',
-                backgroundColor: 'var(--bg-muted)',
-                border: '1px solid var(--border-light)'
+                backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                border: '1px solid var(--border-light)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between'
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontWeight: 700, fontSize: '0.9rem' }}>Hostel Accommodation</span>
-                <Badge variant="info">Day Scholar</Badge>
+              <div>
+                <div style={{ fontWeight: 600, fontSize: '0.88rem', color: '#F1F5F9' }}>Semester Grade Card (Sem 5)</div>
+                <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>SGPA: 8.85 • Official VTU Transcript</div>
               </div>
-              <div style={{ fontSize: '0.82rem', marginTop: '0.4rem', color: 'var(--text-muted)' }}>
-                Student commutes daily from HBR Layout / Kalyan Nagar residence.
+              <Button variant="outline" size="sm" icon={Download}>
+                Download PDF
+              </Button>
+            </div>
+
+            <div
+              style={{
+                padding: '0.8rem 1rem',
+                borderRadius: 'var(--radius-md)',
+                backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                border: '1px solid var(--border-light)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+              }}
+            >
+              <div>
+                <div style={{ fontWeight: 600, fontSize: '0.88rem', color: '#F1F5F9' }}>Digital College Identity Card</div>
+                <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Smart Card ID with QR verification</div>
               </div>
+              <Button variant="outline" size="sm" icon={Download}>
+                Download PDF
+              </Button>
             </div>
           </div>
         </Card>
@@ -326,7 +405,7 @@ export const StudentProfile = () => {
             <Button variant="outline" onClick={() => setIsEditModalOpen(false)}>
               Cancel
             </Button>
-            <Button variant="primary" icon={Save} onClick={handleEditSubmit}>
+            <Button variant="teal" icon={Save} onClick={handleEditSubmit}>
               Save Profile Changes
             </Button>
           </div>
@@ -425,3 +504,4 @@ export const StudentProfile = () => {
   );
 };
 
+export default StudentProfile;

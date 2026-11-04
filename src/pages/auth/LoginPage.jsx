@@ -110,57 +110,61 @@ export const LoginPage = () => {
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#081628',
-        backgroundImage: 'radial-gradient(circle at 50% 20%, #162E4D 0%, #081628 70%)',
-        color: '#FFFFFF',
+        backgroundColor: '#0B1220',
+        backgroundImage: 'radial-gradient(circle at 50% 15%, #101B2C 0%, #0B1220 75%)',
+        color: '#F1F5F9',
         position: 'relative'
       }}
     >
       {/* Top Academic Ribbon */}
       <header
         style={{
-          padding: '1.25rem 2.5rem',
+          padding: '1.1rem 2.25rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          borderBottom: '1px solid rgba(197, 160, 89, 0.25)',
-          backgroundColor: 'rgba(8, 22, 40, 0.7)',
-          backdropFilter: 'blur(8px)'
+          borderBottom: '1px solid rgba(255, 255, 255, 0.09)',
+          backgroundColor: 'rgba(17, 29, 48, 0.75)',
+          backdropFilter: 'blur(12px)'
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <img
             src="/hkbk-crest.svg"
             alt="HKBK Crest"
-            style={{ width: '48px', height: '48px', filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.4))' }}
+            style={{ width: '44px', height: '44px', filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.5))' }}
           />
           <div>
             <h1
               style={{
                 fontFamily: 'var(--font-heading)',
-                fontSize: '1.25rem',
+                fontSize: '1.2rem',
                 fontWeight: 800,
-                letterSpacing: '0.03em',
-                color: '#FFFFFF'
+                letterSpacing: '0.02em',
+                color: '#F1F5F9'
               }}
             >
               HKBK COLLEGE OF ENGINEERING
             </h1>
-            <p style={{ fontSize: '0.75rem', color: '#DFBF77', letterSpacing: '0.04em' }}>
+            <p style={{ fontSize: '0.74rem', color: '#A5B4C7', letterSpacing: '0.02em' }}>
               Autonomous Institution | Affiliated to VTU Belagavi | Approved by AICTE, New Delhi
             </p>
           </div>
         </div>
 
-        <div style={{ textAlign: 'right', display: 'none' }} className="header-meta">
+        <div style={{ textAlign: 'right' }} className="simp-navbar-badge">
           <span
             style={{
               fontSize: '0.75rem',
-              color: '#94A3B8',
+              color: '#36C6B0',
+              backgroundColor: 'rgba(54, 198, 176, 0.12)',
+              border: '1px solid rgba(54, 198, 176, 0.25)',
+              padding: '0.25rem 0.65rem',
+              borderRadius: 'var(--radius-full)',
               fontFamily: 'var(--font-mono)'
             }}
           >
-            SIMP Internal Portal v2.4
+            SIMP Enterprise Portal v2.4
           </span>
         </div>
       </header>
@@ -181,16 +185,17 @@ export const LoginPage = () => {
             maxWidth: '920px',
             display: 'grid',
             gridTemplateColumns: '1.15fr 1fr',
-            backgroundColor: '#0E1E33',
-            borderRadius: 'var(--radius-xl)',
-            border: '1px solid rgba(197, 160, 89, 0.35)',
-            boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.6)',
+            backgroundColor: 'rgba(255, 255, 255, 0.045)',
+            backdropFilter: 'blur(12px)',
+            borderRadius: 'var(--radius-lg)',
+            border: '1px solid rgba(255, 255, 255, 0.09)',
+            boxShadow: '0 20px 45px -15px rgba(0, 0, 0, 0.6)',
             overflow: 'hidden'
           }}
           className="login-card-container"
         >
           {/* Left Column: Form & Role Tabs */}
-          <div style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ padding: '2.25rem', display: 'flex', flexDirection: 'column' }}>
             <div style={{ marginBottom: '1.5rem' }}>
               <div
                 style={{
@@ -200,21 +205,21 @@ export const LoginPage = () => {
                   fontSize: '0.72rem',
                   fontWeight: 700,
                   textTransform: 'uppercase',
-                  color: '#DFBF77',
-                  background: 'rgba(197, 160, 89, 0.15)',
+                  color: '#36C6B0',
+                  background: 'rgba(54, 198, 176, 0.12)',
                   padding: '0.2rem 0.6rem',
                   borderRadius: 'var(--radius-sm)',
-                  border: '1px solid rgba(197, 160, 89, 0.3)',
+                  border: '1px solid rgba(54, 198, 176, 0.25)',
                   marginBottom: '0.75rem'
                 }}
               >
                 <Sparkles size={13} />
                 <span>Single Sign-On Authentication</span>
               </div>
-              <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#FFFFFF' }}>
+              <h2 style={{ fontSize: '1.45rem', fontWeight: 800, color: '#F1F5F9' }}>
                 Academic Portal Login
               </h2>
-              <p style={{ fontSize: '0.85rem', color: '#94A3B8', marginTop: '0.3rem' }}>
+              <p style={{ fontSize: '0.85rem', color: '#A5B4C7', marginTop: '0.3rem' }}>
                 Select your institutional role to access your internal dashboard.
               </p>
             </div>
@@ -225,7 +230,7 @@ export const LoginPage = () => {
                 display: 'grid',
                 gridTemplateColumns: 'repeat(4, 1fr)',
                 gap: '0.4rem',
-                backgroundColor: 'rgba(5, 12, 22, 0.6)',
+                backgroundColor: 'rgba(11, 18, 32, 0.75)',
                 padding: '0.35rem',
                 borderRadius: 'var(--radius-md)',
                 marginBottom: '1.75rem',
@@ -248,14 +253,14 @@ export const LoginPage = () => {
                       gap: '0.35rem',
                       padding: '0.65rem 0.3rem',
                       borderRadius: 'var(--radius-sm)',
-                      background: isSelected ? '#162E4D' : 'transparent',
-                      color: isSelected ? '#FFFFFF' : '#94A3B8',
-                      border: isSelected ? '1px solid var(--accent-gold)' : '1px solid transparent',
+                      background: isSelected ? 'rgba(54, 198, 176, 0.15)' : 'transparent',
+                      color: isSelected ? '#36C6B0' : '#A5B4C7',
+                      border: isSelected ? '1px solid rgba(54, 198, 176, 0.4)' : '1px solid transparent',
                       cursor: 'pointer',
                       transition: 'all 0.15s ease'
                     }}
                   >
-                    <Icon size={18} color={isSelected ? '#DFBF77' : undefined} />
+                    <Icon size={18} color={isSelected ? '#36C6B0' : '#A5B4C7'} />
                     <span style={{ fontSize: '0.72rem', fontWeight: 600 }}>{item.label}</span>
                   </button>
                 );
@@ -290,7 +295,7 @@ export const LoginPage = () => {
                     fontSize: '0.78rem',
                     fontWeight: 600,
                     textTransform: 'uppercase',
-                    color: '#CBD5E1',
+                    color: '#A5B4C7',
                     marginBottom: '0.35rem',
                     letterSpacing: '0.04em'
                   }}
@@ -304,7 +309,7 @@ export const LoginPage = () => {
                 <div style={{ position: 'relative' }}>
                   <User
                     size={16}
-                    color="#94A3B8"
+                    color="#718096"
                     style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }}
                   />
                   <input
@@ -319,9 +324,9 @@ export const LoginPage = () => {
                       width: '100%',
                       padding: '0.7rem 0.9rem 0.7rem 2.4rem',
                       borderRadius: 'var(--radius-md)',
-                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid rgba(255, 255, 255, 0.15)',
-                      color: '#FFFFFF',
+                      backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      color: '#F1F5F9',
                       fontFamily: 'var(--font-mono)'
                     }}
                   />
@@ -335,20 +340,20 @@ export const LoginPage = () => {
                       fontSize: '0.78rem',
                       fontWeight: 600,
                       textTransform: 'uppercase',
-                      color: '#CBD5E1',
+                      color: '#A5B4C7',
                       letterSpacing: '0.04em'
                     }}
                   >
                     Password
                   </label>
-                  <span style={{ fontSize: '0.72rem', color: '#DFBF77', cursor: 'pointer' }}>
+                  <span style={{ fontSize: '0.72rem', color: '#36C6B0', cursor: 'pointer' }}>
                     Forgot Password?
                   </span>
                 </div>
                 <div style={{ position: 'relative' }}>
                   <Lock
                     size={16}
-                    color="#94A3B8"
+                    color="#718096"
                     style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }}
                   />
                   <input
@@ -361,30 +366,39 @@ export const LoginPage = () => {
                       width: '100%',
                       padding: '0.7rem 0.9rem 0.7rem 2.4rem',
                       borderRadius: 'var(--radius-md)',
-                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid rgba(255, 255, 255, 0.15)',
-                      color: '#FFFFFF'
+                      backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      color: '#F1F5F9'
                     }}
                   />
                 </div>
               </div>
 
-              <Button
+              <button
                 type="submit"
-                variant="gold"
-                loading={loading}
-                iconRight={ArrowRight}
-                style={{ marginTop: '0.5rem', width: '100%', padding: '0.75rem' }}
+                disabled={loading}
+                className="simp-btn-teal"
+                style={{
+                  marginTop: '0.5rem',
+                  width: '100%',
+                  padding: '0.75rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                  cursor: 'pointer'
+                }}
               >
-                Sign In to {demoAccounts[selectedRole].label}
-              </Button>
+                <span>Sign In to {demoAccounts[selectedRole].label}</span>
+                <ArrowRight size={16} />
+              </button>
             </form>
 
             <div
               style={{
                 marginTop: '1.5rem',
-                fontSize: '0.75rem',
-                color: '#64748B',
+                fontSize: '0.74rem',
+                color: '#718096',
                 textAlign: 'center',
                 lineHeight: 1.4
               }}
@@ -396,9 +410,9 @@ export const LoginPage = () => {
           {/* Right Column: Demo Accounts Quick-Fill Panel */}
           <div
             style={{
-              backgroundColor: 'rgba(5, 12, 22, 0.85)',
-              padding: '2.5rem 2rem',
-              borderLeft: '1px solid rgba(197, 160, 89, 0.25)',
+              backgroundColor: 'rgba(16, 27, 44, 0.85)',
+              padding: '2.25rem 1.85rem',
+              borderLeft: '1px solid rgba(255, 255, 255, 0.09)',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between'
@@ -406,12 +420,12 @@ export const LoginPage = () => {
           >
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem' }}>
-                <CheckCircle2 size={18} color="#DFBF77" />
-                <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#FFFFFF' }}>
+                <CheckCircle2 size={18} color="#36C6B0" />
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#F1F5F9' }}>
                   1-Click Demo Evaluation
                 </h3>
               </div>
-              <p style={{ fontSize: '0.8rem', color: '#94A3B8', marginBottom: '1.25rem' }}>
+              <p style={{ fontSize: '0.8rem', color: '#A5B4C7', marginBottom: '1.25rem' }}>
                 Instant login without typing credentials. Click any persona below to launch that role's complete workflow:
               </p>
 
@@ -427,18 +441,18 @@ export const LoginPage = () => {
                       style={{
                         padding: '0.85rem',
                         borderRadius: 'var(--radius-md)',
-                        background: isCurrent ? 'rgba(197, 160, 89, 0.15)' : 'rgba(255, 255, 255, 0.03)',
+                        background: isCurrent ? 'rgba(54, 198, 176, 0.12)' : 'rgba(255, 255, 255, 0.03)',
                         border: isCurrent
-                          ? '1.5px solid var(--accent-gold)'
-                          : '1px solid rgba(255, 255, 255, 0.08)',
+                          ? '1.5px solid rgba(54, 198, 176, 0.5)'
+                          : '1px solid rgba(255, 255, 255, 0.07)',
                         cursor: 'pointer',
                         transition: 'all 0.15s ease'
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.borderColor = 'var(--accent-gold)';
+                        e.currentTarget.style.borderColor = 'rgba(54, 198, 176, 0.6)';
                       }}
                       onMouseLeave={(e) => {
-                        if (!isCurrent) e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+                        if (!isCurrent) e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.07)';
                       }}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -448,30 +462,30 @@ export const LoginPage = () => {
                               width: '28px',
                               height: '28px',
                               borderRadius: 'var(--radius-sm)',
-                              background: 'var(--primary-navy)',
+                              background: 'rgba(54, 198, 176, 0.15)',
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
-                              color: '#DFBF77'
+                              color: '#36C6B0'
                             }}
                           >
                             <Icon size={15} />
                           </div>
                           <div>
-                            <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#FFFFFF' }}>
+                            <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#F1F5F9' }}>
                               {item.label}
                             </div>
-                            <div style={{ fontSize: '0.7rem', color: '#DFBF77', fontFamily: 'var(--font-mono)' }}>
+                            <div style={{ fontSize: '0.7rem', color: '#36C6B0', fontFamily: 'var(--font-mono)' }}>
                               {item.username}
                             </div>
                           </div>
                         </div>
-                        <ArrowRight size={14} color="#94A3B8" />
+                        <ArrowRight size={14} color="#718096" />
                       </div>
                       <div
                         style={{
                           fontSize: '0.72rem',
-                          color: '#94A3B8',
+                          color: '#A5B4C7',
                           marginTop: '0.4rem',
                           lineHeight: 1.3
                         }}
@@ -493,11 +507,11 @@ export const LoginPage = () => {
                 backgroundColor: 'rgba(255, 255, 255, 0.03)',
                 border: '1px solid rgba(255, 255, 255, 0.06)',
                 fontSize: '0.72rem',
-                color: '#94A3B8'
+                color: '#A5B4C7'
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#CBD5E1', fontWeight: 600 }}>
-                <Info size={13} color="#DFBF77" />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#F1F5F9', fontWeight: 600 }}>
+                <Info size={13} color="#36C6B0" />
                 <span>Need Technical Support?</span>
               </div>
               <div style={{ marginTop: '0.25rem' }}>

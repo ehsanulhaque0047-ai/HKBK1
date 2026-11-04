@@ -13,7 +13,10 @@ import {
   Sparkles,
   ChevronRight,
   Phone,
-  Mail
+  Mail,
+  BookOpen,
+  FileText,
+  Bell
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useData } from '../../context/DataContext';
@@ -37,60 +40,70 @@ export const ParentDashboard = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      {/* 1. Ward Profile Banner */}
-      <div className="portal-hero-banner">
+      {/* 1. Ward Profile Banner with Option F Subtle Glass */}
+      <div
+        className="portal-hero-banner"
+        style={{
+          background: 'linear-gradient(135deg, rgba(25, 40, 59, 0.75) 0%, rgba(16, 27, 44, 0.9) 100%)',
+          backdropFilter: 'blur(14px)',
+          WebkitBackdropFilter: 'blur(14px)',
+          border: '1px solid rgba(54, 198, 176, 0.28)',
+          borderRadius: 'var(--radius-xl)',
+          padding: '1.5rem 1.75rem',
+          boxShadow: 'var(--shadow-glass)'
+        }}
+      >
         <div className="portal-hero-main">
           <img
             src={studentProfile.avatar}
             alt={studentProfile.name}
             style={{
-              width: '90px',
-              height: '90px',
+              width: '88px',
+              height: '88px',
               borderRadius: 'var(--radius-lg)',
               objectFit: 'cover',
-              border: '3px solid var(--accent-gold)',
+              border: '2.5px solid var(--accent-teal)',
               flexShrink: 0
             }}
           />
 
           <div style={{ minWidth: 0 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-              <span style={{ fontSize: '0.8rem', color: '#DFBF77', textTransform: 'uppercase', fontWeight: 700 }}>
-                Parent Portal – Linked Ward
+              <span style={{ fontSize: '0.74rem', color: 'var(--accent-teal)', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.04em' }}>
+                Parent Portal – Linked Ward Academic Record
               </span>
             </div>
 
-            <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#FFFFFF', marginTop: '0.2rem', marginBottom: 0 }}>
+            <h1 style={{ fontSize: '1.45rem', fontWeight: 800, color: '#F1F5F9', marginTop: '0.15rem', marginBottom: 0 }}>
               {studentProfile.name}
             </h1>
 
-            <div style={{ display: 'flex', gap: '1.25rem', marginTop: '0.5rem', fontSize: '0.82rem', color: '#CBD5E1', flexWrap: 'wrap' }}>
-              <span>USN: <strong className="mono-font" style={{ color: '#DFBF77' }}>{studentProfile.usn}</strong></span>
-              <span>Program: <strong>B.E. {studentProfile.department}</strong></span>
-              <span>Current Term: <strong>{studentProfile.semester}th Semester (Sec {studentProfile.section})</strong></span>
+            <div style={{ display: 'flex', gap: '1.25rem', marginTop: '0.45rem', fontSize: '0.82rem', color: '#A5B4C7', flexWrap: 'wrap' }}>
+              <span>USN: <strong className="mono-font" style={{ color: 'var(--accent-teal-light)' }}>{studentProfile.usn}</strong></span>
+              <span>Program: <strong style={{ color: '#F1F5F9' }}>B.E. {studentProfile.department}</strong></span>
+              <span>Current Term: <strong style={{ color: '#F1F5F9' }}>{studentProfile.semester}th Semester (Sec {studentProfile.section})</strong></span>
             </div>
 
-            <div style={{ marginTop: '0.5rem', fontSize: '0.78rem', color: '#94A3B8' }}>
-              Parent Account: {currentUser?.name} ({currentUser?.relation}) • Phone: {currentUser?.phone}
+            <div style={{ marginTop: '0.4rem', fontSize: '0.76rem', color: 'var(--text-muted)' }}>
+              Authorized Parent: {currentUser?.name} ({currentUser?.relation}) • Phone: {currentUser?.phone}
             </div>
           </div>
         </div>
 
         <div className="portal-hero-actions">
           <Button
-            variant="gold"
+            variant="teal"
             size="sm"
             icon={MessageSquare}
             onClick={() => navigate('/parent/communication')}
           >
-            Contact Mentor / Proctor
+            Contact Proctor
           </Button>
           <Button
             variant="outline"
             size="sm"
             icon={CreditCard}
             onClick={() => navigate('/parent/fees')}
-            style={{ color: '#FFFFFF', borderColor: 'rgba(255,255,255,0.2)' }}
           >
             Fee Summary
           </Button>
@@ -101,17 +114,17 @@ export const ParentDashboard = () => {
       <div className="grid-cols-4">
         <StatsCard
           icon={UserCheck}
-          label="Ward Attendance"
+          label="Attendance Overview"
           value={`${attendance.overallPercentage}%`}
           subvalue={`${attendance.totalClassesAttended} / ${attendance.totalClassesConducted} Attended`}
           color={attendance.overallPercentage >= 75 ? 'success' : 'danger'}
-          trend={attendance.overallPercentage >= 75 ? '✓ Exam Eligible' : '⚠ Shortage Alert'}
+          trend={attendance.overallPercentage >= 75 ? 'Exam Eligible (>75%)' : 'Shortage Alert (<75%)'}
           onClick={() => navigate('/parent/attendance')}
         />
         <StatsCard
           icon={Award}
           label="Cumulative CGPA"
-          value={examinations.cumulativeStats.cgpa}
+          value={`${examinations.cumulativeStats.cgpa} CGPA`}
           subvalue="Current SGPA: 8.85"
           color="gold"
           trend="Top 5% in Class"
@@ -119,17 +132,18 @@ export const ParentDashboard = () => {
         />
         <StatsCard
           icon={CreditCard}
-          label="Outstanding College Fees"
-          value={`₹ ${fees.outstandingFee.toLocaleString('en-IN')}`}
-          subvalue="Due Date: 30-Nov-2024"
+          label="College Fee Standing"
+          value={fees.outstandingFee === 0 ? 'Dues Cleared' : `₹ ${fees.outstandingFee.toLocaleString('en-IN')}`}
+          subvalue="Even Semester 2024–25"
           color={fees.outstandingFee > 0 ? 'warning' : 'success'}
+          trend={fees.outstandingFee === 0 ? 'Paid in Full' : 'Due: 30-Nov-2024'}
           onClick={() => navigate('/parent/fees')}
         />
         <StatsCard
           icon={MessageSquare}
           label="Proctor Messages"
           value={`${parentMessages.length} Messages`}
-          subvalue="Dr. A. K. Manjunath"
+          subvalue="Dr. A. K. Manjunath (Proctor)"
           color="navy"
           onClick={() => navigate('/parent/communication')}
         />
@@ -137,12 +151,12 @@ export const ParentDashboard = () => {
 
       {/* 3. Main Dashboard Two-Column Grid */}
       <div className="dashboard-split-grid">
-        {/* Left Column: Attendance Health & Latest Internal Assessment Marks */}
+        {/* Left Column: Subject Attendance & CIE Results */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {/* Subject Attendance Health */}
           <Card
             title="Subject-wise Attendance Snapshot"
-            subtitle="VTU requires minimum 75% per course"
+            subtitle="VTU requires minimum 75% per course for exam eligibility"
             icon={UserCheck}
             accent
             action={
@@ -169,29 +183,29 @@ export const ParentDashboard = () => {
                 </thead>
                 <tbody>
                   {attendance.subjects.slice(0, 4).map((sub) => (
-                    <tr key={sub.subjectCode}>
+                    <tr key={sub.subjectCode || sub.code}>
                       <td>
-                        <div style={{ fontWeight: 700 }}>{sub.subjectName}</div>
+                        <div style={{ fontWeight: 700, color: '#F1F5F9' }}>{sub.subjectName || sub.name}</div>
                         <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>{sub.faculty}</div>
                       </td>
-                      <td>{sub.total}</td>
+                      <td>{sub.total || sub.conducted}</td>
                       <td style={{ fontWeight: 600 }}>{sub.attended}</td>
                       <td>
                         <span
                           style={{
                             fontWeight: 700,
                             fontFamily: 'var(--font-mono)',
-                            color: sub.percentage <= 75 ? 'var(--status-danger)' : 'var(--status-success)'
+                            color: sub.percentage < 75 ? 'var(--status-danger)' : 'var(--accent-teal)'
                           }}
                         >
                           {sub.percentage}%
                         </span>
                       </td>
                       <td>
-                        {sub.percentage <= 75 ? (
-                          <Badge variant="warning">Borderline (75%)</Badge>
+                        {sub.percentage < 75 ? (
+                          <Badge variant="warning">Borderline</Badge>
                         ) : (
-                          <Badge variant="success">Safe</Badge>
+                          <Badge variant="success">Eligible</Badge>
                         )}
                       </td>
                     </tr>
@@ -203,8 +217,8 @@ export const ParentDashboard = () => {
 
           {/* Continuous Internal Evaluation (CIE) */}
           <Card
-            title="Continuous Internal Evaluation (CIE) Performance"
-            subtitle="IA-1 & IA-2 Assessment Scores"
+            title="Continuous Internal Evaluation (CIE) & SGPA"
+            subtitle="IA-1 & IA-2 Assessment Scores for 6th Semester"
             icon={Award}
             action={
               <Button
@@ -221,7 +235,7 @@ export const ParentDashboard = () => {
               <table className="simp-table">
                 <thead>
                   <tr>
-                    <th>Course</th>
+                    <th>Course Title</th>
                     <th>IA-1 (/30)</th>
                     <th>IA-2 (/30)</th>
                     <th>Avg IA</th>
@@ -231,10 +245,10 @@ export const ParentDashboard = () => {
                 <tbody>
                   {examinations.internalMarks.slice(0, 4).map((m) => (
                     <tr key={m.code}>
-                      <td style={{ fontWeight: 700 }}>{m.subject}</td>
+                      <td style={{ fontWeight: 700, color: '#F1F5F9' }}>{m.subject}</td>
                       <td>{m.ia1}</td>
                       <td>{m.ia2 !== null ? m.ia2 : '—'}</td>
-                      <td style={{ fontWeight: 700, color: 'var(--text-gold)' }}>{m.avgIa}</td>
+                      <td style={{ fontWeight: 700, color: 'var(--accent-teal)' }}>{m.avgIa}</td>
                       <td style={{ fontWeight: 800, color: 'var(--status-success)' }}>
                         {m.totalInternal} / 50
                       </td>
@@ -249,37 +263,37 @@ export const ParentDashboard = () => {
         {/* Right Column: Mentor Contacts, Institutional Notices */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {/* Proctor / Faculty Contact Card */}
-          <Card title="Assigned Faculty Mentor" icon={HeartHandshake} accent>
+          <Card title="Assigned Faculty Proctor" icon={HeartHandshake} accent>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
                 <img
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200"
                   alt=""
-                  style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--accent-gold)' }}
+                  style={{ width: '46px', height: '46px', borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--accent-teal)' }}
                 />
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: '0.95rem' }}>
+                  <div style={{ fontWeight: 700, fontSize: '0.92rem', color: '#F1F5F9' }}>
                     Dr. A. K. Manjunath
                   </div>
-                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                    Associate Professor & PG Coordinator, CSE
+                  <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)' }}>
+                    Associate Professor & Proctor, Dept. of CSE
                   </div>
                 </div>
               </div>
 
-              <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+              <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <Mail size={14} color="var(--accent-gold-dark)" />
+                  <Mail size={14} color="var(--accent-teal)" />
                   <span>manjunath.ak@hkbk.edu.in</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <Phone size={14} color="var(--accent-gold-dark)" />
+                  <Phone size={14} color="var(--accent-teal)" />
                   <span>+91 94481 77652 (Proctor Desk AB-208)</span>
                 </div>
               </div>
 
               <Button
-                variant="gold"
+                variant="teal"
                 size="sm"
                 icon={MessageSquare}
                 onClick={() => navigate('/parent/communication')}
@@ -291,7 +305,7 @@ export const ParentDashboard = () => {
           </Card>
 
           {/* Institutional Circulars for Parents */}
-          <Card title="Institutional Circulars" icon={Sparkles}>
+          <Card title="Institutional Circulars" icon={Bell}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
               {announcements.slice(0, 3).map((notif) => (
                 <div
@@ -299,17 +313,17 @@ export const ParentDashboard = () => {
                   style={{
                     padding: '0.75rem',
                     borderRadius: 'var(--radius-md)',
-                    backgroundColor: 'var(--bg-muted)',
+                    backgroundColor: 'rgba(255, 255, 255, 0.03)',
                     border: '1px solid var(--border-light)'
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--accent-gold-dark)' }}>
+                    <span style={{ fontSize: '0.68rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--accent-teal)' }}>
                       {notif.category}
                     </span>
                     <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>{notif.date}</span>
                   </div>
-                  <div style={{ fontSize: '0.82rem', fontWeight: 700, marginTop: '0.2rem' }}>
+                  <div style={{ fontSize: '0.82rem', fontWeight: 700, marginTop: '0.2rem', color: '#F1F5F9' }}>
                     {notif.title}
                   </div>
                 </div>
@@ -321,3 +335,5 @@ export const ParentDashboard = () => {
     </div>
   );
 };
+
+export default ParentDashboard;

@@ -10,7 +10,7 @@ import {
   CreditCard,
   Library,
   FileCheck,
-  AlertTriangle,
+  HelpCircle,
   Briefcase,
   Bell,
   Users,
@@ -18,11 +18,11 @@ import {
   GraduationCap,
   ClipboardList,
   LogOut,
-  RotateCcw,
   Sparkles,
   MessageSquare,
   FolderUp,
-  FileClock
+  FileClock,
+  BarChart3
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useData } from '../../context/DataContext';
@@ -30,8 +30,7 @@ import { usePackage } from '../../context/PackageContext';
 
 export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
   const { currentUser, role, switchRole, logout } = useAuth();
-  const { resetAllData } = useData();
-  const { packageTier, currentPackage, setIsComparisonModalOpen } = usePackage();
+  const { packageTier, currentPackage } = usePackage();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -39,27 +38,27 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
     navigate('/login');
   };
 
-  // Student Navigation Links
+  // Student Navigation Links matching Section 4
   const studentLinks = [
     { to: '/student/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { to: '/student/profile', label: 'Student Profile', icon: GraduationCap },
+    { to: '/student/profile', label: 'My Profile', icon: GraduationCap },
     { to: '/student/attendance', label: 'Attendance', icon: UserCheck, badge: '84.6%' },
     { to: '/student/timetable', label: 'Timetable', icon: CalendarDays },
-    { to: '/student/academics', label: 'Academics & Syllabus', icon: BookOpen },
+    { to: '/student/academics', label: 'Subjects', icon: BookOpen },
     { to: '/student/assignments', label: 'Assignments', icon: FileText, badge: '2 Due' },
-    { to: '/student/examination', label: 'Examinations & Marks', icon: Award },
-    { to: '/student/fees', label: 'Fee Payments', icon: CreditCard, alert: true },
-    { to: '/student/library', label: 'Central Library', icon: Library },
-    { to: '/student/documents', label: 'Document Requests', icon: FileCheck },
-    { to: '/student/complaints', label: 'Grievance / Complaints', icon: AlertTriangle },
-    { to: '/student/placements', label: 'Placements & Internships', icon: Briefcase },
-    { to: '/student/notifications', label: 'Notices & Circulars', icon: Bell },
+    { to: '/student/examination', label: 'Examinations', icon: Award },
+    { to: '/student/results', label: 'Results', icon: BarChart3 },
+    { to: '/student/fees', label: 'Fees', icon: CreditCard },
+    { to: '/student/library', label: 'Study Materials', icon: Library },
+    { to: '/student/notifications', label: 'Notices', icon: Bell },
+    { to: '/student/documents', label: 'Documents', icon: FileCheck },
+    { to: '/student/complaints', label: 'Help and Support', icon: HelpCircle },
     { to: '/packages', label: 'Commercial Packages', icon: Sparkles }
   ];
 
   // Faculty Navigation Links
   const facultyLinks = [
-    { to: '/faculty/dashboard', label: 'Faculty Overview', icon: LayoutDashboard },
+    { to: '/faculty/dashboard', label: 'Overview', icon: LayoutDashboard },
     { to: '/faculty/attendance', label: 'Mark Attendance', icon: UserCheck },
     { to: '/faculty/assignments', label: 'Assignment Manager', icon: FileText },
     { to: '/faculty/internal-marks', label: 'Internal Assessment Marks', icon: Award },
@@ -77,7 +76,7 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
     { to: '/admin/departments', label: 'Departments & Intake', icon: Building2 },
     { to: '/admin/fees', label: 'Student Fee Balances', icon: CreditCard },
     { to: '/admin/documents', label: 'Certificate Approvals', icon: FileCheck },
-    { to: '/admin/complaints', label: 'Grievance Redressal', icon: AlertTriangle },
+    { to: '/admin/complaints', label: 'Grievance Redressal', icon: HelpCircle },
     { to: '/admin/notices', label: 'Broadcast Circulars', icon: Bell },
     { to: '/packages', label: 'Commercial Packages', icon: Sparkles }
   ];
@@ -115,9 +114,9 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
           style={{
             position: 'fixed',
             inset: 0,
-            background: 'rgba(0,0,0,0.5)',
+            background: 'rgba(11, 18, 32, 0.7)',
             zIndex: 90,
-            backdropFilter: 'blur(2px)'
+            backdropFilter: 'blur(4px)'
           }}
         />
       )}
@@ -125,9 +124,9 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
       <aside
         style={{
           width: 'var(--sidebar-width)',
-          backgroundColor: 'var(--primary-navy)',
-          color: '#F8FAFC',
-          borderRight: '1px solid rgba(197, 160, 89, 0.25)',
+          backgroundColor: 'var(--bg-sidebar)',
+          color: '#F1F5F9',
+          borderRight: '1px solid var(--border-light)',
           display: 'flex',
           flexDirection: 'column',
           position: 'fixed',
@@ -143,8 +142,8 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
         {/* Brand Header */}
         <div
           style={{
-            padding: '1.25rem 1.4rem',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+            padding: '1.2rem 1.35rem',
+            borderBottom: '1px solid var(--border-light)',
             display: 'flex',
             alignItems: 'center',
             gap: '0.85rem'
@@ -153,16 +152,16 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
           <img
             src="/hkbk-crest.svg"
             alt="HKBK Crest"
-            style={{ width: '42px', height: '42px', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }}
+            style={{ width: '40px', height: '40px', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }}
           />
           <div style={{ minWidth: 0 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
               <span
                 style={{
                   fontFamily: 'var(--font-heading)',
-                  fontSize: '1.1rem',
+                  fontSize: '1.05rem',
                   fontWeight: 800,
-                  letterSpacing: '0.04em',
+                  letterSpacing: '0.03em',
                   color: '#FFFFFF'
                 }}
               >
@@ -170,13 +169,13 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
               </span>
               <span
                 style={{
-                  fontSize: '0.7rem',
+                  fontSize: '0.68rem',
                   fontWeight: 700,
-                  color: 'var(--accent-gold)',
-                  background: 'rgba(197, 160, 89, 0.15)',
+                  color: 'var(--accent-teal)',
+                  background: 'var(--accent-teal-subtle)',
                   padding: '0.1rem 0.4rem',
                   borderRadius: '4px',
-                  border: '1px solid rgba(197, 160, 89, 0.3)'
+                  border: '1px solid rgba(54, 198, 176, 0.25)'
                 }}
               >
                 SIMP
@@ -184,8 +183,8 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
             </div>
             <div
               style={{
-                fontSize: '0.72rem',
-                color: '#94A3B8',
+                fontSize: '0.7rem',
+                color: '#718096',
                 textTransform: 'uppercase',
                 letterSpacing: '0.06em',
                 whiteSpace: 'nowrap',
@@ -201,9 +200,9 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
         {/* Role Pill Banner */}
         <div
           style={{
-            padding: '0.75rem 1.4rem',
-            background: 'rgba(8, 22, 40, 0.65)',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+            padding: '0.65rem 1.35rem',
+            background: 'rgba(255, 255, 255, 0.02)',
+            borderBottom: '1px solid var(--border-light)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between'
@@ -215,19 +214,19 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
               fontWeight: 700,
               textTransform: 'uppercase',
               letterSpacing: '0.08em',
-              color: 'var(--accent-gold-light)',
+              color: 'var(--accent-teal-light)',
               display: 'flex',
               alignItems: 'center',
               gap: '0.4rem'
             }}
           >
-            <Sparkles size={12} color="var(--accent-gold)" />
+            <Sparkles size={12} color="var(--accent-teal)" />
             {roleTitle}
           </span>
           <span
             style={{
               fontSize: '0.68rem',
-              color: '#94A3B8',
+              color: 'var(--text-muted)',
               fontFamily: 'var(--font-mono)'
             }}
           >
@@ -239,7 +238,7 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
         <div
           style={{
             padding: '0.5rem 0.75rem',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+            borderBottom: '1px solid var(--border-light)',
             display: 'grid',
             gridTemplateColumns: 'repeat(4, 1fr)',
             gap: '0.25rem'
@@ -257,18 +256,19 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
               onClick={() => {
                 switchRole(r.key);
                 navigate(`/${r.key}/dashboard`);
-                onCloseMobile();
+                if (onCloseMobile) onCloseMobile();
               }}
               style={{
                 padding: '0.35rem 0.2rem',
                 fontSize: '0.68rem',
                 fontWeight: 700,
                 borderRadius: 'var(--radius-xs)',
-                backgroundColor: role === r.key ? 'var(--accent-gold)' : 'rgba(255, 255, 255, 0.06)',
-                color: role === r.key ? 'var(--primary-navy-dark)' : '#CBD5E1',
+                backgroundColor: role === r.key ? 'var(--accent-teal)' : 'rgba(255, 255, 255, 0.04)',
+                color: role === r.key ? '#07101D' : '#A5B4C7',
                 border: 'none',
                 cursor: 'pointer',
-                textAlign: 'center'
+                textAlign: 'center',
+                transition: 'all 0.15s ease'
               }}
             >
               {r.label}
@@ -276,15 +276,15 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
           ))}
         </div>
 
-        {/* Navigation Items */}
+        {/* Navigation Items with Subtle Glass & Teal Active Indicator */}
         <nav
           style={{
             flex: 1,
             overflowY: 'auto',
-            padding: '1rem 0.75rem',
+            padding: '0.85rem 0.7rem',
             display: 'flex',
             flexDirection: 'column',
-            gap: '0.25rem'
+            gap: '0.2rem'
           }}
         >
           {roleLinks.map((item) => {
@@ -298,17 +298,17 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.75rem',
-                  padding: '0.65rem 0.85rem',
+                  padding: '0.6rem 0.8rem',
                   borderRadius: 'var(--radius-md)',
-                  fontSize: '0.85rem',
+                  fontSize: '0.84rem',
                   fontWeight: isActive ? 600 : 500,
-                  color: isActive ? '#FFFFFF' : '#CBD5E1',
-                  backgroundColor: isActive ? 'var(--primary-navy-subtle)' : 'transparent',
-                  borderLeft: isActive ? '3px solid var(--accent-gold)' : '3px solid transparent',
+                  color: isActive ? '#FFFFFF' : '#A5B4C7',
+                  backgroundColor: isActive ? 'rgba(54, 198, 176, 0.12)' : 'transparent',
+                  borderLeft: isActive ? '3px solid var(--accent-teal)' : '3px solid transparent',
                   transition: 'all 0.15s ease'
                 })}
               >
-                <Icon size={18} style={{ flexShrink: 0, opacity: 0.9 }} />
+                <Icon size={17} style={{ flexShrink: 0, opacity: 0.95 }} />
                 <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {item.label}
                 </span>
@@ -317,32 +317,22 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
                     style={{
                       fontSize: '0.68rem',
                       fontWeight: 700,
-                      padding: '0.15rem 0.45rem',
+                      padding: '0.12rem 0.45rem',
                       borderRadius: 'var(--radius-full)',
-                      background: 'rgba(197, 160, 89, 0.2)',
-                      color: 'var(--accent-gold-light)',
-                      border: '1px solid rgba(197, 160, 89, 0.3)'
+                      background: 'rgba(54, 198, 176, 0.15)',
+                      color: 'var(--accent-teal-light)',
+                      border: '1px solid rgba(54, 198, 176, 0.3)'
                     }}
                   >
                     {item.badge}
                   </span>
-                )}
-                {item.alert && (
-                  <span
-                    style={{
-                      width: '6px',
-                      height: '6px',
-                      borderRadius: '50%',
-                      background: '#F87171'
-                    }}
-                  />
                 )}
               </NavLink>
             );
           })}
         </nav>
 
-        {/* 3D Package Tier Switcher Banner */}
+        {/* Subtle Glass Commercial Package Banner */}
         <div
           onClick={() => {
             navigate('/packages');
@@ -352,8 +342,8 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
             margin: '0.4rem 0.75rem',
             padding: '0.65rem 0.85rem',
             borderRadius: 'var(--radius-md)',
-            background: 'linear-gradient(135deg, rgba(197, 160, 89, 0.18) 0%, rgba(15, 23, 42, 0.6) 100%)',
-            border: '1px solid rgba(197, 160, 89, 0.35)',
+            background: 'rgba(54, 198, 176, 0.08)',
+            border: '1px solid rgba(54, 198, 176, 0.25)',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
@@ -363,13 +353,13 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
           title="View Packages: P1 Website (₹1.20L) / P2 +Android (₹1.68L) / P3 +Android+iOS (₹2.16L)"
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', minWidth: 0 }}>
-            <Sparkles size={16} color="var(--accent-gold)" style={{ flexShrink: 0 }} />
+            <Sparkles size={15} color="var(--accent-teal)" style={{ flexShrink: 0 }} />
             <div style={{ minWidth: 0 }}>
               <div
                 style={{
                   fontSize: '0.74rem',
                   fontWeight: 800,
-                  color: 'var(--accent-gold)',
+                  color: 'var(--accent-teal-light)',
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis'
@@ -377,12 +367,12 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
               >
                 {currentPackage?.shortName || currentPackage?.name}
               </div>
-              <div style={{ fontSize: '0.65rem', color: '#94A3B8' }}>
+              <div style={{ fontSize: '0.65rem', color: '#718096' }}>
                 {currentPackage?.devPrice} Dev • {currentPackage?.hostingPrice}
               </div>
             </div>
           </div>
-          <span style={{ fontSize: '0.7rem', color: 'var(--accent-gold)', fontWeight: 800, flexShrink: 0 }}>
+          <span style={{ fontSize: '0.72rem', color: 'var(--accent-teal)', fontWeight: 800, flexShrink: 0 }}>
             ➔
           </span>
         </div>
@@ -390,9 +380,9 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
         {/* User Mini Profile Footer */}
         <div
           style={{
-            padding: '1rem',
-            borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-            backgroundColor: 'rgba(5, 11, 20, 0.75)'
+            padding: '0.85rem 1rem',
+            borderTop: '1px solid var(--border-light)',
+            backgroundColor: 'rgba(11, 18, 32, 0.6)'
           }}
         >
           <div
@@ -400,89 +390,71 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
               display: 'flex',
               alignItems: 'center',
               gap: '0.75rem',
-              marginBottom: '0.75rem'
+              marginBottom: '0.6rem'
             }}
           >
             <img
               src={currentUser?.avatar || 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100'}
               alt={currentUser?.name}
               style={{
-                width: '38px',
-                height: '38px',
+                width: '36px',
+                height: '36px',
                 borderRadius: '50%',
                 objectFit: 'cover',
-                border: '1.5px solid var(--accent-gold)'
+                border: '1.5px solid var(--accent-teal)'
               }}
             />
             <div style={{ minWidth: 0, flex: 1 }}>
               <div
                 style={{
-                  fontSize: '0.85rem',
-                  fontWeight: 600,
-                  color: '#FFFFFF',
+                  fontSize: '0.82rem',
+                  fontWeight: 700,
+                  color: '#F1F5F9',
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis'
                 }}
               >
-                {currentUser?.name || 'User'}
+                {currentUser?.name}
               </div>
               <div
                 style={{
-                  fontSize: '0.72rem',
-                  color: '#94A3B8',
-                  fontFamily: 'var(--font-mono)'
+                  fontSize: '0.68rem',
+                  color: 'var(--accent-teal)',
+                  textTransform: 'uppercase',
+                  fontWeight: 600
                 }}
               >
-                {currentUser?.usn || currentUser?.employeeId || currentUser?.linkedStudentUsn || role.toUpperCase()}
+                {role}
               </div>
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
-            <button
-              onClick={resetAllData}
-              title="Reset sample data to factory defaults"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '0.35rem',
-                padding: '0.45rem',
-                fontSize: '0.72rem',
-                color: '#94A3B8',
-                background: 'rgba(255, 255, 255, 0.05)',
-                borderRadius: 'var(--radius-sm)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                cursor: 'pointer'
-              }}
-            >
-              <RotateCcw size={12} />
-              <span>Reset Data</span>
-            </button>
-
-            <button
-              onClick={handleLogout}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '0.35rem',
-                padding: '0.45rem',
-                fontSize: '0.72rem',
-                color: '#F87171',
-                background: 'rgba(239, 68, 68, 0.1)',
-                borderRadius: 'var(--radius-sm)',
-                border: '1px solid rgba(239, 68, 68, 0.2)',
-                cursor: 'pointer'
-              }}
-            >
-              <LogOut size={12} />
-              <span>Sign Out</span>
-            </button>
-          </div>
+          <button
+            onClick={handleLogout}
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.4rem',
+              padding: '0.35rem',
+              borderRadius: 'var(--radius-sm)',
+              fontSize: '0.74rem',
+              fontWeight: 600,
+              color: 'var(--status-danger)',
+              background: 'var(--status-danger-bg)',
+              border: '1px solid var(--status-danger-border)',
+              cursor: 'pointer'
+            }}
+          >
+            <LogOut size={13} />
+            <span>Sign Out</span>
+          </button>
         </div>
       </aside>
     </>
   );
 };
+
+export default Sidebar;
