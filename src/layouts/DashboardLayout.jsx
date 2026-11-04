@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Sidebar } from '../components/sidebar/Sidebar';
 import { Navbar } from '../components/navbar/Navbar';
 import { Toast } from '../components/common/Toast';
 
 export const DashboardLayout = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const location = useLocation();
+
+  // Close mobile drawer automatically when navigating between pages
+  useEffect(() => {
+    setIsMobileOpen(false);
+  }, [location.pathname]);
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', backgroundColor: 'var(--bg-page)' }}>
@@ -27,7 +33,10 @@ export const DashboardLayout = () => {
         }}
         className="simp-main-wrapper"
       >
-        <Navbar onToggleMobile={() => setIsMobileOpen(!isMobileOpen)} />
+        <Navbar
+          onToggleMobile={() => setIsMobileOpen(!isMobileOpen)}
+          isMobileOpen={isMobileOpen}
+        />
 
         <main
           className="simp-main-content"
@@ -70,28 +79,8 @@ export const DashboardLayout = () => {
       </div>
 
       <Toast />
-
-      {/* Global CSS for layout responsiveness */}
-      <style>{`
-        @media (max-width: 1024px) {
-          .simp-sidebar {
-            transform: translateX(-100%);
-          }
-          .simp-sidebar.mobile-open {
-            transform: translateX(0);
-          }
-          .simp-main-wrapper {
-            margin-left: 0 !important;
-          }
-          #mobile-nav-toggle {
-            display: inline-flex !important;
-          }
-          .role-switcher-container {
-            display: none !important;
-          }
-        }
-      `}</style>
     </div>
   );
 };
+
 

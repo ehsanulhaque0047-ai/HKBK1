@@ -445,42 +445,79 @@
   }
 }
 
+/* Sidebar Navigation Base (Desktop Default) */
+.simp-sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--bg-sidebar);
+  color: #F1F5F9;
+  border-right: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 60;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.simp-sidebar-backdrop {
+  display: none;
+}
+
 .simp-navbar {
   height: var(--navbar-height);
-  background: rgba(16, 27, 44, 0.88);
+  background: rgba(16, 27, 44, 0.95);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-light);
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 1.25rem;
+  padding-left: max(1.25rem, env(safe-area-inset-left));
+  padding-right: max(1.25rem, env(safe-area-inset-right));
+  padding-top: env(safe-area-inset-top);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
   width: 100%;
   box-sizing: border-box;
+  overflow: visible;
 }
 
 .simp-navbar-left {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.65rem;
   min-width: 0;
+  flex: 1;
 }
 
 .mobile-nav-toggle {
   display: none;
   align-items: center;
   justify-content: center;
-  padding: 0.45rem;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  padding: 0;
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border-light);
   color: var(--text-primary);
   cursor: pointer;
   flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.mobile-nav-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--accent-teal);
+  color: var(--accent-teal);
 }
 
 .simp-navbar-brand {
@@ -490,6 +527,7 @@
   min-width: 0;
   text-decoration: none;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .simp-navbar-brand-logo {
@@ -503,6 +541,7 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
+  overflow: hidden;
 }
 
 .simp-navbar-title-row {
@@ -520,11 +559,20 @@
   white-space: nowrap;
 }
 
+.simp-navbar-college-name-tablet {
+  display: none;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
 .simp-navbar-college-name-mobile {
   display: none;
   font-family: var(--font-heading);
-  font-size: 0.92rem;
-  font-weight: 700;
+  font-size: 0.85rem;
+  font-weight: 800;
   color: var(--text-primary);
   white-space: nowrap;
 }
@@ -598,7 +646,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 0.65rem;
+  gap: 0.5rem;
   flex-shrink: 0;
 }
 
@@ -641,6 +689,10 @@
   }
 }
 
+.navbar-user-chip-wrapper {
+  position: relative;
+}
+
 .navbar-user-chip {
   display: flex;
   align-items: center;
@@ -658,7 +710,7 @@
 }
 
 @media (max-width: 900px) {
-  .navbar-user-chip {
+  .navbar-user-chip-wrapper {
     display: none !important;
   }
 }
@@ -674,45 +726,94 @@
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-glass);
   padding: 0.5rem;
-  z-index: 100;
+  z-index: 110;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
 
 /* Package Tier Pill in Navbar */
-.package-tier-pill {
+.package-selector-wrapper {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.7rem;
+}
+
+.package-tier-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.32rem 0.65rem;
   border-radius: var(--radius-md);
   font-size: 0.75rem;
   font-weight: 700;
+  background: rgba(54, 198, 176, 0.12);
+  border: 1px solid rgba(54, 198, 176, 0.35);
+  color: var(--accent-teal-light);
   cursor: pointer;
   transition: all 0.15s ease;
   white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1.2;
 }
 
 .package-tier-pill:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(54, 198, 176, 0.2);
+  background: rgba(54, 198, 176, 0.18);
+  border-color: var(--accent-teal);
+  box-shadow: 0 2px 8px rgba(54, 198, 176, 0.2);
+}
+
+.package-pill-sparkle {
+  color: var(--accent-teal);
+  flex-shrink: 0;
+}
+
+.package-pill-name-desktop {
+  display: inline;
+}
+
+.package-pill-name-mobile {
+  display: none;
+}
+
+.package-pill-price-desktop {
+  display: inline;
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--accent-teal);
+}
+
+.package-pill-chevron {
+  opacity: 0.7;
+  flex-shrink: 0;
 }
 
 .package-selector-dropdown {
   position: absolute;
   top: calc(100% + 6px);
   right: 0;
-  width: 290px;
+  width: 280px;
+  max-width: calc(100vw - 16px);
   background: #101B2C;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-glass);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
   padding: 0.5rem;
-  z-index: 100;
+  z-index: 110;
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
+  box-sizing: border-box;
+}
+
+.package-selector-dropdown-header {
+  padding: 0.35rem 0.6rem 0.45rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-light);
+  letter-spacing: 0.04em;
 }
 
 .package-selector-item {
@@ -737,6 +838,110 @@
   background: rgba(54, 198, 176, 0.1);
   border-color: rgba(54, 198, 176, 0.35);
 }
+
+.package-selector-dropdown-footer {
+  border-top: 1px solid var(--border-light);
+  padding-top: 0.35rem;
+  margin-top: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.package-dropdown-btn-page {
+  width: 100%;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-teal);
+  background: rgba(54, 198, 176, 0.1);
+  border: 1px solid rgba(54, 198, 176, 0.25);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  transition: all 0.15s ease;
+}
+
+.package-dropdown-btn-page:hover {
+  background: rgba(54, 198, 176, 0.2);
+}
+
+.package-dropdown-btn-modal {
+  width: 100%;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+/* Header Action Buttons (Theme, Notification) */
+.simp-navbar-action-btn {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  padding: 0;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.simp-navbar-action-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--accent-teal);
+}
+
+.simp-navbar-badge-counter {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  background: var(--status-danger);
+  color: #FFFFFF;
+  font-size: 0.62rem;
+  font-weight: 700;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 3px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--bg-surface);
+}
+
+.navbar-notifications-popover {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 320px;
+  max-width: calc(100vw - 16px);
+  background: #101B2C;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  z-index: 110;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
 
 /* ========================================================
    Student Profile Hero Card (Subtle Glass)
@@ -957,32 +1162,69 @@
 }
 
 /* ========================================================
-   RESPONSIVE MEDIA QUERIES (1024px, 768px, 640px, 480px, 360px)
+   RESPONSIVE MEDIA QUERIES (1024px, 768px, 640px, 480px, 360px, 320px)
    ======================================================== */
 @media (max-width: 1024px) {
   .simp-sidebar {
+    top: var(--navbar-height) !important;
+    height: calc(100vh - var(--navbar-height)) !important;
+    height: calc(100dvh - var(--navbar-height)) !important;
+    bottom: 0 !important;
+    width: min(var(--sidebar-width), 85vw) !important;
+    max-width: 320px !important;
+    z-index: 90 !important;
     transform: translateX(-100%);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
   }
+
   .simp-sidebar.mobile-open {
     transform: translateX(0) !important;
   }
+
+  .simp-sidebar-backdrop {
+    display: block !important;
+    position: fixed !important;
+    top: var(--navbar-height) !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: rgba(11, 18, 32, 0.7) !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+    z-index: 85 !important;
+  }
+
+  .sidebar-brand-header {
+    display: none !important;
+  }
+
   .simp-main-wrapper {
     margin-left: 0 !important;
     width: 100% !important;
     max-width: 100vw !important;
+    overflow-x: hidden !important;
   }
+
   .mobile-nav-toggle {
     display: inline-flex !important;
   }
+
+  .simp-navbar-center {
+    display: none !important;
+  }
+
   .dashboard-split-grid {
     grid-template-columns: 1fr;
   }
+
   .spatial-intelligence-grid {
     grid-template-columns: 1fr !important;
   }
+
   .academics-split-grid {
     grid-template-columns: 1fr !important;
   }
+
   .student-profile-desktop-grid {
     grid-template-columns: 1fr;
     gap: 1.25rem;
@@ -993,25 +1235,51 @@
   .simp-main-content {
     padding: 0.85rem !important;
   }
+
   .simp-navbar {
-    padding: 0 0.85rem;
-    height: 60px;
+    padding: 0 0.75rem;
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+    padding-right: max(0.75rem, env(safe-area-inset-right));
+    height: 58px;
   }
+
   .simp-navbar-college-name-desktop {
-    display: none;
+    display: none !important;
   }
+
+  .simp-navbar-college-name-tablet {
+    display: inline-block !important;
+  }
+
   .simp-navbar-college-name-mobile {
-    display: inline-block;
+    display: none !important;
   }
+
   .simp-navbar-sem-badge {
-    display: none;
+    display: none !important;
   }
+
   .simp-navbar-subtitle {
     display: none !important;
   }
-  .simp-navbar-center {
+
+  .package-pill-name-desktop {
     display: none !important;
   }
+
+  .package-pill-name-mobile {
+    display: inline !important;
+  }
+
+  .package-pill-price-desktop {
+    display: none !important;
+  }
+
+  .package-tier-pill {
+    padding: 0.28rem 0.5rem;
+    font-size: 0.72rem;
+  }
+
   .login-card-container {
     grid-template-columns: 1fr !important;
   }
@@ -1101,13 +1369,108 @@
 
 @media (max-width: 480px) {
   .simp-navbar {
-    padding: 0 0.65rem;
+    padding: 0 0.55rem;
+    padding-left: max(0.55rem, env(safe-area-inset-left));
+    padding-right: max(0.55rem, env(safe-area-inset-right));
   }
+
+  .simp-navbar-left {
+    gap: 0.45rem;
+  }
+
+  .simp-navbar-right {
+    gap: 0.35rem;
+  }
+
   .simp-navbar-brand-logo {
     width: 28px;
     height: 28px;
   }
-  .simp-navbar-college-name-mobile {
-    font-size: 0.85rem;
+
+  .mobile-nav-toggle {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+  }
+
+  .simp-navbar-action-btn {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+  }
+
+  .package-tier-pill {
+    padding: 0.25rem 0.45rem;
+    font-size: 0.7rem;
+    gap: 0.2rem;
   }
 }
+
+@media (max-width: 360px) {
+  .simp-navbar {
+    padding: 0 0.4rem;
+    padding-left: max(0.4rem, env(safe-area-inset-left));
+    padding-right: max(0.4rem, env(safe-area-inset-right));
+  }
+
+  .simp-navbar-left {
+    gap: 0.35rem;
+  }
+
+  .simp-navbar-right {
+    gap: 0.25rem;
+  }
+
+  .simp-navbar-brand-logo {
+    width: 26px;
+    height: 26px;
+  }
+
+  .simp-navbar-college-name-tablet {
+    display: none !important;
+  }
+
+  .simp-navbar-college-name-mobile {
+    display: inline-block !important;
+    font-size: 0.82rem;
+  }
+
+  .package-tier-pill {
+    padding: 0.22rem 0.38rem;
+    font-size: 0.68rem;
+  }
+
+  .package-pill-sparkle {
+    display: none;
+  }
+}
+
+@media (max-width: 320px) {
+  .simp-navbar {
+    padding: 0 0.35rem;
+    padding-left: max(0.35rem, env(safe-area-inset-left));
+    padding-right: max(0.35rem, env(safe-area-inset-right));
+  }
+
+  .simp-navbar-brand-logo {
+    display: none;
+  }
+
+  .simp-navbar-college-name-mobile {
+    display: inline-block !important;
+    font-size: 0.8rem;
+  }
+
+  .simp-navbar-action-btn {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+  }
+
+  .mobile-nav-toggle {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+  }
+}
+

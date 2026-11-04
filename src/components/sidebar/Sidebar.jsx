@@ -111,36 +111,16 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
       {isMobileOpen && (
         <div
           onClick={onCloseMobile}
-          style={{
-            position: 'fixed',
-            inset: 0,
-            background: 'rgba(11, 18, 32, 0.7)',
-            zIndex: 90,
-            backdropFilter: 'blur(4px)'
-          }}
+          className="simp-sidebar-backdrop"
         />
       )}
 
       <aside
-        style={{
-          width: 'var(--sidebar-width)',
-          backgroundColor: 'var(--bg-sidebar)',
-          color: '#F1F5F9',
-          borderRight: '1px solid var(--border-light)',
-          display: 'flex',
-          flexDirection: 'column',
-          position: 'fixed',
-          top: 0,
-          bottom: 0,
-          left: 0,
-          zIndex: 100,
-          transition: 'transform 0.3s ease',
-          transform: isMobileOpen ? 'translateX(0)' : undefined
-        }}
         className={`simp-sidebar ${isMobileOpen ? 'mobile-open' : ''}`}
       >
         {/* Brand Header */}
         <div
+          className="sidebar-brand-header"
           style={{
             padding: '1.2rem 1.35rem',
             borderBottom: '1px solid var(--border-light)',
