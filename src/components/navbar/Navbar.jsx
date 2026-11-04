@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Menu,
@@ -14,21 +14,35 @@ import {
   ExternalLink,
   X,
   Sparkles,
-  Sliders
+  ChevronDown,
+  Layers,
+  Check
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 import { useData } from '../../context/DataContext';
-import { usePackage } from '../../context/PackageContext';
+import { usePackage, PACKAGES } from '../../context/PackageContext';
 
 export const Navbar = ({ onToggleMobile }) => {
   const { currentUser, role, switchRole } = useAuth();
   const { theme, toggleTheme, isDark } = useTheme();
   const { announcements, markAnnouncementRead } = useData();
-  const { packageTier, currentPackage, setIsComparisonModalOpen } = usePackage();
+  const { packageTier, setPackageTier, currentPackage, setIsComparisonModalOpen } = usePackage();
   const navigate = useNavigate();
 
   const [showNotifications, setShowNotifications] = useState(false);
+  const [showPackageDropdown, setShowPackageDropdown] = useState(false);
+  const packageDropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (packageDropdownRef.current && !packageDropdownRef.current.contains(e.target)) {
+        setShowPackageDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const unreadCount = announcements.filter((a) => !a.read).length;
 
@@ -48,124 +62,157 @@ export const Navbar = ({ onToggleMobile }) => {
   ];
 
   return (
-    <header
-      style={{
-        height: 'var(--navbar-height)',
-        backgroundColor: 'var(--bg-surface)',
-        borderBottom: '1px solid var(--border-light)',
-        position: 'sticky',
-        top: 0,
-        zIndex: 50,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '0 1.5rem',
-        boxShadow: 'var(--shadow-xs)'
-      }}
-    >
-      {/* Left: Mobile Toggle & Page Academic Badge */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+    <header className="simp-navbar">
+      {/* Left: Mobile Hamburger Toggle + HKBK Brand */}
+      <div className="simp-navbar-left">
         <button
           onClick={onToggleMobile}
           aria-label="Toggle Navigation Menu"
-          className="simp-btn-subtle"
-          style={{
-            padding: '0.45rem',
-            borderRadius: 'var(--radius-md)',
-            display: 'none' // enabled via media query in css
-          }}
+          className="mobile-nav-toggle"
           id="mobile-nav-toggle"
         >
           <Menu size={20} />
         </button>
 
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span
-              style={{
-                fontFamily: 'var(--font-heading)',
-                fontSize: '0.95rem',
-                fontWeight: 700,
-                color: 'var(--text-primary)'
-              }}
-            >
-              HKBK College of Engineering
-            </span>
-            <span
-              style={{
-                fontSize: '0.72rem',
-                color: 'var(--text-muted)',
-                background: 'var(--bg-subtle)',
-                padding: '0.15rem 0.5rem',
-                borderRadius: 'var(--radius-sm)',
-                fontWeight: 600
-              }}
-            >
-              AY 2024–25 (Even Sem)
-            </span>
-          </div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-            Visvesvaraya Technological University (VTU) Belagavi | Campus: Nagawara, Bengaluru
+        <div
+          className="simp-navbar-brand"
+          onClick={() => handleRoleChange(role)}
+          title="HKBK College of Engineering Portal"
+        >
+          <img
+            src="/hkbk-crest.svg"
+            alt="HKBK Crest"
+            className="simp-navbar-brand-logo"
+          />
+          <div className="simp-navbar-title-wrap">
+            <div className="simp-navbar-title-row">
+              <span className="simp-navbar-college-name-desktop">
+                HKBK College of Engineering
+              </span>
+              <span className="simp-navbar-college-name-mobile">
+                HKBK CE
+              </span>
+              <span className="simp-navbar-sem-badge">
+                AY 2024–25 (Even Sem)
+              </span>
+            </div>
+            <div className="simp-navbar-subtitle">
+              Visvesvaraya Technological University (VTU) Belagavi | Campus: Nagawara, Bengaluru
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Center/Right: Role Switcher Demo Pills + Theme + Notifications */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-        {/* Package Tier Trigger Pill */}
-        <button
-          onClick={() => setIsComparisonModalOpen(true)}
-          title="Click to view packages: P1 Website (₹1.20L) / P2 +Android (₹1.68L) / P3 +Android+iOS (₹2.16L)"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.45rem',
-            padding: '0.35rem 0.75rem',
-            borderRadius: 'var(--radius-md)',
-            background:
-              packageTier === 'package3' || packageTier === 'complete'
-                ? 'linear-gradient(135deg, rgba(197, 160, 89, 0.2) 0%, rgba(197, 160, 89, 0.05) 100%)'
-                : packageTier === 'package2' || packageTier === 'advanced'
-                ? 'rgba(37, 99, 235, 0.12)'
-                : 'var(--bg-subtle)',
-            border:
-              packageTier === 'package3' || packageTier === 'complete'
-                ? '1px solid var(--accent-gold)'
-                : '1px solid var(--border-light)',
-            color: packageTier === 'package3' || packageTier === 'complete' ? 'var(--accent-gold)' : 'var(--text-primary)',
-            fontSize: '0.75rem',
-            fontWeight: 700,
-            cursor: 'pointer',
-            transition: 'all 0.15s ease'
-          }}
-          className="package-tier-pill"
-        >
-          <Sparkles size={13} color="var(--accent-gold)" />
-          <span className="package-tier-pill-name">{currentPackage?.shortName || currentPackage?.name}</span>
-          <span
+      {/* Right: Package Selector Dropdown + Role Switcher (Desktop) + Theme + Notifications */}
+      <div className="simp-navbar-right">
+        {/* Compact Package Selector with Dropdown */}
+        <div className="package-selector-wrapper" ref={packageDropdownRef}>
+          <button
+            onClick={() => setShowPackageDropdown(!showPackageDropdown)}
+            title="Switch demo package"
+            className="package-selector-btn"
             style={{
-              fontSize: '0.68rem',
-              fontWeight: 800,
-              color: packageTier === 'package3' || packageTier === 'complete' ? 'var(--accent-gold)' : 'var(--text-muted)'
+              background:
+                packageTier === 'package3' || packageTier === 'complete'
+                  ? 'linear-gradient(135deg, rgba(197, 160, 89, 0.2) 0%, rgba(197, 160, 89, 0.05) 100%)'
+                  : packageTier === 'package2' || packageTier === 'advanced'
+                  ? 'rgba(37, 99, 235, 0.12)'
+                  : 'var(--bg-subtle)',
+              border:
+                packageTier === 'package3' || packageTier === 'complete'
+                  ? '1px solid var(--accent-gold)'
+                  : '1px solid var(--border-light)',
+              color: packageTier === 'package3' || packageTier === 'complete' ? 'var(--accent-gold)' : 'var(--text-primary)'
             }}
           >
-            {currentPackage?.devPrice}
-          </span>
-          <span
-            style={{
-              fontSize: '0.62rem',
-              color: 'var(--text-muted)',
-              background: 'var(--bg-card)',
-              padding: '0.1rem 0.35rem',
-              borderRadius: '4px',
-              border: '1px solid var(--border-light)'
-            }}
-          >
-            Packages ▾
-          </span>
-        </button>
+            <Sparkles size={13} color="var(--accent-gold)" />
+            <span className="package-tier-pill-name">
+              {currentPackage?.shortName || currentPackage?.name}
+            </span>
+            <span
+              style={{
+                fontSize: '0.68rem',
+                fontWeight: 800,
+                color: packageTier === 'package3' || packageTier === 'complete' ? 'var(--accent-gold)' : 'var(--accent-blue)'
+              }}
+            >
+              {currentPackage?.devPrice}
+            </span>
+            <ChevronDown size={12} style={{ opacity: 0.7 }} />
+          </button>
 
-        {/* Quick 1-Click Role Switcher */}
+          {/* Compact Dropdown Menu */}
+          {showPackageDropdown && (
+            <div className="package-selector-dropdown">
+              <div
+                style={{
+                  padding: '0.35rem 0.6rem 0.45rem',
+                  fontSize: '0.7rem',
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  color: 'var(--text-muted)',
+                  borderBottom: '1px solid var(--border-light)',
+                  letterSpacing: '0.04em'
+                }}
+              >
+                Select Package Tier
+              </div>
+
+              {PACKAGES.map((pkg) => {
+                const isSelected = packageTier === pkg.id;
+                return (
+                  <button
+                    key={pkg.id}
+                    onClick={() => {
+                      setPackageTier(pkg.id);
+                      setShowPackageDropdown(false);
+                    }}
+                    className={`package-selector-item ${isSelected ? 'active' : ''}`}
+                  >
+                    <div>
+                      <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                        P{pkg.number}: {pkg.shortName}
+                      </div>
+                      <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+                        Dev: <strong style={{ color: 'var(--accent-gold)' }}>{pkg.devPrice}</strong> • Host: {pkg.hostingPrice}/yr
+                      </div>
+                    </div>
+                    {isSelected && <Check size={14} color="var(--accent-gold)" />}
+                  </button>
+                );
+              })}
+
+              <div style={{ borderTop: '1px solid var(--border-light)', paddingTop: '0.35rem', marginTop: '0.2rem' }}>
+                <button
+                  onClick={() => {
+                    setShowPackageDropdown(false);
+                    setIsComparisonModalOpen(true);
+                  }}
+                  style={{
+                    width: '100%',
+                    padding: '0.4rem 0.6rem',
+                    fontSize: '0.72rem',
+                    fontWeight: 700,
+                    color: 'var(--accent-blue)',
+                    background: 'transparent',
+                    border: 'none',
+                    borderRadius: 'var(--radius-sm)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.35rem'
+                  }}
+                >
+                  <Layers size={13} />
+                  <span>Compare All 3 Packages ↗</span>
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Quick 1-Click Role Switcher (Visible on desktop > 1024px) */}
         <div
           style={{
             display: 'flex',
@@ -208,7 +255,8 @@ export const Navbar = ({ onToggleMobile }) => {
                   color: isSelected ? '#FFFFFF' : 'var(--text-secondary)',
                   border: isSelected ? '1px solid var(--accent-gold)' : '1px solid transparent',
                   boxShadow: isSelected ? 'var(--shadow-xs)' : 'none',
-                  transition: 'all 0.15s ease'
+                  transition: 'all 0.15s ease',
+                  cursor: 'pointer'
                 }}
               >
                 <Icon size={13} color={isSelected ? 'var(--accent-gold)' : undefined} />
@@ -226,10 +274,14 @@ export const Navbar = ({ onToggleMobile }) => {
           style={{
             padding: '0.5rem',
             borderRadius: 'var(--radius-md)',
-            border: '1px solid var(--border-light)'
+            border: '1px solid var(--border-light)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer'
           }}
         >
-          {isDark ? <Sun size={18} color="#DFBF77" /> : <Moon size={18} color="var(--primary-navy)" />}
+          {isDark ? <Sun size={17} color="#DFBF77" /> : <Moon size={17} color="var(--primary-navy)" />}
         </button>
 
         {/* Notifications Popover Toggle */}
@@ -241,11 +293,15 @@ export const Navbar = ({ onToggleMobile }) => {
               padding: '0.5rem',
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--border-light)',
-              position: 'relative'
+              position: 'relative',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer'
             }}
             title="Announcements & Notices"
           >
-            <Bell size={18} />
+            <Bell size={17} />
             {unreadCount > 0 && (
               <span
                 style={{
@@ -277,7 +333,8 @@ export const Navbar = ({ onToggleMobile }) => {
                 position: 'absolute',
                 top: 'calc(100% + 10px)',
                 right: 0,
-                width: '360px',
+                width: '320px',
+                maxWidth: '90vw',
                 background: 'var(--bg-card)',
                 border: '1px solid var(--border-light)',
                 borderRadius: 'var(--radius-lg)',
@@ -301,7 +358,7 @@ export const Navbar = ({ onToggleMobile }) => {
                 </div>
                 <button
                   onClick={() => setShowNotifications(false)}
-                  style={{ color: 'var(--text-muted)' }}
+                  style={{ color: 'var(--text-muted)', background: 'transparent', border: 'none', cursor: 'pointer' }}
                 >
                   <X size={16} />
                 </button>
@@ -366,7 +423,10 @@ export const Navbar = ({ onToggleMobile }) => {
                     color: 'var(--accent-blue)',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.3rem'
+                    gap: '0.3rem',
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer'
                   }}
                 >
                   <span>View All Circulars</span>

@@ -30,9 +30,9 @@ export const DashboardLayout = () => {
         <Navbar onToggleMobile={() => setIsMobileOpen(!isMobileOpen)} />
 
         <main
+          className="simp-main-content"
           style={{
             flex: 1,
-            padding: '1.75rem',
             maxWidth: '1440px',
             width: '100%',
             margin: '0 auto',

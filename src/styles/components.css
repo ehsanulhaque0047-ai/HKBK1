@@ -392,6 +392,7 @@
 
 @media (max-width: 640px) {
   .grid-cols-4, .grid-cols-3, .grid-cols-2 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  .packages-comparison-grid { grid-template-columns: 1fr !important; }
 }
 
 
@@ -513,19 +514,647 @@
   }
 }
 
-
-/* 3D Hero Orbital Crystal Styling */
-@keyframes spinSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+/* ========================================================
+   Responsive Navigation & Sticky Header
+   ======================================================== */
+.simp-main-content {
+  padding: 1.75rem;
+}
+@media (max-width: 768px) {
+  .simp-main-content {
+    padding: 0.85rem !important;
+  }
 }
 
-.spin-icon {
-  animation: spinSlow 6s linear infinite;
+.simp-navbar {
+  height: var(--navbar-height);
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-light);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.25rem;
+  box-shadow: var(--shadow-xs);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.simp-navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.mobile-nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.simp-navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.simp-navbar-brand-logo {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.simp-navbar-title-wrap {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.simp-navbar-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.simp-navbar-college-name-desktop {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.simp-navbar-college-name-mobile {
+  display: none;
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.simp-navbar-sem-badge {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+  padding: 0.12rem 0.45rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.simp-navbar-subtitle {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.simp-navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+}
+
+/* Compact Package Selector in Navbar */
+.package-selector-wrapper {
+  position: relative;
+}
+
+.package-selector-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radius-md);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.package-selector-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 290px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 0.5rem;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.package-selector-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  transition: all 0.12s ease;
+}
+
+.package-selector-item:hover {
+  background: var(--bg-subtle);
+}
+
+.package-selector-item.active {
+  background: var(--bg-subtle);
+  border-color: var(--accent-gold);
+}
+
+/* ========================================================
+   Clean Demo Package Summary Card (Section 0)
+   ======================================================== */
+.demo-package-summary-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-top: 3.5px solid var(--accent-gold);
+  border-radius: var(--radius-xl);
+  padding: 1.25rem 1.4rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.demo-package-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.demo-package-active-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.demo-package-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.demo-package-pricing-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 0.4rem 0.75rem;
+  flex-wrap: wrap;
+}
+
+.demo-package-features-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.demo-package-feature-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-muted);
+  border: 1px solid var(--border-light);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.demo-package-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) auto;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.demo-pkg-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid var(--border-light);
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  text-align: center;
+  gap: 0.15rem;
+}
+
+.demo-pkg-btn:hover {
+  border-color: var(--accent-gold);
+  background: var(--bg-card);
+}
+
+.demo-pkg-btn.active {
+  background: var(--primary-navy);
+  color: #FFFFFF;
+  border-color: var(--accent-gold);
+  box-shadow: var(--shadow-xs);
+}
+
+.demo-pkg-btn.active .demo-pkg-price {
+  color: var(--accent-gold-light);
+}
+
+.demo-pkg-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.demo-pkg-price {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* ========================================================
+   Student Profile Hero Card (Section 1)
+   Desktop: 2-column layout (Left: photo + identity; Right: academic info + action buttons)
+   Mobile: Clean vertical layout (Photo, Name, USN, Dept/Sem, Academic info, Buttons stacked)
+   ======================================================== */
+.student-profile-hero {
+  background: linear-gradient(135deg, var(--primary-navy-dark) 0%, var(--primary-navy) 100%);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  border-radius: var(--radius-xl);
+  padding: 1.75rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  color: #FFFFFF;
+}
+
+.student-profile-hero-bg-crest {
+  position: absolute;
+  right: -30px;
+  bottom: -40px;
+  opacity: 0.08;
+  pointer-events: none;
+  width: 280px;
+  height: 280px;
+}
+
+.student-profile-desktop-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 1.1fr) minmax(320px, 1.4fr);
+  gap: 2rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.student-profile-left-col {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+.student-avatar-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.student-avatar-img {
+  width: 96px;
+  height: 96px;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  border: 3px solid var(--accent-gold);
+  box-shadow: var(--shadow-md);
+  display: block;
+}
+
+.student-status-badge {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  background: #15803D;
+  color: #FFFFFF;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-full);
+  border: 2px solid #0B1E36;
+}
+
+.student-identity-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.student-name-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: 0.02em;
+  margin: 0;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.student-usn-chip {
+  display: inline-block;
+  background: rgba(197, 160, 89, 0.2);
+  color: var(--accent-gold-light);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  width: fit-content;
+}
+
+.student-profile-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  min-width: 0;
+}
+
+.student-academic-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.student-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  color: #CBD5E1;
+  min-width: 0;
+}
+
+.student-meta-item strong {
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.student-meta-label {
+  color: #94A3B8;
+  font-size: 0.76rem;
+}
+
+.student-profile-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* ========================================================
+   Faculty, Admin, Parent Hero Banners
+   ======================================================== */
+.portal-hero-banner {
+  background: linear-gradient(135deg, var(--primary-navy-dark) 0%, var(--primary-navy) 100%);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  border-radius: var(--radius-xl);
+  padding: 1.75rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.75rem;
+}
+
+.portal-hero-main {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.portal-hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Two-column dashboard split */
+.dashboard-split-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 1.5rem;
+}
+
+.spatial-intelligence-grid {
+  display: grid;
+  grid-template-columns: minmax(300px, 340px) 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+/* ========================================================
+   RESPONSIVE MEDIA QUERIES (1024px, 768px, 640px, 430px, 360px)
+   ======================================================== */
+@media (max-width: 1024px) {
+  .simp-sidebar {
+    transform: translateX(-100%);
+  }
+  .simp-sidebar.mobile-open {
+    transform: translateX(0) !important;
+  }
+  .simp-main-wrapper {
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+  .mobile-nav-toggle {
+    display: inline-flex !important;
+  }
+  .role-switcher-container {
+    display: none !important;
+  }
+  .dashboard-split-grid {
+    grid-template-columns: 1fr;
+  }
+  .spatial-intelligence-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .student-profile-desktop-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .demo-package-buttons-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
-  .hero-orbital-crystal-container {
-    height: 320px !important;
+  .simp-main-content {
+  padding: 1.75rem;
+}
+@media (max-width: 768px) {
+  .simp-main-content {
+    padding: 0.85rem !important;
   }
 }
+
+.simp-navbar {
+    padding: 0 0.85rem;
+    height: 60px;
+  }
+  .simp-navbar-college-name-desktop {
+    display: none;
+  }
+  .simp-navbar-college-name-mobile {
+    display: inline-block;
+  }
+  .simp-navbar-sem-badge {
+    display: none;
+  }
+  .simp-navbar-subtitle {
+    display: none !important;
+  }
+
+  /* Student Profile Card Mobile Stack per Requirement 4 */
+  .student-profile-hero {
+    padding: 1.25rem;
+  }
+  .student-profile-desktop-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+  }
+  .student-profile-left-col {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.85rem;
+  }
+  .student-avatar-img {
+    width: 84px;
+    height: 84px;
+  }
+  .student-identity-text {
+    align-items: center;
+  }
+  .student-name-title {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+  .student-academic-meta-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 0.85rem;
+  }
+  .student-profile-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+  }
+  .student-profile-actions > button,
+  .student-profile-actions > a {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Portal Hero Mobile (Faculty, Admin, Parent) */
+  .portal-hero-banner {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1.25rem;
+    gap: 1.25rem;
+  }
+  .portal-hero-main {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.85rem;
+  }
+  .portal-hero-actions {
+    width: 100%;
+  }
+  .portal-hero-actions > button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Demo package buttons on mobile */
+  .demo-package-buttons-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .simp-main-content {
+  padding: 1.75rem;
+}
+@media (max-width: 768px) {
+  .simp-main-content {
+    padding: 0.85rem !important;
+  }
+}
+
+.simp-navbar {
+    padding: 0 0.65rem;
+  }
+  .simp-navbar-brand-logo {
+    width: 28px;
+    height: 28px;
+  }
+  .simp-navbar-college-name-mobile {
+    font-size: 0.85rem;
+  }
+  .demo-package-summary-card {
+    padding: 1rem;
+  }
+}
+

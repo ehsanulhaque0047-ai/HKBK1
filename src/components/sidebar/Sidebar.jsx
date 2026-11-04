@@ -29,7 +29,7 @@ import { useData } from '../../context/DataContext';
 import { usePackage } from '../../context/PackageContext';
 
 export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
-  const { currentUser, role, logout } = useAuth();
+  const { currentUser, role, switchRole, logout } = useAuth();
   const { resetAllData } = useData();
   const { packageTier, currentPackage, setIsComparisonModalOpen } = usePackage();
   const navigate = useNavigate();
@@ -229,6 +229,47 @@ export const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
           >
             VTU / AICTE
           </span>
+        </div>
+
+        {/* Quick Role Switcher */}
+        <div
+          style={{
+            padding: '0.5rem 0.75rem',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '0.25rem'
+          }}
+          className="sidebar-role-switcher"
+        >
+          {[
+            { key: 'student', label: 'Student' },
+            { key: 'faculty', label: 'Faculty' },
+            { key: 'admin', label: 'Admin' },
+            { key: 'parent', label: 'Parent' }
+          ].map((r) => (
+            <button
+              key={r.key}
+              onClick={() => {
+                switchRole(r.key);
+                navigate(`/${r.key}/dashboard`);
+                onCloseMobile();
+              }}
+              style={{
+                padding: '0.35rem 0.2rem',
+                fontSize: '0.68rem',
+                fontWeight: 700,
+                borderRadius: 'var(--radius-xs)',
+                backgroundColor: role === r.key ? 'var(--accent-gold)' : 'rgba(255, 255, 255, 0.06)',
+                color: role === r.key ? 'var(--primary-navy-dark)' : '#CBD5E1',
+                border: 'none',
+                cursor: 'pointer',
+                textAlign: 'center'
+              }}
+            >
+              {r.label}
+            </button>
+          ))}
         </div>
 
         {/* Navigation Items */}

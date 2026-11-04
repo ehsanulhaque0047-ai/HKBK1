@@ -42,62 +42,55 @@ export const AdminDashboard = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       {/* 1. Admin Command Center Header */}
-      <div
-        className="simp-card-navy"
-        style={{
-          borderRadius: 'var(--radius-xl)',
-          padding: '1.75rem',
-          display: 'grid',
-          gridTemplateColumns: 'auto 1fr auto',
-          alignItems: 'center',
-          gap: '1.75rem'
-        }}
-      >
-        <img
-          src={currentUser?.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300'}
-          alt={currentUser?.name}
-          style={{
-            width: '90px',
-            height: '90px',
-            borderRadius: 'var(--radius-lg)',
-            objectFit: 'cover',
-            border: '3px solid var(--accent-gold)'
-          }}
-        />
+      <div className="portal-hero-banner">
+        <div className="portal-hero-main">
+          <img
+            src={currentUser?.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300'}
+            alt={currentUser?.name}
+            style={{
+              width: '90px',
+              height: '90px',
+              borderRadius: 'var(--radius-lg)',
+              objectFit: 'cover',
+              border: '3px solid var(--accent-gold)',
+              flexShrink: 0
+            }}
+          />
 
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-            <h1 style={{ fontSize: '1.45rem', fontWeight: 800, color: '#FFFFFF' }}>
-              {currentUser?.name || 'Prof. Syed Mustafa'}
-            </h1>
-            <span
-              style={{
-                background: 'rgba(197, 160, 89, 0.25)',
-                color: 'var(--accent-gold-light)',
-                border: '1px solid rgba(197, 160, 89, 0.4)',
-                fontSize: '0.78rem',
-                fontWeight: 700,
-                padding: '0.15rem 0.5rem',
-                borderRadius: 'var(--radius-sm)',
-                fontFamily: 'var(--font-mono)'
-              }}
-            >
-              {currentUser?.employeeId || 'HKBK-ADM-003'}
-            </span>
-          </div>
+          <div style={{ minWidth: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
+              <h1 style={{ fontSize: '1.45rem', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>
+                {currentUser?.name || 'Prof. Syed Mustafa'}
+              </h1>
+              <span
+                style={{
+                  background: 'rgba(197, 160, 89, 0.25)',
+                  color: 'var(--accent-gold-light)',
+                  border: '1px solid rgba(197, 160, 89, 0.4)',
+                  fontSize: '0.78rem',
+                  fontWeight: 700,
+                  padding: '0.15rem 0.5rem',
+                  borderRadius: 'var(--radius-sm)',
+                  fontFamily: 'var(--font-mono)'
+                }}
+              >
+                {currentUser?.employeeId || 'HKBK-ADM-003'}
+              </span>
+            </div>
 
-          <p style={{ fontSize: '0.88rem', color: '#DFBF77', marginTop: '0.2rem' }}>
-            Dean Academics & SIMP System Controller – Office of the Registrar
-          </p>
+            <p style={{ fontSize: '0.88rem', color: '#DFBF77', marginTop: '0.2rem', marginBottom: 0 }}>
+              Dean Academics & SIMP System Controller – Office of the Registrar
+            </p>
 
-          <div style={{ display: 'flex', gap: '1.25rem', marginTop: '0.6rem', fontSize: '0.8rem', color: '#CBD5E1', flexWrap: 'wrap' }}>
-            <span>Office: <strong>Principal Secretariat, Main Block, 1st Flr</strong></span>
-            <span>Affiliation: <strong>VTU Belagavi Center Code 1HK</strong></span>
-            <span>System Access: <strong>Full Super-Administrator Privileges</strong></span>
+            <div style={{ display: 'flex', gap: '1.25rem', marginTop: '0.6rem', fontSize: '0.8rem', color: '#CBD5E1', flexWrap: 'wrap' }}>
+              <span>Office: <strong>Principal Secretariat, Main Block, 1st Flr</strong></span>
+              <span>Affiliation: <strong>VTU Belagavi Center Code 1HK</strong></span>
+              <span>System Access: <strong>Full Super-Administrator Privileges</strong></span>
+            </div>
           </div>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        <div className="portal-hero-actions">
           <Button
             variant="gold"
             size="sm"

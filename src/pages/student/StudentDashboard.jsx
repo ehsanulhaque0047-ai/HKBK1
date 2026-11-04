@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   GraduationCap,
@@ -21,7 +21,8 @@ import {
   Download,
   Smartphone,
   Eye,
-  Sliders
+  Sliders,
+  Check
 } from 'lucide-react';
 import { useData } from '../../context/DataContext';
 import { usePackage, PACKAGES } from '../../context/PackageContext';
@@ -34,9 +35,7 @@ import { StatsCard } from '../../components/common/StatsCard';
 import { Card3D } from '../../components/3d/Card3D';
 import { AttendanceRing3D } from '../../components/3d/AttendanceRing3D';
 import { Analytics3D } from '../../components/3d/Analytics3D';
-import { CampusCanvas3D } from '../../components/3d/CampusCanvas3D';
 import { MobileAppShowcase3D } from '../../components/3d/MobileAppShowcase3D';
-import { HeroOrbitalCrystal } from '../../components/3d/HeroOrbitalCrystalLazy';
 import { PackagePricingSection } from '../../components/packages/PackagePricingSection';
 
 export const StudentDashboard = () => {
@@ -53,7 +52,6 @@ export const StudentDashboard = () => {
 
   const { packageTier, setPackageTier, currentPackage, setIsComparisonModalOpen } = usePackage();
   const navigate = useNavigate();
-  const [hero3DMode, setHero3DMode] = useState('crystal'); // 'crystal' | 'campus'
 
   // Pending assignments count
   const pendingAssignments = assignments.filter((a) => a.status === 'Pending');
@@ -65,304 +63,234 @@ export const StudentDashboard = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      {/* 0. Package Demonstration Live Switcher Banner */}
-      <div
-        style={{
-          background: 'var(--bg-card)',
-          border: '1px solid var(--border-light)',
-          borderRadius: 'var(--radius-lg)',
-          padding: '0.85rem 1.25rem',
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '1rem',
-          boxShadow: 'var(--shadow-xs)'
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-          <span
-            style={{
-              width: '9px',
-              height: '9px',
-              borderRadius: '50%',
-              backgroundColor: 'var(--accent-gold)',
-              boxShadow: '0 0 8px var(--accent-gold)'
-            }}
-          />
-          <div>
-            <span style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--text-primary)' }}>
-              Active Demonstration Experience:{' '}
-            </span>
-            <span
-              style={{
-                fontSize: '0.78rem',
-                fontWeight: 800,
-                color: 'var(--accent-gold)'
-              }}
-            >
-              {currentPackage.name} (Dev: {currentPackage.devPrice} | Hosting: {currentPackage.hostingPrice})
-            </span>
-            <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)', marginLeft: '0.5rem' }}>
-              • {currentPackage.tagline}
-            </span>
+      {/* 0. Demo Package Summary Card */}
+      <div className="demo-package-summary-card">
+        <div className="demo-package-header-row">
+          <div className="demo-package-active-info">
+            <div className="demo-package-badge-row">
+              <span
+                style={{
+                  width: '9px',
+                  height: '9px',
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--accent-gold)',
+                  boxShadow: '0 0 8px var(--accent-gold)',
+                  display: 'inline-block'
+                }}
+              />
+              <span style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', color: 'var(--accent-gold)', letterSpacing: '0.04em' }}>
+                Active Demonstration Experience
+              </span>
+              <span
+                style={{
+                  fontSize: '0.7rem',
+                  fontWeight: 700,
+                  padding: '0.15rem 0.5rem',
+                  borderRadius: 'var(--radius-sm)',
+                  background: 'rgba(197, 160, 89, 0.15)',
+                  color: 'var(--accent-gold-dark)',
+                  border: '1px solid rgba(197, 160, 89, 0.3)'
+                }}
+              >
+                {currentPackage.badge || `Package ${currentPackage.number}`}
+              </span>
+            </div>
+
+            <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+              {currentPackage.name}
+            </h3>
+
+            <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.4 }}>
+              {currentPackage.tagline}
+            </p>
+          </div>
+
+          {/* Pricing & Platforms Overview */}
+          <div className="demo-package-pricing-badge">
+            <div style={{ textAlign: 'left' }}>
+              <div style={{ fontSize: '0.68rem', textTransform: 'uppercase', fontWeight: 700, color: 'var(--text-muted)' }}>
+                One-Time Development Fee
+              </div>
+              <div style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--accent-gold)' }}>
+                {currentPackage.devPrice}
+              </div>
+            </div>
+            <div style={{ width: '1px', height: '28px', backgroundColor: 'var(--border-light)' }} />
+            <div style={{ textAlign: 'left' }}>
+              <div style={{ fontSize: '0.68rem', textTransform: 'uppercase', fontWeight: 700, color: 'var(--text-muted)' }}>
+                Annual Hosting (Est.)
+              </div>
+              <div style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                {currentPackage.hostingPrice}<span style={{ fontSize: '0.7rem', fontWeight: 500, color: 'var(--text-muted)' }}>/yr</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap' }}>
-          {PACKAGES.map((pkg) => (
-            <button
-              key={pkg.id}
-              onClick={() => setPackageTier(pkg.id)}
+        {/* Platforms & Short List of Important Features */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+              Included Platforms:
+            </span>
+            <span
               style={{
-                padding: '0.35rem 0.7rem',
-                fontSize: '0.72rem',
-                fontWeight: 700,
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                color: 'var(--accent-blue)',
+                background: 'var(--accent-blue-subtle)',
+                padding: '0.15rem 0.55rem',
                 borderRadius: 'var(--radius-sm)',
-                backgroundColor: packageTier === pkg.id ? 'var(--primary-navy)' : 'var(--bg-subtle)',
-                color: packageTier === pkg.id ? '#FFFFFF' : 'var(--text-secondary)',
-                border: packageTier === pkg.id ? '1px solid var(--accent-gold)' : '1px solid var(--border-light)',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease'
+                border: '1px solid rgba(29, 99, 184, 0.2)'
               }}
             >
-              {pkg.number === 1 ? 'P1: Website (₹1.20L)' : pkg.number === 2 ? 'P2: +Android (₹1.68L)' : 'P3: +Android+iOS (₹2.16L)'}
-            </button>
-          ))}
+              {currentPackage.visualFeatures?.platforms || (currentPackage.hasIOS ? 'Web + Android + iOS Apps' : currentPackage.hasAndroid ? 'Web + Android Mobile App' : 'Web Browser (Desktop, Tablet & Mobile)')}
+            </span>
+          </div>
+
+          <div className="demo-package-features-list">
+            {(currentPackage.includes?.slice(0, 5) || []).map((feature, idx) => (
+              <span key={idx} className="demo-package-feature-chip">
+                <Check size={11} color="var(--accent-gold)" />
+                <span>{feature}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Responsive Package Selection Buttons */}
+        <div className="demo-package-buttons-grid">
+          {PACKAGES.map((pkg) => {
+            const isSelected = packageTier === pkg.id;
+            return (
+              <button
+                key={pkg.id}
+                onClick={() => setPackageTier(pkg.id)}
+                className={`demo-pkg-btn ${isSelected ? 'active' : ''}`}
+              >
+                <span className="demo-pkg-title">
+                  P{pkg.number}: {pkg.shortName}
+                </span>
+                <span className="demo-pkg-price">
+                  Dev: {pkg.devPrice} • Host: {pkg.hostingPrice}/yr
+                </span>
+              </button>
+            );
+          })}
+
           <button
             onClick={() => setIsComparisonModalOpen(true)}
+            className="demo-pkg-btn"
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.25rem',
-              padding: '0.35rem 0.75rem',
-              fontSize: '0.72rem',
-              fontWeight: 700,
-              borderRadius: 'var(--radius-sm)',
               backgroundColor: 'transparent',
-              color: 'var(--accent-blue)',
-              border: '1px dashed var(--accent-blue)',
-              cursor: 'pointer'
+              borderColor: 'var(--accent-blue)',
+              color: 'var(--accent-blue)'
             }}
           >
-            <Sliders size={12} />
-            <span>Packages & Estimates ▾</span>
+            <span className="demo-pkg-title" style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+              <Sliders size={13} /> Compare Matrix ▾
+            </span>
+            <span className="demo-pkg-price" style={{ color: 'var(--accent-blue)' }}>
+              Detailed Specs & SLAs
+            </span>
           </button>
         </div>
       </div>
 
-      {/* 1. Student Identity Header Banner */}
-      <Card3D tiltIntensity={tiltAmount > 0 ? 4 : 0}>
-        <div
-          className="simp-card-navy"
-          style={{
-            borderRadius: 'var(--radius-xl)',
-            padding: '1.75rem',
-            position: 'relative',
-            overflow: 'hidden',
-            display: 'grid',
-            gridTemplateColumns: 'auto 1fr auto',
-            alignItems: 'center',
-            gap: '1.75rem'
-          }}
-        >
+      {/* 1. Student Identity Header Banner (Desktop: 2-column, Mobile: Clean vertical stack) */}
+      <Card3D tiltIntensity={tiltAmount > 0 ? 3 : 0}>
+        <div className="student-profile-hero">
           {/* Subtle decorative gold seal background */}
-          <div
-            style={{
-              position: 'absolute',
-              right: '-30px',
-              bottom: '-40px',
-              opacity: 0.08,
-              pointerEvents: 'none'
-            }}
-          >
-            <img src="/hkbk-crest.svg" alt="" style={{ width: '280px', height: '280px' }} />
-          </div>
+          <img
+            src="/hkbk-crest.svg"
+            alt=""
+            className="student-profile-hero-bg-crest"
+          />
 
-          {/* Student Avatar */}
-          <div style={{ position: 'relative' }}>
-            <img
-              src={studentProfile.avatar}
-              alt={studentProfile.name}
-              style={{
-                width: '96px',
-                height: '96px',
-                borderRadius: 'var(--radius-lg)',
-                objectFit: 'cover',
-                border: '3px solid var(--accent-gold)',
-                boxShadow: 'var(--shadow-md)'
-              }}
-            />
-            <span
-              style={{
-                position: 'absolute',
-                bottom: '-6px',
-                right: '-6px',
-                background: '#15803D',
-                color: '#FFFFFF',
-                fontSize: '0.65rem',
-                fontWeight: 700,
-                padding: '0.15rem 0.45rem',
-                borderRadius: 'var(--radius-full)',
-                border: '2px solid #0B1E36'
-              }}
-            >
-              ACTIVE
-            </span>
-          </div>
-
-          {/* Core Student Meta */}
-          <div style={{ minWidth: 0 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
-              <h1
-                style={{
-                  fontSize: '1.5rem',
-                  fontWeight: 800,
-                  color: '#FFFFFF',
-                  letterSpacing: '0.02em',
-                  margin: 0
-                }}
-              >
-                {studentProfile.name}
-              </h1>
-              <span
-                style={{
-                  background: 'rgba(197, 160, 89, 0.2)',
-                  color: 'var(--accent-gold-light)',
-                  border: '1px solid rgba(197, 160, 89, 0.35)',
-                  fontSize: '0.8rem',
-                  fontWeight: 700,
-                  padding: '0.2rem 0.6rem',
-                  borderRadius: 'var(--radius-sm)',
-                  fontFamily: 'var(--font-mono)'
-                }}
-              >
-                USN: {studentProfile.usn}
-              </span>
-            </div>
-
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '1.25rem',
-                marginTop: '0.6rem',
-                flexWrap: 'wrap',
-                fontSize: '0.84rem',
-                color: '#CBD5E1'
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                <GraduationCap size={16} color="var(--accent-gold)" />
-                <span>{studentProfile.department} (Sec {studentProfile.section})</span>
+          <div className="student-profile-desktop-grid">
+            {/* Desktop Left Column / Mobile Items 1, 2, 3: Photo + Identity Details */}
+            <div className="student-profile-left-col">
+              <div className="student-avatar-container">
+                <img
+                  src={studentProfile.avatar}
+                  alt={studentProfile.name}
+                  className="student-avatar-img"
+                />
+                <span className="student-status-badge">
+                  ACTIVE
+                </span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                <BookOpen size={16} color="var(--accent-gold)" />
-                <span>{studentProfile.course} – {studentProfile.semester}th Semester</span>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                <Calendar size={16} color="var(--accent-gold)" />
-                <span>Academic Year {studentProfile.academicYear || '2024-2025'}</span>
+
+              <div className="student-identity-text">
+                <h1 className="student-name-title">
+                  {studentProfile.name}
+                </h1>
+                <span className="student-usn-chip">
+                  USN: {studentProfile.usn}
+                </span>
+                <div style={{ fontSize: '0.82rem', color: '#DFBF77', fontWeight: 600 }}>
+                  {studentProfile.course} – Section {studentProfile.section}
+                </div>
               </div>
             </div>
 
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '1rem',
-                marginTop: '0.5rem',
-                fontSize: '0.78rem',
-                color: '#94A3B8'
-              }}
-            >
-              <span>Mentor: {studentProfile.mentor?.name}</span>
-              <span>•</span>
-              <span>Quota: {studentProfile.quota}</span>
-              <span>•</span>
-              <span>Bus Pass: {studentProfile.transport?.routeNo}</span>
-            </div>
-          </div>
+            {/* Desktop Right Column / Mobile Items 4, 5, 6: Academic Info + Action Buttons */}
+            <div className="student-profile-right-col">
+              {/* Academic Info Grid (Dept, Sem, Year, Mentor, Quota, Bus) */}
+              <div className="student-academic-meta-grid">
+                <div className="student-meta-item">
+                  <GraduationCap size={15} color="var(--accent-gold)" />
+                  <span>
+                    <span className="student-meta-label">Dept: </span>
+                    <strong>{studentProfile.department}</strong>
+                  </span>
+                </div>
+                <div className="student-meta-item">
+                  <BookOpen size={15} color="var(--accent-gold)" />
+                  <span>
+                    <span className="student-meta-label">Term: </span>
+                    <strong>{studentProfile.semester}th Sem (AY 2024–25)</strong>
+                  </span>
+                </div>
+                <div className="student-meta-item">
+                  <UserCheck size={15} color="var(--accent-gold)" />
+                  <span>
+                    <span className="student-meta-label">Mentor: </span>
+                    <strong>{studentProfile.mentor?.name}</strong>
+                  </span>
+                </div>
+                <div className="student-meta-item">
+                  <MapPin size={15} color="var(--accent-gold)" />
+                  <span>
+                    <span className="student-meta-label">Quota / Bus: </span>
+                    <strong>{studentProfile.quota} • {studentProfile.transport?.routeNo || 'Route 14'}</strong>
+                  </span>
+                </div>
+              </div>
 
-          {/* Quick Profile & Hall Ticket Action */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', zIndex: 1 }}>
-            <Button
-              variant="gold"
-              size="sm"
-              icon={Download}
-              onClick={() => navigate('/student/examination')}
-            >
-              Hall Ticket (VTU)
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => navigate('/student/profile')}
-              style={{ color: '#FFFFFF', borderColor: 'rgba(255,255,255,0.2)' }}
-            >
-              Complete Profile
-            </Button>
+              {/* Action Buttons: Stacked on mobile, side-by-side on desktop */}
+              <div className="student-profile-actions">
+                <Button
+                  variant="gold"
+                  size="sm"
+                  icon={Download}
+                  onClick={() => navigate('/student/examination')}
+                >
+                  Hall Ticket (VTU)
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => navigate('/student/profile')}
+                  style={{ color: '#FFFFFF', borderColor: 'rgba(255,255,255,0.25)' }}
+                >
+                  Complete Profile
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </Card3D>
-
-      {/* Flagship Feature: Real-time 3D Orbital Crystal Sculpture (Reference Design: Glossy Black Crystal, Gold Cage, Intersecting Rings & 3 Gemstones) */}
-      {packageTier !== 'package1' && packageTier !== 'basic' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-          {(packageTier === 'package3' || packageTier === 'complete') && (
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'flex-end',
-                gap: '0.4rem'
-              }}
-            >
-              <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 600 }}>
-                3D Experience:
-              </span>
-              <button
-                onClick={() => setHero3DMode('crystal')}
-                style={{
-                  padding: '0.25rem 0.65rem',
-                  fontSize: '0.72rem',
-                  fontWeight: 700,
-                  borderRadius: 'var(--radius-sm)',
-                  backgroundColor: hero3DMode === 'crystal' ? 'var(--primary-navy)' : 'var(--bg-subtle)',
-                  color: hero3DMode === 'crystal' ? 'var(--accent-gold)' : 'var(--text-secondary)',
-                  border: hero3DMode === 'crystal' ? '1px solid var(--accent-gold)' : '1px solid var(--border-light)',
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease'
-                }}
-              >
-                💎 3D Orbital Crystal
-              </button>
-              <button
-                onClick={() => setHero3DMode('campus')}
-                style={{
-                  padding: '0.25rem 0.65rem',
-                  fontSize: '0.72rem',
-                  fontWeight: 700,
-                  borderRadius: 'var(--radius-sm)',
-                  backgroundColor: hero3DMode === 'campus' ? 'var(--primary-navy)' : 'var(--bg-subtle)',
-                  color: hero3DMode === 'campus' ? 'var(--accent-gold)' : 'var(--text-secondary)',
-                  border: hero3DMode === 'campus' ? '1px solid var(--accent-gold)' : '1px solid var(--border-light)',
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease'
-                }}
-              >
-                🏛️ Campus Spire & Map
-              </button>
-            </div>
-          )}
-
-          {hero3DMode === 'crystal' ? (
-            <HeroOrbitalCrystal height={390} />
-          ) : (
-            <CampusCanvas3D onNavigateModule={(route) => navigate(route)} />
-          )}
-        </div>
-      )}
 
       {/* 2. Key Academic Metric Cards (Wrapped in 3D Parallax Tilt) */}
       <div className="grid-cols-4">
@@ -421,14 +349,7 @@ export const StudentDashboard = () => {
 
       {/* 3. 3D Spatial Intelligence Section: Dynamic 3D Attendance Ring + Continuous CIE Analytics Engine */}
       {packageTier !== 'package1' && packageTier !== 'basic' ? (
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'minmax(300px, 340px) 1fr',
-            gap: '1.5rem',
-            alignItems: 'stretch'
-          }}
-        >
+        <div className="spatial-intelligence-grid">
           {/* 3D Radial Attendance Gauge */}
           <AttendanceRing3D
             percentage={attendance.overallPercentage}
@@ -537,7 +458,7 @@ export const StudentDashboard = () => {
       )}
 
       {/* 5. Main Dashboard Two-Column Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.35fr 1fr', gap: '1.5rem' }}>
+      <div className="dashboard-split-grid">
         {/* Left Column: Today's Timetable & Upcoming Exams */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {/* Today's Schedule Card */}

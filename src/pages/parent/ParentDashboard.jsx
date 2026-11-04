@@ -38,52 +38,45 @@ export const ParentDashboard = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       {/* 1. Ward Profile Banner */}
-      <div
-        className="simp-card-navy"
-        style={{
-          borderRadius: 'var(--radius-xl)',
-          padding: '1.75rem',
-          display: 'grid',
-          gridTemplateColumns: 'auto 1fr auto',
-          alignItems: 'center',
-          gap: '1.75rem'
-        }}
-      >
-        <img
-          src={studentProfile.avatar}
-          alt={studentProfile.name}
-          style={{
-            width: '90px',
-            height: '90px',
-            borderRadius: 'var(--radius-lg)',
-            objectFit: 'cover',
-            border: '3px solid var(--accent-gold)'
-          }}
-        />
+      <div className="portal-hero-banner">
+        <div className="portal-hero-main">
+          <img
+            src={studentProfile.avatar}
+            alt={studentProfile.name}
+            style={{
+              width: '90px',
+              height: '90px',
+              borderRadius: 'var(--radius-lg)',
+              objectFit: 'cover',
+              border: '3px solid var(--accent-gold)',
+              flexShrink: 0
+            }}
+          />
 
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-            <span style={{ fontSize: '0.8rem', color: '#DFBF77', textTransform: 'uppercase', fontWeight: 700 }}>
-              Parent Portal – Linked Ward
-            </span>
-          </div>
+          <div style={{ minWidth: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+              <span style={{ fontSize: '0.8rem', color: '#DFBF77', textTransform: 'uppercase', fontWeight: 700 }}>
+                Parent Portal – Linked Ward
+              </span>
+            </div>
 
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#FFFFFF', marginTop: '0.2rem' }}>
-            {studentProfile.name}
-          </h1>
+            <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#FFFFFF', marginTop: '0.2rem', marginBottom: 0 }}>
+              {studentProfile.name}
+            </h1>
 
-          <div style={{ display: 'flex', gap: '1.25rem', marginTop: '0.5rem', fontSize: '0.82rem', color: '#CBD5E1', flexWrap: 'wrap' }}>
-            <span>USN: <strong className="mono-font" style={{ color: '#DFBF77' }}>{studentProfile.usn}</strong></span>
-            <span>Program: <strong>B.E. {studentProfile.department}</strong></span>
-            <span>Current Term: <strong>{studentProfile.semester}th Semester (Sec {studentProfile.section})</strong></span>
-          </div>
+            <div style={{ display: 'flex', gap: '1.25rem', marginTop: '0.5rem', fontSize: '0.82rem', color: '#CBD5E1', flexWrap: 'wrap' }}>
+              <span>USN: <strong className="mono-font" style={{ color: '#DFBF77' }}>{studentProfile.usn}</strong></span>
+              <span>Program: <strong>B.E. {studentProfile.department}</strong></span>
+              <span>Current Term: <strong>{studentProfile.semester}th Semester (Sec {studentProfile.section})</strong></span>
+            </div>
 
-          <div style={{ marginTop: '0.5rem', fontSize: '0.78rem', color: '#94A3B8' }}>
-            Parent Account: {currentUser?.name} ({currentUser?.relation}) • Phone: {currentUser?.phone}
+            <div style={{ marginTop: '0.5rem', fontSize: '0.78rem', color: '#94A3B8' }}>
+              Parent Account: {currentUser?.name} ({currentUser?.relation}) • Phone: {currentUser?.phone}
+            </div>
           </div>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        <div className="portal-hero-actions">
           <Button
             variant="gold"
             size="sm"

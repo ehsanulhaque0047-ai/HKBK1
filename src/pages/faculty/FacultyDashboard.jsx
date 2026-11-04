@@ -31,62 +31,55 @@ export const FacultyDashboard = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       {/* 1. Faculty Profile Banner */}
-      <div
-        className="simp-card-navy"
-        style={{
-          borderRadius: 'var(--radius-xl)',
-          padding: '1.75rem',
-          display: 'grid',
-          gridTemplateColumns: 'auto 1fr auto',
-          alignItems: 'center',
-          gap: '1.75rem'
-        }}
-      >
-        <img
-          src={currentUser?.avatar || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300'}
-          alt={currentUser?.name}
-          style={{
-            width: '90px',
-            height: '90px',
-            borderRadius: 'var(--radius-lg)',
-            objectFit: 'cover',
-            border: '3px solid var(--accent-gold)'
-          }}
-        />
+      <div className="portal-hero-banner">
+        <div className="portal-hero-main">
+          <img
+            src={currentUser?.avatar || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300'}
+            alt={currentUser?.name}
+            style={{
+              width: '90px',
+              height: '90px',
+              borderRadius: 'var(--radius-lg)',
+              objectFit: 'cover',
+              border: '3px solid var(--accent-gold)',
+              flexShrink: 0
+            }}
+          />
 
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-            <h1 style={{ fontSize: '1.45rem', fontWeight: 800, color: '#FFFFFF' }}>
-              {currentUser?.name || 'Dr. A. K. Manjunath'}
-            </h1>
-            <span
-              style={{
-                background: 'rgba(197, 160, 89, 0.25)',
-                color: 'var(--accent-gold-light)',
-                border: '1px solid rgba(197, 160, 89, 0.4)',
-                fontSize: '0.78rem',
-                fontWeight: 700,
-                padding: '0.15rem 0.5rem',
-                borderRadius: 'var(--radius-sm)',
-                fontFamily: 'var(--font-mono)'
-              }}
-            >
-              {currentUser?.employeeId || 'HKBK-FAC-108'}
-            </span>
-          </div>
+          <div style={{ minWidth: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
+              <h1 style={{ fontSize: '1.45rem', fontWeight: 800, color: '#FFFFFF', margin: 0 }}>
+                {currentUser?.name || 'Dr. A. K. Manjunath'}
+              </h1>
+              <span
+                style={{
+                  background: 'rgba(197, 160, 89, 0.25)',
+                  color: 'var(--accent-gold-light)',
+                  border: '1px solid rgba(197, 160, 89, 0.4)',
+                  fontSize: '0.78rem',
+                  fontWeight: 700,
+                  padding: '0.15rem 0.5rem',
+                  borderRadius: 'var(--radius-sm)',
+                  fontFamily: 'var(--font-mono)'
+                }}
+              >
+                {currentUser?.employeeId || 'HKBK-FAC-108'}
+              </span>
+            </div>
 
-          <p style={{ fontSize: '0.88rem', color: '#DFBF77', marginTop: '0.2rem' }}>
-            {currentUser?.designation || 'Associate Professor & PG Coordinator'} – Dept. of Computer Science & Engineering
-          </p>
+            <p style={{ fontSize: '0.88rem', color: '#DFBF77', marginTop: '0.2rem', marginBottom: 0 }}>
+              {currentUser?.designation || 'Associate Professor & PG Coordinator'} – Dept. of Computer Science & Engineering
+            </p>
 
-          <div style={{ display: 'flex', gap: '1.25rem', marginTop: '0.6rem', fontSize: '0.8rem', color: '#CBD5E1', flexWrap: 'wrap' }}>
-            <span>Cabin: <strong>Admin Block AB-208</strong></span>
-            <span>Email: <strong>{currentUser?.email || 'manjunath.ak@hkbk.edu.in'}</strong></span>
-            <span>Experience: <strong>14 Years (VTU / IISc)</strong></span>
+            <div style={{ display: 'flex', gap: '1.25rem', marginTop: '0.6rem', fontSize: '0.8rem', color: '#CBD5E1', flexWrap: 'wrap' }}>
+              <span>Cabin: <strong>Admin Block AB-208</strong></span>
+              <span>Email: <strong>{currentUser?.email || 'manjunath.ak@hkbk.edu.in'}</strong></span>
+              <span>Experience: <strong>14 Years (VTU / IISc)</strong></span>
+            </div>
           </div>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        <div className="portal-hero-actions">
           <Button
             variant="gold"
             size="sm"
